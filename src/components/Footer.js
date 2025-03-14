@@ -13,13 +13,13 @@ const Footer = () => {
           Build With <span className="text-primary text-2xl px-1">&#9825;</span>{" "}
           by&nbsp;
           <Link href="/" className="underline underline-offset-2">
-            CupCak Studio
+            Evology Hub
           </Link>
         </div>
 
-        <Link href="/" className="underline underline-offset-2">
+        {/* <Link href="/" className="underline underline-offset-2">
           Say Hello
-        </Link>
+        </Link> */}
       </Layout>
     </footer>
   );

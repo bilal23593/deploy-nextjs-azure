@@ -31,6 +31,39 @@ const AnimatedNumbers = ({ value }) => {
   return <span ref={ref}></span>;
 };
 
+const YouTubePlayer = ({ videoId }) => {
+  useEffect(() => {
+    // Dynamically load the YouTube API script
+    const script = document.createElement("script");
+    script.src = "https://www.youtube.com/iframe_api";
+    script.async = true;
+    document.body.appendChild(script);
+
+    window.onYouTubeIframeAPIReady = () => {
+      new window.YT.Player("yt-player", {
+        videoId,
+        playerVars: {
+          autoplay: 1,
+          controls: 1,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+        },
+        events: {
+          onReady: (event) => event.target.playVideo(),
+        },
+      });
+    };
+
+    return () => {
+      // Cleanup when the component is unmounted
+      if (script) script.remove();
+    };
+  }, [videoId]);
+
+  return <div id="yt-player" style={{ width: "100%", height: "100%" }} />;
+};
+
 const about = () => {
   return (
     <>
@@ -113,19 +146,10 @@ const about = () => {
               </div>
             </div>
             <div
-              className="col-span-4 relative h-max rounded-2xl border-2 border-solid border-dark bg-light p-8
-            xl:col-span-4 md:order-1 md:col-span-8"
+              className="col-span-4 relative max-h-max rounded-2xl border-2 border-solid border-dark bg-light p-8
+            xl:col-span-4 md:order-1 md:col-span-8 "
             >
-              <div className="absolute top-0 -right-3 -z-10 w-[102%] h-[103%] rounded-[2rem] bg-dark" />
-              <Image
-                src={profileImage}
-                alt="CupCak"
-                className="w-full h-auto rounded-2xl pl-20"
-                priority
-                sizes="(max-width: 768px) 100vw,
-                (max-width: 1200px) 50vw,
-                33vw"
-              />
+              <YouTubePlayer videoId="EOlp1K1KKKU" />
             </div>
           </div>
         </Layout>

@@ -7,6 +7,8 @@ import {
   GithubIcon,
   LinkArrow,
   LinkedInIcon,
+  SkypeIcon,
+  TelegramIcon,
   TwitterIcon,
 } from "./Icons";
 import { motion } from "framer-motion";
@@ -91,17 +93,16 @@ const NavBar = () => {
         <nav>
           <CustomLink href="/" title="Home" className="mr-4" />
           <CustomLink href="/about" title="About" className="mx-4" />
-          <CustomLink href="/projects" title="Projects" className="mx-4" />
         </nav>
         <nav className="flex items-center justify-center flex-wrap">
           <motion.a
-            href={"/"}
+            href={"https://join.skype.com/invite/qaHJVhuEI5wU"}
             target="_blank"
             whileHover={{ y: -6, x: -6 }}
             whileTap={{ scale: 0.9 }}
             className="w-6 mx-3"
           >
-            <TwitterIcon />
+            <SkypeIcon />
           </motion.a>
           <motion.a
             href={"/"}
@@ -111,6 +112,15 @@ const NavBar = () => {
             className="w-6 mx-3"
           >
             <LinkedInIcon />
+          </motion.a>
+          <motion.a
+            href={"https://t.me/bilal23593"}
+            target="_blank"
+            whileHover={{ y: -6 }}
+            whileTap={{ scale: 0.9 }}
+            className="w-6 mt-8"
+          >
+            <TelegramIcon />
           </motion.a>
         </nav>
       </div>
@@ -130,11 +140,6 @@ bg-light/90 light:bg-dark/75 rounded-lg backdrop-blur-md py-32"
             <CustomMobileLink
               href="/about"
               title="About"
-              toggle={handleClick}
-            />
-            <CustomMobileLink
-              href="/projects"
-              title="Projects"
               toggle={handleClick}
             />
           </nav>
@@ -161,7 +166,7 @@ bg-light/90 light:bg-dark/75 rounded-lg backdrop-blur-md py-32"
         </motion.div>
       ) : null}
 
-      <div className="absolute left-[50%] top-1 translate-x-[50%] ">
+      <div className="absolute sm:left-[33%] left-[49%] top-[25%] translate-x-[50%]">
         <Logo></Logo>
       </div>
     </header>

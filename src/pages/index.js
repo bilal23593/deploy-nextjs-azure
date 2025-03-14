@@ -51,34 +51,28 @@ export default function Home() {
                 and flair. Partner with us to communicate your message
                 effectively and leave a lasting impression!
               </p>
-              <div className="flex items-center self-start mt-2 lg:self-center ">
+              <div className="flex items-center self-start mt-2 lg:self-center">
                 <Link
                   href="https://www.fiverr.com/sohab1122?up_rollout=true"
                   target="_blank"
-                  className="flex items-center bg-dark text-light p-2.5 px-6 rounded-lg text-md font-semibold 
+                  className="flex items-center bg-dark text-light p-2.5 px-10 rounded-lg text-md font-semibold 
                     hover:bg-light hover:text-dark
                   border-2 border-solid border-transparent hover:border-dark 
-                  md:p-2 md-px-4 md:text-base
+                  md:p-2 md-px-4 md:text-base min-w-80
                   "
-                  // download={true}
                 >
-                  WORK WITH US ON FIVERR
-                  <LinkArrow className={"w-3 ml-1"}></LinkArrow>
+                  ORDER US ON FIVERR
+                  <LinkArrow className={"w-2/12 ml-1"}></LinkArrow>
                 </Link>
-                {/* <Link
-                  href="/"
-                  className="ml-4 text-lg font-medium capitlaize text_dark underline md:text-base"
-                >
-                  Contact
-                </Link> */}
               </div>
+              <div className="flex items-center self-start mt-2 lg:self-center"></div>
             </div>
           </div>
         </Layout>
         <HireMe></HireMe>
-        <div className="absolute right-8 bottom-8 inline-block w-24 md:hidden">
+        {/* <div className="absolute right-8 bottom-8 inline-block w-24 md:hidden">
           <Image src={lightBulb} alt="" className="w-full h-auto" />
-        </div>
+        </div> */}
       </main>
     </>
   );
