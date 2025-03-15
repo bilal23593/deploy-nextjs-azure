@@ -53,7 +53,7 @@ export default function Home() {
               </p>
               <div className="flex items-center self-start mt-2 lg:self-center">
                 <Link
-                  href="https://www.fiverr.com/sohab1122?up_rollout=true"
+                  href="https://www.fiverr.com/s/akB06EK"
                   target="_blank"
                   className="flex items-center bg-dark text-light p-2.5 px-10 rounded-lg text-md font-semibold 
                     hover:bg-light hover:text-dark
