@@ -15,6 +15,16 @@ export default function Home() {
       <Head>
         <title>Cube Cake Studiios | Home</title>
         <meta name="description" content="Created By Cube Cake Team" />
+
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-P52C0MPPMM"
+        ></script>
+        <script>
+          window.dataLayer = window.dataLayer || []; function gtag()
+          {dataLayer.push(arguments)}
+          gtag('js', new Date()); gtag('config', 'G-P52C0MPPMM');
+        </script>
       </Head>
       <TransitionEffect />
       <main className="flex items-center text-dark w-full min-h-screen">
