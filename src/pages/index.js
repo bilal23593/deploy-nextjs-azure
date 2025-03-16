@@ -8,6 +8,7 @@ import { LinkArrow } from "@/components/Icons";
 import HireMe from "@/components/HireMe";
 import lightBulb from "../../public/images/svgs/miscellaneous_icons_1.svg";
 import { TransitionEffect } from "@/components/TransitionEffect";
+import Script from "next/script";
 
 export default function Home() {
   return (
@@ -15,17 +16,22 @@ export default function Home() {
       <Head>
         <title>Cube Cake Studiios | Home</title>
         <meta name="description" content="Created By Cube Cake Team" />
-
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-P52C0MPPMM"
-        ></script>
-        <script>
-          window.dataLayer = window.dataLayer || []; function gtag()
-          {dataLayer.push(arguments)}
-          gtag('js', new Date()); gtag('config', 'G-P52C0MPPMM');
-        </script>
       </Head>
+      <Script
+        strategy="afterInteractive" // Load the script after the page has loaded
+        src="https://www.googletagmanager.com/gtag/js?id=G-P52C0MPPMM"
+      />
+      <Script
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-P52C0MPPMM');
+          `,
+        }}
+      />
       <TransitionEffect />
       <main className="flex items-center text-dark w-full min-h-screen">
         <Layout className="pt-0 md:pt-16 sm:pt-8">
