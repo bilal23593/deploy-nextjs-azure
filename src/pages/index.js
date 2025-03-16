@@ -19,7 +19,7 @@ export default function Home() {
       </Head>
       <Script
         strategy="afterInteractive" // Load the script after the page has loaded
-        src="https://www.googletagmanager.com/gtag/js?id=G-P52C0MPPMM"
+        src="https://www.googletagmanager.com/gtag/js?id=G-5ZZBM4ND5G"
         id="google-analytics-script"
       />
       <Script
@@ -30,7 +30,7 @@ export default function Home() {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-P52C0MPPMM');
+            gtag('config', 'G-5ZZBM4ND5G');
           `,
         }}
       />
