@@ -20,8 +20,10 @@ export default function Home() {
       <Script
         strategy="afterInteractive" // Load the script after the page has loaded
         src="https://www.googletagmanager.com/gtag/js?id=G-P52C0MPPMM"
+        id="google-analytics-script"
       />
       <Script
+        id="google-analytics-script"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
