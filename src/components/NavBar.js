@@ -2,18 +2,11 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Logo from "./Logo";
 import { useRouter } from "next/router";
-import {
-  CircularText,
-  GithubIcon,
-  LinkArrow,
-  LinkedInIcon,
-  SkypeIcon,
-  TelegramIcon,
-  TwitterIcon,
-} from "./Icons";
 import { motion } from "framer-motion";
+import { getSocialLink } from "@/data/social";
 const CustomLink = ({ href, title, className = "" }) => {
   const router = useRouter();
+  const isActive = router.pathname === href;
 
   return (
     <Link href={href} className={`${className} relative group`}>
@@ -21,7 +14,7 @@ const CustomLink = ({ href, title, className = "" }) => {
       <span
         className={`h-[1px] inline-block bg-dark absolute left-0 -bottom-0.5
       group-hover:w-full transition-[width] ease huration-300
-      ${router.asPath === href ? "w-full" : "w-0"}
+      ${isActive ? "w-full" : "w-0"}
       `}
       >
         &nbsp;
@@ -32,6 +25,7 @@ const CustomLink = ({ href, title, className = "" }) => {
 
 const CustomMobileLink = ({ href, title, className = "", toggle }) => {
   const router = useRouter();
+  const isActive = router.pathname === href;
 
   const handleClick = () => {
     toggle();
@@ -40,7 +34,6 @@ const CustomMobileLink = ({ href, title, className = "", toggle }) => {
 
   return (
     <button
-      href={href}
       className={`${className} relative group text-dark dark:text-light my-2`}
       onClick={handleClick}
     >
@@ -48,7 +41,7 @@ const CustomMobileLink = ({ href, title, className = "", toggle }) => {
       <span
         className={`h-[1px] inline-block absolute left-0 -bottom-0.5
       group-hover:w-full transition-[width] ease huration-300
-      ${router.asPath === href ? "w-full" : "w-0"}
+      ${isActive ? "w-full" : "w-0"}
       `}
       >
         &nbsp;
@@ -60,13 +53,15 @@ const CustomMobileLink = ({ href, title, className = "", toggle }) => {
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const fiverr = getSocialLink('Fiverr')?.url || 'https://www.fiverr.com/s/akB06EK';
+
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
   return (
     <header
-      className="w-full px-32 py-8 font-medium flex items-center justify-between relative
+      className="w-full px-32 py-6 font-medium flex items-center justify-between relative
     z-10 lg:px-16 md:px-12 sm:px-"
     >
       <button
@@ -93,36 +88,18 @@ const NavBar = () => {
         <nav>
           <CustomLink href="/" title="Home" className="mr-4" />
           <CustomLink href="/about" title="About" className="mx-4" />
+          <CustomLink href="/services" title="Services" className="mx-4" />
+          <CustomLink href="/portfolio" title="Portfolio" className="mx-4" />
+          <CustomLink href="/contact" title="Contact" className="ml-4" />
         </nav>
-        <nav className="flex items-center justify-center flex-wrap">
-          <motion.a
-            href={"https://join.skype.com/invite/qaHJVhuEI5wU"}
-            target="_blank"
-            whileHover={{ y: -6, x: -6 }}
-            whileTap={{ scale: 0.9 }}
-            className="w-6 mx-3"
-          >
-            <SkypeIcon />
-          </motion.a>
-          <motion.a
-            href={"/"}
-            target="_blank"
-            whileHover={{ y: -6 }}
-            whileTap={{ scale: 0.9 }}
-            className="w-6 mx-3"
-          >
-            <LinkedInIcon />
-          </motion.a>
-          <motion.a
-            href={"https://t.me/bilal23593"}
-            target="_blank"
-            whileHover={{ y: -6 }}
-            whileTap={{ scale: 0.9 }}
-            className="w-6 mt-8"
-          >
-            <TelegramIcon />
-          </motion.a>
-        </nav>
+        <a
+          href={fiverr}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-6 inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white font-semibold rounded-full hover:shadow-lg transition"
+        >
+          Hire on Fiverr
+        </a>
       </div>
 
       {isOpen ? (
@@ -139,33 +116,37 @@ const NavBar = () => {
               title="About"
               toggle={handleClick}
             />
-          </nav>
-          <nav className="flex items-center justify-center flex-wrap mt-2">
-            <motion.a
-              href={"https://join.skype.com/invite/qaHJVhuEI5wU"}
+            <CustomMobileLink
+              href="/services"
+              title="Services"
+              toggle={handleClick}
+            />
+            <CustomMobileLink
+              href="/portfolio"
+              title="Portfolio"
+              toggle={handleClick}
+            />
+            <CustomMobileLink
+              href="/contact"
+              title="Contact"
+              toggle={handleClick}
+            />
+            <a
+              href={fiverr}
               target="_blank"
-              whileHover={{ y: -6, x: -6 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-6 mx-3"
+              rel="noopener noreferrer"
+              onClick={handleClick}
+              className="mt-4 px-6 py-3 bg-purple-600 text-white rounded-full font-semibold"
             >
-              <SkypeIcon />
-            </motion.a>
-            <motion.a
-              href={"/"}
-              target="_blank"
-              whileHover={{ y: -6 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-6 mx-3"
-            >
-              <LinkedInIcon />
-            </motion.a>
+              Hire on Fiverr
+            </a>
           </nav>
         </motion.div>
       ) : null}
 
-      <div className="absolute sm:left-[33%] left-[49%] top-[25%] translate-x-[50%]">
+      {/* <div className="absolute sm:left-[33%] left-[49%] top-[25%] translate-x-[50%]">
         <Logo></Logo>
-      </div>
+      </div> */}
     </header>
   );
 };

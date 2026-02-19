@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { animate, motion, stagger } from "framer-motion";
 
 const quote = {

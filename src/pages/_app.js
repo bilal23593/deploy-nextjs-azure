@@ -1,32 +1,56 @@
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
+import CookieConsent from "@/components/CookieConsent";
 import "@/styles/globals.css";
-import { AnimatePresence } from "framer-motion";
 import { Montserrat } from "next/font/google";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import Script from "next/script";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font--mont",
+  variable: "--font-mont",
 });
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#B63E96" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main
         className={`${montserrat.variable} font-mont bg-light w-full min-h-screen`}
       >
-        <NavBar></NavBar>
-        <AnimatePresence mode="wait">
-          <Component key={router.asPath} {...pageProps} />
-        </AnimatePresence>
-        <Footer></Footer>
+        {/* Google Analytics */}
+        {gaId ? (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  window.gtag = gtag;
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}', { anonymize_ip: true });
+                `,
+              }}
+            />
+          </>
+        ) : null}
+
+        <NavBar />
+        <Component {...pageProps} />
+        <Footer />
+        <CookieConsent />
       </main>
     </>
   );
