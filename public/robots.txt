@@ -1,38 +1,7 @@
-# Robots.txt for CUBE CAKE STUDIIOS
-# Controls search engine crawlers and bot access
-
-# Allow all search engines
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
-Disallow: /*.json$
-Disallow: /_next/
-Crawl-delay: 1
+Disallow: /_next/static/*.map
 
-# Google-specific rules
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-# Bing
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-# Yandex
-User-agent: Yandexbot
-Allow: /
-
-# Block bad bots
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
-
-# Sitemap location
 Sitemap: https://cubecakestudios.com/sitemap.xml

@@ -1,5 +1,4 @@
 import Layout from "@/components/Layout";
-import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import profilePic from "../../public/images/profile/developer-pic-3.png";
@@ -9,8 +8,8 @@ import HireMe from "@/components/HireMe";
 import lightBulb from "../../public/images/svgs/miscellaneous_icons_1.svg";
 import { TransitionEffect } from "@/components/TransitionEffect";
 import GenZPulseSection from "@/components/GenZPulseSection";
-import Script from "next/script";
-import { getSEOMeta, getOpenGraphMeta, getTwitterMeta, getOrganizationSchema } from "@/lib/seo";
+import SEOHead from "@/components/SEOHead";
+import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/seo";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { getSocialLink } from "@/data/social";
 
@@ -26,28 +25,6 @@ export default function Home() {
   const heroTiltY = useMotionValue(0);
   const heroX = useSpring(heroTiltX, { stiffness: 170, damping: 16, mass: 0.5 });
   const heroY = useSpring(heroTiltY, { stiffness: 170, damping: 16, mass: 0.5 });
-
-  const seoMeta = getSEOMeta({
-    title: "CUBE CAKE STUDIIOS | 2D Animation & Explainer Videos",
-    description:
-      "Professional 2D animation and explainer video production. Bring your ideas to life with stunning visuals. UI/UX Design, Branding & Web Design services.",
-    canonicalUrl: "https://cubecakestudios.com",
-  });
-
-  const openGraphMeta = getOpenGraphMeta({
-    title: "CUBE CAKE STUDIIOS | Design & Animation Agency",
-    description:
-      "Transform your ideas into visually striking 2D animations and compelling explainer videos.",
-    canonicalUrl: "https://cubecakestudios.com",
-  });
-
-  const twitterMeta = getTwitterMeta({
-    title: "CUBE CAKE STUDIIOS",
-    description:
-      "Professional design & animation agency creating stunning visuals for your brand.",
-  });
-
-  const organizationSchema = getOrganizationSchema();
 
   const fiverr = getSocialLink('Fiverr')?.url || 'https://www.fiverr.com/s/akB06EK';
 
@@ -134,40 +111,32 @@ export default function Home() {
     '/images/avatars/head6.svg',
   ];
 
+  const homePageSchema = getWebPageSchema({
+    title: "CUBE CAKE STUDIIOS | 2D Animation & Explainer Videos",
+    description:
+      "Professional 2D animation and explainer video production. Bring your ideas to life with stunning visuals. UI/UX Design, Branding and Web Design services.",
+    url: "/",
+    type: "WebPage",
+  });
+
+  const homeBreadcrumbSchema = getBreadcrumbSchema([{ title: "Home", url: "/" }]);
+
   return (
     <>
-      <Head>
-        <title>{seoMeta.title}</title>
-        <meta name="description" content={seoMeta.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="keywords"
-          content="animation, 2d animation, explainer video, ui design, ux design, branding, web design"
-        />
-        <meta name="author" content="CUBE CAKE STUDIIOS" />
-        <link rel="canonical" href={seoMeta.canonical} />
-
-        {/* Open Graph */}
-        <meta property="og:type" content={openGraphMeta.type} />
-        <meta property="og:url" content={openGraphMeta.url} />
-        <meta property="og:title" content={openGraphMeta.title} />
-        <meta property="og:description" content={openGraphMeta.description} />
-        <meta property="og:image" content={openGraphMeta.images[0].url} />
-        <meta property="og:site_name" content="CUBE CAKE STUDIIOS" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content={twitterMeta.cardType} />
-        <meta name="twitter:creator" content={twitterMeta.handle} />
-        <meta name="twitter:title" content={twitterMeta.title} />
-        <meta name="twitter:description" content={twitterMeta.description} />
-        <meta name="twitter:image" content={twitterMeta.image} />
-
-        {/* Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-      </Head>
+      <SEOHead
+        title="CUBE CAKE STUDIIOS | 2D Animation & Explainer Videos"
+        description="Professional 2D animation and explainer video production. Bring your ideas to life with stunning visuals. UI/UX Design, Branding and Web Design services."
+        canonicalUrl="/"
+        keywords={[
+          "2d animation agency",
+          "explainer videos",
+          "ui ux design",
+          "branding studio",
+          "web design services",
+        ]}
+        ogType="website"
+        structuredData={[homePageSchema, homeBreadcrumbSchema]}
+      />
 
       <TransitionEffect />
 

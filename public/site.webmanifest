@@ -1,0 +1,17 @@
+{
+  "name": "CUBE CAKE STUDIIOS",
+  "short_name": "CC STUDIIOS",
+  "description": "Design and animation studio specializing in 2D animation, explainer videos, UI/UX, branding, and web design.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#B63E96",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

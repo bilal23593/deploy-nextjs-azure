@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Layout from '@/components/Layout';
@@ -13,7 +12,8 @@ import {
   SkypeIcon,
   TelegramIcon,
 } from '@/components/Icons';
-import { getSEOMeta, getOpenGraphMeta, getTwitterMeta, getContactSchema } from '@/lib/seo';
+import SEOHead from '@/components/SEOHead';
+import { getBreadcrumbSchema, getContactSchema, getWebPageSchema } from '@/lib/seo';
 
 const socialIconMap = {
   GitHub: GithubIcon,
@@ -55,51 +55,31 @@ const processSteps = [
 ];
 
 const Contact = () => {
+  const contactTitle = 'Contact Us | CUBE CAKE STUDIIOS';
+  const contactDescription =
+    'Get in touch with CUBE CAKE STUDIIOS. Contact our team for inquiries, project quotes, or partnership opportunities.';
   const contactSchema = getContactSchema();
-
-  const seoMeta = getSEOMeta({
-    title: 'Contact Us | CUBE CAKE STUDIIOS',
-    description:
-      'Get in touch with CUBE CAKE STUDIIOS. Contact our team for inquiries, project quotes, or partnership opportunities.',
-    canonicalUrl: 'https://cubecakestudios.com/contact',
+  const contactPageSchema = getWebPageSchema({
+    title: contactTitle,
+    description: contactDescription,
+    url: '/contact',
+    type: 'ContactPage',
   });
-
-  const openGraphMeta = getOpenGraphMeta({
-    title: 'Contact Us | CUBE CAKE STUDIIOS',
-    description: 'Get in touch with our team for your next project.',
-    canonicalUrl: 'https://cubecakestudios.com/contact',
-  });
-
-  const twitterMeta = getTwitterMeta({
-    title: 'Contact Us | CUBE CAKE STUDIIOS',
-    description: 'Get in touch with our team for your next project.',
-  });
+  const contactBreadcrumbSchema = getBreadcrumbSchema([
+    { title: 'Home', url: '/' },
+    { title: 'Contact', url: '/contact' },
+  ]);
 
   return (
     <>
-      <Head>
-        <title>{seoMeta.title}</title>
-        <meta name="description" content={seoMeta.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="keywords" content="contact, inquiry, quote, project, services" />
-        <meta name="author" content="CUBE CAKE STUDIIOS" />
-        <link rel="canonical" href={seoMeta.canonical} />
-
-        <meta property="og:type" content={openGraphMeta.type} />
-        <meta property="og:url" content={openGraphMeta.url} />
-        <meta property="og:title" content={openGraphMeta.title} />
-        <meta property="og:description" content={openGraphMeta.description} />
-
-        <meta name="twitter:card" content={twitterMeta.cardType} />
-        <meta name="twitter:creator" content={twitterMeta.handle} />
-        <meta name="twitter:title" content={twitterMeta.title} />
-        <meta name="twitter:description" content={twitterMeta.description} />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
-        />
-      </Head>
+      <SEOHead
+        title={contactTitle}
+        description={contactDescription}
+        canonicalUrl="/contact"
+        keywords={['contact animation agency', 'project inquiry', 'creative brief', 'quote request']}
+        ogType="website"
+        structuredData={[contactPageSchema, contactSchema, contactBreadcrumbSchema]}
+      />
 
       <TransitionEffect />
 

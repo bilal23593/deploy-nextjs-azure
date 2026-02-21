@@ -1,10 +1,10 @@
-import Head from "next/head";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { TransitionEffect } from "@/components/TransitionEffect";
 import ProjectCard from "@/components/ProjectCard";
 import { portfolioProjects, projectCategories } from "@/data/portfolio";
-import { getSEOMeta, getOpenGraphMeta, getTwitterMeta } from "@/lib/seo";
+import SEOHead from "@/components/SEOHead";
+import { getBreadcrumbSchema, getPortfolioSchema, getWebPageSchema } from "@/lib/seo";
 
 const showcaseTags = [
   "Real campaign frames",
@@ -25,45 +25,37 @@ const Portfolio = () => {
     return portfolioProjects.filter((project) => project.category === activeCategory);
   }, [activeCategory]);
 
-  const seoMeta = getSEOMeta({
-    title: "Portfolio | CUBE CAKE STUDIIOS",
-    description:
-      "View our latest animation, design, and branding projects. Showcase of successful client work and case studies.",
-    canonicalUrl: "https://cubecakestudios.com/portfolio",
+  const portfolioTitle = "Portfolio | CUBE CAKE STUDIIOS";
+  const portfolioDescription =
+    "View our latest animation, design, and branding projects. Showcase of successful client work and case studies.";
+  const portfolioPageSchema = getWebPageSchema({
+    title: portfolioTitle,
+    description: portfolioDescription,
+    url: "/portfolio",
+    type: "CollectionPage",
   });
-
-  const openGraphMeta = getOpenGraphMeta({
-    title: "Our Portfolio | CUBE CAKE STUDIIOS",
-    description: "Explore our design and animation projects.",
-    canonicalUrl: "https://cubecakestudios.com/portfolio",
-  });
-
-  const twitterMeta = getTwitterMeta({
-    title: "Our Portfolio | CUBE CAKE STUDIIOS",
-    description: "Explore our design and animation projects.",
-  });
+  const portfolioListSchema = getPortfolioSchema(portfolioProjects);
+  const portfolioBreadcrumbSchema = getBreadcrumbSchema([
+    { title: "Home", url: "/" },
+    { title: "Portfolio", url: "/portfolio" },
+  ]);
 
   return (
     <>
-      <Head>
-        <title>{seoMeta.title}</title>
-        <meta name="description" content={seoMeta.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="keywords" content="portfolio, projects, case studies, animation, design" />
-        <meta name="author" content="CUBE CAKE STUDIIOS" />
-        <link rel="canonical" href={seoMeta.canonical} />
-
-        <meta property="og:type" content={openGraphMeta.type} />
-        <meta property="og:url" content={openGraphMeta.url} />
-        <meta property="og:title" content={openGraphMeta.title} />
-        <meta property="og:description" content={openGraphMeta.description} />
-        <meta property="og:image" content={openGraphMeta.images[0].url} />
-
-        <meta name="twitter:card" content={twitterMeta.cardType} />
-        <meta name="twitter:creator" content={twitterMeta.handle} />
-        <meta name="twitter:title" content={twitterMeta.title} />
-        <meta name="twitter:description" content={twitterMeta.description} />
-      </Head>
+      <SEOHead
+        title={portfolioTitle}
+        description={portfolioDescription}
+        canonicalUrl="/portfolio"
+        keywords={[
+          "animation portfolio",
+          "design case studies",
+          "branding projects",
+          "ui ux portfolio",
+          "web design showcase",
+        ]}
+        ogType="website"
+        structuredData={[portfolioPageSchema, portfolioListSchema, portfolioBreadcrumbSchema]}
+      />
 
       <TransitionEffect />
 

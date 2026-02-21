@@ -1,9 +1,13 @@
-import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { TransitionEffect } from "@/components/TransitionEffect";
 import { services, processSteps } from "@/data/services";
-import { getSEOMeta, getOpenGraphMeta, getTwitterMeta } from "@/lib/seo";
+import SEOHead from "@/components/SEOHead";
+import {
+  getBreadcrumbSchema,
+  getServiceListSchema,
+  getWebPageSchema,
+} from "@/lib/seo";
 
 const MotionLink = motion.create(Link);
 
@@ -49,52 +53,39 @@ const serviceStats = [
 ];
 
 const Services = () => {
-  const seoMeta = getSEOMeta({
-    title: "Services | CUBE CAKE STUDIIOS",
-    description:
-      "Our comprehensive design and animation services: 2D Animation, Explainer Videos, UI/UX Design, Branding, and Web Design.",
-    canonicalUrl: "https://cubecakestudios.com/services",
+  const servicesTitle = "Services | CUBE CAKE STUDIIOS";
+  const servicesDescription =
+    "Our comprehensive design and animation services: 2D Animation, Explainer Videos, UI/UX Design, Branding, and Web Design.";
+
+  const servicesPageSchema = getWebPageSchema({
+    title: servicesTitle,
+    description: servicesDescription,
+    url: "/services",
+    type: "CollectionPage",
   });
 
-  const openGraphMeta = getOpenGraphMeta({
-    title: "Our Services | CUBE CAKE STUDIIOS",
-    description:
-      "Professional design and animation services for brands and businesses.",
-    canonicalUrl: "https://cubecakestudios.com/services",
-  });
-
-  const twitterMeta = getTwitterMeta({
-    title: "Our Services | CUBE CAKE STUDIIOS",
-    description:
-      "Professional design and animation services for brands and businesses.",
-  });
+  const servicesListSchema = getServiceListSchema(services);
+  const servicesBreadcrumbSchema = getBreadcrumbSchema([
+    { title: "Home", url: "/" },
+    { title: "Services", url: "/services" },
+  ]);
 
   return (
     <>
-      <Head>
-        <title>{seoMeta.title}</title>
-        <meta name="description" content={seoMeta.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="keywords"
-          content="animation, explainer video, UI design, UX design, branding, web design"
-        />
-        <meta name="author" content="CUBE CAKE STUDIIOS" />
-        <link rel="canonical" href={seoMeta.canonical} />
-
-        <meta property="og:type" content={openGraphMeta.type} />
-        <meta property="og:url" content={openGraphMeta.url} />
-        <meta property="og:title" content={openGraphMeta.title} />
-        <meta property="og:description" content={openGraphMeta.description} />
-        <meta property="og:image" content={openGraphMeta.images[0].url} />
-        <meta property="og:site_name" content="CUBE CAKE STUDIIOS" />
-
-        <meta name="twitter:card" content={twitterMeta.cardType} />
-        <meta name="twitter:creator" content={twitterMeta.handle} />
-        <meta name="twitter:title" content={twitterMeta.title} />
-        <meta name="twitter:description" content={twitterMeta.description} />
-        <meta name="twitter:image" content={twitterMeta.image} />
-      </Head>
+      <SEOHead
+        title={servicesTitle}
+        description={servicesDescription}
+        canonicalUrl="/services"
+        keywords={[
+          "2d animation services",
+          "explainer video production",
+          "ui ux design services",
+          "branding services",
+          "web design agency",
+        ]}
+        ogType="website"
+        structuredData={[servicesPageSchema, servicesListSchema, servicesBreadcrumbSchema]}
+      />
 
       <TransitionEffect />
 

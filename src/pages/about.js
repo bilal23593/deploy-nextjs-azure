@@ -1,11 +1,11 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import profileImage from "../../public/images/profile/developer-pic-3.png";
 import { TransitionEffect } from "@/components/TransitionEffect";
-import { getSEOMeta, getOpenGraphMeta, getTwitterMeta } from "@/lib/seo";
+import SEOHead from "@/components/SEOHead";
+import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/seo";
 
 const MotionLink = motion.create(Link);
 
@@ -91,46 +91,32 @@ const AnimatedNumbers = ({ value }) => {
 };
 
 const About = () => {
-  const seoMeta = getSEOMeta({
-    title: "About Us | CUBE CAKE STUDIIOS",
-    description:
-      "Learn about CUBE CAKE STUDIIOS - a team of creative professionals specializing in 2D animation, explainer videos, UI/UX design, branding, and web design since 2020.",
-    canonicalUrl: "https://cubecakestudios.com/about",
+  const aboutTitle = "About Us | CUBE CAKE STUDIIOS";
+  const aboutDescription =
+    "Learn about CUBE CAKE STUDIIOS - a team of creative professionals specializing in 2D animation, explainer videos, UI/UX design, branding, and web design since 2020.";
+
+  const aboutPageSchema = getWebPageSchema({
+    title: aboutTitle,
+    description: aboutDescription,
+    url: "/about",
+    type: "AboutPage",
   });
 
-  const openGraphMeta = getOpenGraphMeta({
-    title: "About CUBE CAKE STUDIIOS",
-    description:
-      "Meet the team behind exceptional design & animation work. Passion. Excellence. Innovation.",
-    canonicalUrl: "https://cubecakestudios.com/about",
-  });
-
-  const twitterMeta = getTwitterMeta({
-    title: "About CUBE CAKE STUDIIOS",
-    description: "Meet the creative team at CUBE CAKE STUDIIOS.",
-  });
+  const aboutBreadcrumbSchema = getBreadcrumbSchema([
+    { title: "Home", url: "/" },
+    { title: "About", url: "/about" },
+  ]);
 
   return (
     <>
-      <Head>
-        <title>{seoMeta.title}</title>
-        <meta name="description" content={seoMeta.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="keywords" content="about, team, mission, values, animation, design" />
-        <meta name="author" content="CUBE CAKE STUDIIOS" />
-        <link rel="canonical" href={seoMeta.canonical} />
-
-        <meta property="og:type" content={openGraphMeta.type} />
-        <meta property="og:url" content={openGraphMeta.url} />
-        <meta property="og:title" content={openGraphMeta.title} />
-        <meta property="og:description" content={openGraphMeta.description} />
-        <meta property="og:image" content={openGraphMeta.images[0].url} />
-
-        <meta name="twitter:card" content={twitterMeta.cardType} />
-        <meta name="twitter:creator" content={twitterMeta.handle} />
-        <meta name="twitter:title" content={twitterMeta.title} />
-        <meta name="twitter:description" content={twitterMeta.description} />
-      </Head>
+      <SEOHead
+        title={aboutTitle}
+        description={aboutDescription}
+        canonicalUrl="/about"
+        keywords={["about animation agency", "design studio team", "creative company profile"]}
+        ogType="website"
+        structuredData={[aboutPageSchema, aboutBreadcrumbSchema]}
+      />
 
       <TransitionEffect />
 

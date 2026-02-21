@@ -1,16 +1,18 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import { TransitionEffect } from '@/components/TransitionEffect';
+import SEOHead from '@/components/SEOHead';
 
 const NotFound = () => {
   return (
     <>
-      <Head>
-        <title>Page Not Found | CUBE CAKE STUDIIOS</title>
-        <meta name="description" content="The page you are looking for could not be found." />
-        <meta name="robots" content="noindex" />
-      </Head>
+      <SEOHead
+        title="Page Not Found | CUBE CAKE STUDIIOS"
+        description="The page you are looking for could not be found."
+        canonicalUrl="/404"
+        noindex
+        nofollow
+      />
 
       <TransitionEffect />
       <main className="w-full min-h-screen bg-light dark:bg-dark flex items-center justify-center">

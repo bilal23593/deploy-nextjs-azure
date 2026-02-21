@@ -1,29 +1,35 @@
-import Head from 'next/head';
 import Layout from '@/components/Layout';
 import AnimatedText from '@/components/AnimatedText';
 import { TransitionEffect } from '@/components/TransitionEffect';
-import { getSEOMeta } from '@/lib/seo';
+import SEOHead from '@/components/SEOHead';
+import { getBreadcrumbSchema, getLegalWebPageSchema } from '@/lib/seo';
 
 const Terms = () => {
-  const seoMeta = getSEOMeta({
-    title: 'Terms of Service | CUBE CAKE STUDIIOS',
-    description:
-      'Terms of Service and use conditions for CUBE CAKE STUDIIOS website and services.',
-    canonicalUrl: 'https://cubecakestudios.com/terms',
-  });
+  const termsTitle = 'Terms of Service | CUBE CAKE STUDIIOS';
+  const termsDescription =
+    'Terms of Service and use conditions for CUBE CAKE STUDIIOS website and services.';
 
   const lastUpdated = 'February 6, 2026';
+  const termsSchema = getLegalWebPageSchema({
+    name: termsTitle,
+    url: '/terms',
+    lastReviewed: '2026-02-06',
+  });
+  const termsBreadcrumbSchema = getBreadcrumbSchema([
+    { title: 'Home', url: '/' },
+    { title: 'Terms of Service', url: '/terms' },
+  ]);
 
   return (
     <>
-      <Head>
-        <title>{seoMeta.title}</title>
-        <meta name="description" content={seoMeta.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href={seoMeta.canonical} />
-        <meta property="og:title" content={seoMeta.title} />
-        <meta property="og:description" content={seoMeta.description} />
-      </Head>
+      <SEOHead
+        title={termsTitle}
+        description={termsDescription}
+        canonicalUrl="/terms"
+        keywords={['terms of service', 'website terms', 'service conditions']}
+        ogType="website"
+        structuredData={[termsSchema, termsBreadcrumbSchema]}
+      />
 
       <TransitionEffect />
       <main className="w-full min-h-screen bg-light dark:bg-dark">

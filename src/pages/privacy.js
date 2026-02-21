@@ -1,29 +1,35 @@
-import Head from 'next/head';
 import Layout from '@/components/Layout';
 import AnimatedText from '@/components/AnimatedText';
 import { TransitionEffect } from '@/components/TransitionEffect';
-import { getSEOMeta } from '@/lib/seo';
+import SEOHead from '@/components/SEOHead';
+import { getBreadcrumbSchema, getLegalWebPageSchema } from '@/lib/seo';
 
 const Privacy = () => {
-  const seoMeta = getSEOMeta({
-    title: 'Privacy Policy | CUBE CAKE STUDIIOS',
-    description:
-      'Our privacy policy outlines how CUBE CAKE STUDIIOS collects, uses, and protects your personal information.',
-    canonicalUrl: 'https://cubecakestudios.com/privacy',
-  });
+  const privacyTitle = 'Privacy Policy | CUBE CAKE STUDIIOS';
+  const privacyDescription =
+    'Our privacy policy outlines how CUBE CAKE STUDIIOS collects, uses, and protects your personal information.';
 
   const lastUpdated = 'February 6, 2026';
+  const privacySchema = getLegalWebPageSchema({
+    name: privacyTitle,
+    url: '/privacy',
+    lastReviewed: '2026-02-06',
+  });
+  const privacyBreadcrumbSchema = getBreadcrumbSchema([
+    { title: 'Home', url: '/' },
+    { title: 'Privacy Policy', url: '/privacy' },
+  ]);
 
   return (
     <>
-      <Head>
-        <title>{seoMeta.title}</title>
-        <meta name="description" content={seoMeta.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href={seoMeta.canonical} />
-        <meta property="og:title" content={seoMeta.title} />
-        <meta property="og:description" content={seoMeta.description} />
-      </Head>
+      <SEOHead
+        title={privacyTitle}
+        description={privacyDescription}
+        canonicalUrl="/privacy"
+        keywords={['privacy policy', 'data protection', 'cookie policy']}
+        ogType="website"
+        structuredData={[privacySchema, privacyBreadcrumbSchema]}
+      />
 
       <TransitionEffect />
       <main className="w-full min-h-screen bg-light dark:bg-dark">
