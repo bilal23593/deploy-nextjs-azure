@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { getCountries, getCountryCallingCode } from 'libphonenumber-js';
 
 const fieldClassName =
   'w-full rounded-xl border border-gray-300/90 dark:border-gray-700/80 bg-white/90 dark:bg-gray-900/80 px-4 py-3 text-dark dark:text-light placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/70 focus:border-primary/70 transition';
@@ -14,18 +15,34 @@ const ContactForm = () => {
     service: 'general',
     message: '',
   });
+  const [country, setCountry] = useState('');
+  const [countryCode, setCountryCode] = useState('');
+  const [countryOptions, setCountryOptions] = useState([]);
 
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
   const [errorMessage, setErrorMessage] = useState('');
 
+  useEffect(() => {
+    const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+    const options = getCountries()
+      .map((countryItem) => ({
+        value: countryItem,
+        label: regionNames.of(countryItem) || countryItem,
+        code: `+${getCountryCallingCode(countryItem)}`,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label, 'en'));
+
+    setCountryOptions(options);
+  }, []);
+
   const services = [
-    { value: 'general', label: 'General Inquiry' },
-    { value: 'animation', label: '2D Animation' },
-    { value: 'explainer', label: 'Explainer Video' },
-    { value: 'uiux', label: 'UI/UX Design' },
-    { value: 'branding', label: 'Branding' },
-    { value: 'web', label: 'Web Design' },
-    { value: 'other', label: 'Other' },
+    { value: 'General Inquiry', label: 'General Inquiry' },
+    { value: '2D Animation', label: '2D Animation' },
+    { value: 'Explainer Video', label: 'Explainer Video' },
+    { value: 'UI/UX Design', label: 'UI/UX Design' },
+    { value: 'Branding', label: 'Branding' },
+    { value: 'Web Design', label: 'Web Design' },
+    { value: 'Other', label: 'Other' },
   ];
 
   const quickServiceChips = services.slice(1, 6);
@@ -43,6 +60,14 @@ const ContactForm = () => {
       ...prev,
       service: value,
     }));
+  };
+
+  const handleCountryChange = (event) => {
+    const selectedCountry = event.target.value;
+    const selectedOption = countryOptions.find((option) => option.value === selectedCountry);
+
+    setCountry(selectedCountry);
+    setCountryCode(selectedOption?.code || '');
   };
 
   const validateForm = () => {
@@ -92,7 +117,10 @@ const ContactForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          phone: [countryCode, formData.phone.trim()].filter(Boolean).join(' '),
+        }),
       });
 
       const data = await response.json();
@@ -106,6 +134,8 @@ const ContactForm = () => {
           service: 'general',
           message: '',
         });
+        setCountry('');
+        setCountryCode('');
 
         setTimeout(() => setStatus('idle'), 5000);
       } else {
@@ -196,20 +226,47 @@ const ContactForm = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
             <div>
+              <label htmlFor="country" className={labelClassName}>
+                Country
+              </label>
+              <select
+                id="country"
+                name="country"
+                value={country}
+                onChange={handleCountryChange}
+                className={fieldClassName}
+              >
+                <option value="">Select country</option>
+                {countryOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
               <label htmlFor="phone" className={labelClassName}>
                 Phone Number
               </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="+1 (555) 123-4567"
-                className={fieldClassName}
-              />
+              <div className="flex items-center gap-2">
+                <div className="min-w-[88px] rounded-xl border border-gray-300/90 dark:border-gray-700/80 bg-gray-100 dark:bg-gray-800/80 px-3 py-3 text-center text-sm font-semibold text-dark dark:text-light">
+                  {countryCode || '--'}
+                </div>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="3001234567"
+                  className={fieldClassName}
+                />
+              </div>
             </div>
+          </div>
 
+          <div>
             <div>
               <label htmlFor="service" className={labelClassName}>
                 Service *

@@ -151,9 +151,10 @@ const LeadTunnelPopup = ({ routeKey }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.96 }}
             transition={{ duration: 0.24, ease: "easeOut" }}
-            className="fixed z-[121] inset-0 flex items-center justify-center p-4 md:p-3"
+            className="fixed inset-0 z-[121] flex items-center justify-center p-4 md:items-start md:p-3 overflow-y-auto overscroll-contain"
+            style={{ WebkitOverflowScrolling: "touch" }}
           >
-            <div className="relative w-full max-w-[980px] overflow-hidden rounded-[2rem] border border-white/25 bg-[#0b1020]/95 text-white shadow-[0_35px_120px_-40px_rgba(0,0,0,0.75)]">
+            <div className="relative my-6 md:my-2 w-full max-w-[980px] overflow-hidden md:overflow-y-auto md:max-h-[calc(100svh-1rem)] rounded-[2rem] border border-white/25 bg-[#0b1020]/95 text-white shadow-[0_35px_120px_-40px_rgba(0,0,0,0.75)]">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(56,189,248,0.27),transparent_34%),radial-gradient(circle_at_86%_84%,rgba(182,62,150,0.24),transparent_36%),linear-gradient(165deg,rgba(9,14,29,0.92),rgba(31,12,47,0.9),rgba(9,25,44,0.92))]" />
               <motion.div
                 className="absolute -top-20 -right-10 w-64 h-64 rounded-full bg-violet-400/30 blur-3xl"
