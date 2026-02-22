@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Professional character for LinkedIn">
+  <defs>
+    <linearGradient id="lbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a9d4ff" />
+      <stop offset="100%" stop-color="#2d73c6" />
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="320" height="220" rx="24" fill="url(#lbg)" />
+  <rect x="172" y="52" width="110" height="128" rx="12" fill="#f8fafc" />
+  <rect x="184" y="66" width="86" height="12" rx="6" fill="#dbeafe" />
+  <rect x="184" y="86" width="70" height="8" rx="4" fill="#93c5fd" />
+  <rect x="184" y="100" width="60" height="8" rx="4" fill="#bfdbfe" />
+  <rect x="184" y="116" width="74" height="8" rx="4" fill="#bfdbfe" />
+  <circle cx="226" cy="150" r="18" fill="#0A66C2" />
+  <text x="216" y="157" font-size="18" font-family="Arial, sans-serif" fill="#fff" font-weight="700">in</text>
+  <circle cx="88" cy="52" r="18" fill="#facc9a" />
+  <rect x="72" y="70" width="32" height="38" rx="12" fill="#123b7a" />
+  <rect x="56" y="104" width="64" height="52" rx="14" fill="#0A66C2" />
+  <polygon points="88,106 72,132 104,132" fill="#fff" />
+  <rect x="50" y="152" width="76" height="10" rx="5" fill="#104d91" />
+  <rect x="236" y="32" width="44" height="44" rx="10" fill="#0A66C2" />
+  <text x="247" y="59" font-size="20" font-family="Arial, sans-serif" fill="#fff" font-weight="700">in</text>
+</svg>

@@ -4,6 +4,7 @@
  */
 
 import rateLimit from '@/lib/rateLimit';
+import { isMailerConfigured, sendContactSubmissionEmail } from '@/lib/mailer';
 
 const parsePositiveInteger = (value, fallback) => {
   const parsed = Number.parseInt(value, 10);
@@ -96,25 +97,14 @@ export default async function handler(req, res) {
       clientIp: ip,
     };
 
-    /**
-     * TODO: Integrate with email service
-     * Options:
-     * 1. SendGrid (npm install @sendgrid/mail)
-     * 2. Mailgun (npm install mailgun.js)
-     * 3. Nodemailer (npm install nodemailer)
-     * 4. Vercel's email service partner
-     * 5. Custom backend service
-     */
-
-    // For now, log to console (in production, send email)
-    console.log('New contact form submission:', sanitizedData);
-
-    // TODO: Remove this in production - store in database or send email
-    // Temporary storage in memory (not suitable for production)
-    if (!global.contactSubmissions) {
-      global.contactSubmissions = [];
+    if (!isMailerConfigured()) {
+      return res.status(500).json({
+        message:
+          'Contact form email is not configured. Please set EMAIL_USER, EMAIL_PASSWORD, and EMAIL_TO (or SMTP_* variables).',
+      });
     }
-    global.contactSubmissions.push(sanitizedData);
+
+    await sendContactSubmissionEmail(sanitizedData);
 
     // Success response
     return res.status(200).json({

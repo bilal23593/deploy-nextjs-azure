@@ -3,54 +3,37 @@
  * Centralized configuration for all social profiles and contact methods
  */
 
+const GOOGLE_PROFILE_URL =
+  process.env.NEXT_PUBLIC_GOOGLE_PROFILE_URL ||
+  'https://www.google.com/search?q=CUBE+CAKE+STUDIIOS';
+
+const WHATSAPP_URL =
+  process.env.NEXT_PUBLIC_WHATSAPP_URL || 'https://wa.me/971543462742';
+
 export const socialLinks = [
   {
     name: 'Fiverr',
-    url: 'https://www.fiverr.com/s/akB06EK',
+    url: 'https://www.fiverr.com/sohab1122',
     icon: 'FiFiverr',
     color: 'text-primary',
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/company/cubecakestudios',
+    url: 'https://www.linkedin.com/company/cube-cake-studiios/',
     icon: 'FiLinkedin',
     color: 'text-blue-600',
   },
   {
-    name: 'Dribbble',
-    url: 'https://dribbble.com/cubecakestudios',
-    icon: 'FiDribbble',
-    color: 'text-pink-600',
+    name: 'Google Profile',
+    url: GOOGLE_PROFILE_URL,
+    icon: 'FiGoogle',
+    color: 'text-amber-500',
   },
   {
-    name: 'GitHub',
-    url: 'https://github.com/bilal23593',
-    icon: 'FiGithub',
-    color: 'text-gray-800 dark:text-white',
-  },
-  {
-    name: 'Twitter',
-    url: 'https://twitter.com/cubecakestudios',
-    icon: 'FiTwitter',
-    color: 'text-blue-400',
-  },
-  {
-    name: 'Instagram',
-    url: 'https://instagram.com/cubecakestudios',
-    icon: 'FiInstagram',
-    color: 'text-pink-500',
-  },
-  {
-    name: 'Skype',
-    url: 'skype:join.skype.com/invite/qaHJVhuEI5wU',
-    icon: 'FiSkype',
-    color: 'text-blue-500',
-  },
-  {
-    name: 'Telegram',
-    url: 'https://t.me/bilal23593',
-    icon: 'FiTelegram',
-    color: 'text-blue-400',
+    name: 'WhatsApp',
+    url: WHATSAPP_URL,
+    icon: 'FiMessageCircle',
+    color: 'text-green-500',
   },
 ];
 
@@ -61,16 +44,16 @@ export const contactMethods = [
   {
     type: 'email',
     label: 'Email',
-    value: 'hello@cubecakestudios.com',
+    value: 'hello@cubecakestudiios.com',
     icon: 'FiMail',
-    link: 'mailto:hello@cubecakestudios.com',
+    link: 'mailto:hello@cubecakestudiios.com',
   },
   {
     type: 'phone',
     label: 'Phone',
-    value: '+92 (300) 1234567',
+    value: '+971543462742',
     icon: 'FiPhone',
-    link: 'tel:+923001234567',
+    link: 'tel:+971543462742',
   },
   {
     type: 'address',
@@ -112,8 +95,8 @@ export const companyInfo = {
   established: 2020,
   team: 'Professional designers, animators, and developers',
   location: 'Karachi, Pakistan',
-  email: 'hello@cubecakestudios.com',
-  phone: '+92 (300) 1234567',
+  email: 'hello@cubecakestudiios.com',
+  phone: '+971543462742',
 };
 
 /**
@@ -129,3 +112,4 @@ export const getSocialLink = (name) => {
 export const getAllSocialUrls = () => {
   return socialLinks.map((link) => link.url);
 };
+

@@ -61,7 +61,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
-  const fiverr = getSocialLink("Fiverr")?.url || "https://www.fiverr.com/s/akB06EK";
+  const fiverr = getSocialLink("Fiverr")?.url || "https://www.fiverr.com/sohab1122";
 
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
@@ -194,3 +194,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+

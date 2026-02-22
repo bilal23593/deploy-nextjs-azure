@@ -1,13 +1,9 @@
 import Layout from "@/components/Layout";
 import Link from "next/link";
 import Image from "next/image";
-import profilePic from "../../public/images/profile/developer-pic-3.png";
-import AnimatedText from "@/components/AnimatedText";
-import { LinkArrow } from "@/components/Icons";
-import HireMe from "@/components/HireMe";
-import lightBulb from "../../public/images/svgs/miscellaneous_icons_1.svg";
 import { TransitionEffect } from "@/components/TransitionEffect";
 import GenZPulseSection from "@/components/GenZPulseSection";
+import GlobalRemoteShowcase from "@/components/GlobalRemoteShowcase";
 import SEOHead from "@/components/SEOHead";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/seo";
 import { motion, useMotionValue, useSpring } from "framer-motion";
@@ -26,7 +22,7 @@ export default function Home() {
   const heroX = useSpring(heroTiltX, { stiffness: 170, damping: 16, mass: 0.5 });
   const heroY = useSpring(heroTiltY, { stiffness: 170, damping: 16, mass: 0.5 });
 
-  const fiverr = getSocialLink('Fiverr')?.url || 'https://www.fiverr.com/s/akB06EK';
+  const fiverr = getSocialLink('Fiverr')?.url || 'https://www.fiverr.com/sohab1122';
 
   const handleMagnetMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -420,6 +416,8 @@ export default function Home() {
 
         </section>
 
+        <GlobalRemoteShowcase />
+
         {/* SERVICES SECTION */}
         <section className="w-full bg-light dark:bg-dark/50">
           <Layout>
@@ -660,3 +658,4 @@ export default function Home() {
     </>
   );
 }
+

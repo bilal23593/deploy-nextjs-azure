@@ -69,6 +69,7 @@ const Contact = () => {
     { title: 'Home', url: '/' },
     { title: 'Contact', url: '/contact' },
   ]);
+  const visibleContactMethods = contactMethods.filter((method) => method.type !== 'address');
 
   return (
     <>
@@ -168,7 +169,7 @@ const Contact = () => {
                   </p>
 
                   <div className="mt-6 space-y-3">
-                    {contactMethods.slice(0, 3).map((method) => (
+                    {visibleContactMethods.map((method) => (
                       <div
                         key={method.label}
                         className="rounded-xl border border-white/20 bg-white/10 px-4 py-3"
@@ -209,7 +210,7 @@ const Contact = () => {
                   <p className="text-xs uppercase tracking-[0.14em] font-semibold text-primary">Contact Channels</p>
                   <h3 className="mt-2 text-2xl font-black text-dark dark:text-light">Direct Lines</h3>
                   <div className="mt-5 space-y-3">
-                    {contactMethods.map((method) => (
+                    {visibleContactMethods.map((method) => (
                       <div
                         key={method.label}
                         className="rounded-xl border border-gray-200 dark:border-gray-700 px-4 py-3"

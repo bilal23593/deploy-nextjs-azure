@@ -96,7 +96,6 @@ const Footer = () => {
               >
                 {companyInfo.phone}
               </a>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{companyInfo.location}</p>
             </div>
           </div>
         </div>

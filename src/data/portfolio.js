@@ -25,7 +25,7 @@ export const portfolioProjects = [
       role: 'Marketing Manager',
       avatar: '/images/portfolio/testimonial-1.jpg',
     },
-    link: 'https://www.fiverr.com/s/akB06EK',
+    link: 'https://www.fiverr.com/sohab1122',
     tags: ['Animation', 'Product Showcase', '2D Animation'],
   },
   {
@@ -49,7 +49,7 @@ export const portfolioProjects = [
       role: 'Product Manager',
       avatar: '/images/portfolio/testimonial-2.jpg',
     },
-    link: 'https://www.fiverr.com/s/akB06EK',
+    link: 'https://www.fiverr.com/sohab1122',
     tags: ['Explainer Video', 'SaaS', 'Animation'],
   },
   {
@@ -71,7 +71,7 @@ export const portfolioProjects = [
       role: 'CEO',
       avatar: '/images/portfolio/testimonial-3.jpg',
     },
-    link: 'https://www.fiverr.com/s/akB06EK',
+    link: 'https://www.fiverr.com/sohab1122',
     tags: ['UI Design', 'UX Design', 'Mobile App'],
   },
   {
@@ -94,7 +94,7 @@ export const portfolioProjects = [
       role: 'Founder',
       avatar: '/images/portfolio/testimonial-4.jpg',
     },
-    link: 'https://www.fiverr.com/s/akB06EK',
+    link: 'https://www.fiverr.com/sohab1122',
     tags: ['Branding', 'Logo Design', 'Brand Guidelines'],
   },
   {
@@ -117,7 +117,7 @@ export const portfolioProjects = [
       role: 'Business Development',
       avatar: '/images/portfolio/testimonial-5.jpg',
     },
-    link: 'https://www.fiverr.com/s/akB06EK',
+    link: 'https://www.fiverr.com/sohab1122',
     tags: ['Web Design', 'Responsive', 'Lead Generation'],
   },
   {
@@ -140,7 +140,7 @@ export const portfolioProjects = [
       role: 'Social Media Manager',
       avatar: '/images/portfolio/testimonial-6.jpg',
     },
-    link: 'https://www.fiverr.com/s/akB06EK',
+    link: 'https://www.fiverr.com/sohab1122',
     tags: ['Animation', 'Social Media', 'Marketing'],
   },
 ];
@@ -156,3 +156,4 @@ export const projectCategories = [
   { value: 'Branding', label: 'Branding' },
   { value: 'Web Design', label: 'Web Design' },
 ];
+

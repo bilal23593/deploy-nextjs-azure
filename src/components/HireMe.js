@@ -5,7 +5,7 @@ import Image from "next/image";
 import { getSocialLink } from "@/data/social";
 
 const HireMe = () => {
-  const fiverr = getSocialLink('Fiverr')?.url || 'https://www.fiverr.com/s/akB06EK';
+  const fiverr = getSocialLink('Fiverr')?.url || 'https://www.fiverr.com/sohab1122';
   return (
     <div
       className="fixed left-4 bottom-4 flex items-center justify-center overflow-hidden
@@ -30,3 +30,4 @@ const HireMe = () => {
 };
 
 export default HireMe;
+

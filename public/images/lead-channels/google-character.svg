@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Business owner character with Google profile">
+  <defs>
+    <linearGradient id="gbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe3cd" />
+      <stop offset="100%" stop-color="#ffb980" />
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="320" height="220" rx="24" fill="url(#gbg)" />
+  <rect x="162" y="56" width="126" height="118" rx="12" fill="#fff" />
+  <rect x="176" y="70" width="98" height="10" rx="5" fill="#f3f4f6" />
+  <rect x="176" y="86" width="76" height="8" rx="4" fill="#e5e7eb" />
+  <g transform="translate(176 104)">
+    <polygon points="50,0 60,18 80,20 65,34 69,54 50,44 31,54 35,34 20,20 40,18" fill="#fbbc05" />
+  </g>
+  <rect x="176" y="166" width="98" height="6" rx="3" fill="#d1d5db" />
+  <circle cx="88" cy="54" r="18" fill="#facc9a" />
+  <rect x="72" y="72" width="32" height="36" rx="12" fill="#374151" />
+  <rect x="56" y="104" width="64" height="50" rx="14" fill="#f97316" />
+  <rect x="44" y="150" width="88" height="10" rx="5" fill="#9a3412" />
+  <circle cx="258" cy="38" r="20" fill="#fff" />
+  <text x="248" y="45" font-size="24" font-family="Arial, sans-serif" font-weight="700">
+    <tspan fill="#4285F4">G</tspan>
+  </text>
+  <path d="M230 40a12 12 0 0 1 7-11" fill="none" stroke="#EA4335" stroke-width="3" stroke-linecap="round" />
+  <path d="M229 46a12 12 0 0 0 7 10" fill="none" stroke="#34A853" stroke-width="3" stroke-linecap="round" />
+  <path d="M242 28a12 12 0 0 1 10 4" fill="none" stroke="#FBBC05" stroke-width="3" stroke-linecap="round" />
+</svg>

@@ -5,7 +5,7 @@
 
 import { companyInfo, socialLinks } from "@/data/social";
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_APP_URL || "https://cubecakestudios.com").replace(
+export const SITE_URL = (process.env.NEXT_PUBLIC_APP_URL || "https://cubecakestudiios.com").replace(
   /\/$/,
   ""
 );
@@ -28,8 +28,8 @@ export const defaultMeta = {
   canonicalUrl: SITE_URL,
   ogImage: DEFAULT_OG_IMAGE,
   ogType: "website",
-  twitterHandle: "@cubecakestudios",
-  twitterSite: "@cubecakestudios",
+  twitterHandle: "@cubecakestudiios",
+  twitterSite: "@cubecakestudiios",
   robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
 };
 

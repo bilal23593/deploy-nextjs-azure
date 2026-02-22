@@ -4,4 +4,4 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /_next/static/*.map
 
-Sitemap: https://cubecakestudios.com/sitemap.xml
+Sitemap: https://cubecakestudiios.com/sitemap.xml

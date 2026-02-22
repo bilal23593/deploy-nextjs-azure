@@ -52,7 +52,7 @@ const Privacy = () => {
                   1. Introduction
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  CUBE CAKE STUDIIOS ("we", "our", or "us") operates the cubecakestudios.com
+                  CUBE CAKE STUDIIOS ("we", "our", or "us") operates the cubecakestudiios.com
                   website. This privacy policy explains how we collect, use, disclose, and
                   safeguard your information when you visit our website.
                 </p>
@@ -171,7 +171,7 @@ const Privacy = () => {
                   If you have questions about this privacy policy, please contact us at:
                 </p>
                 <p className="text-gray-700 dark:text-gray-300">
-                  <strong>Email:</strong> hello@cubecakestudios.com
+                  <strong>Email:</strong> hello@cubecakestudiios.com
                   <br />
                   <strong>Website:</strong> /contact
                 </p>

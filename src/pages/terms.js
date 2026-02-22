@@ -189,7 +189,7 @@ const Terms = () => {
                   If you have any questions about these terms, please contact us at:
                 </p>
                 <p className="text-gray-700 dark:text-gray-300">
-                  <strong>Email:</strong> hello@cubecakestudios.com
+                  <strong>Email:</strong> hello@cubecakestudiios.com
                   <br />
                   <strong>Website:</strong> /contact
                 </p>

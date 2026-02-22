@@ -81,8 +81,8 @@ npm install @sendgrid/mail
 - Add to `.env.local`:
   ```
   SENDGRID_API_KEY=your_key_here
-  SENDGRID_FROM_EMAIL=noreply@cubecakestudios.com
-  SENDGRID_TO_EMAIL=hello@cubecakestudios.com
+  SENDGRID_FROM_EMAIL=noreply@cubecakestudiios.com
+  SENDGRID_TO_EMAIL=hello@cubecakestudiios.com
   ```
 - Update `src/pages/api/contact.js` to use SendGrid
 

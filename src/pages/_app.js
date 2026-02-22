@@ -1,10 +1,12 @@
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import CookieConsent from "@/components/CookieConsent";
+import LeadTunnelPopup from "@/components/LeadTunnelPopup";
 import "@/styles/globals.css";
 import { Montserrat } from "next/font/google";
 import Head from "next/head";
 import Script from "next/script";
+import { useRouter } from "next/router";
 import { getOrganizationSchema, getWebsiteSchema } from "@/lib/seo";
 
 const montserrat = Montserrat({
@@ -13,6 +15,7 @@ const montserrat = Montserrat({
 });
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const organizationSchema = getOrganizationSchema();
   const websiteSchema = getWebsiteSchema();
@@ -60,6 +63,7 @@ export default function App({ Component, pageProps }) {
           </>
         ) : null}
 
+        <LeadTunnelPopup routeKey={router.asPath} />
         <NavBar />
         <Component {...pageProps} />
         <Footer />
