@@ -130,7 +130,7 @@ const nextConfig = {
 
   // Environment Variables
   env: {
-    NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID || '',
+    NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID || 'G-1XP9S3Z1VB',
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'https://cubecakestudiios.com',
   },
 };

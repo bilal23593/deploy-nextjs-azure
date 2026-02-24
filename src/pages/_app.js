@@ -16,7 +16,7 @@ const montserrat = Montserrat({
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-1XP9S3Z1VB";
   const organizationSchema = getOrganizationSchema();
   const websiteSchema = getWebsiteSchema();
 
