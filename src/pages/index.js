@@ -8,10 +8,15 @@ import SEOHead from "@/components/SEOHead";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/seo";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { getSocialLink } from "@/data/social";
+import { seoLandingPageList } from "@/data/seoLandingPages";
 
 const MotionLink = motion.create(Link);
 
 export default function Home() {
+  const homeTitle = "2D Animation & Explainer Video Studio for Startups | Cube Cake Studiios";
+  const homeDescription =
+    "Cube Cake Studiios is a global 2D animation and explainer video studio helping startups and brands turn complex ideas into clear, engaging visual stories that drive results.";
+
   const ctaMagnetX = useMotionValue(0);
   const ctaMagnetY = useMotionValue(0);
   const ctaX = useSpring(ctaMagnetX, { stiffness: 220, damping: 18, mass: 0.45 });
@@ -96,6 +101,10 @@ export default function Home() {
     { value: "95%", label: "Client Satisfaction" },
     { value: "4.9", label: "Creative Rating" },
   ];
+  const seoIntentLinks = seoLandingPageList.map((page) => ({
+    href: `/services/${page.slug}`,
+    label: page.h1,
+  }));
 
   // Avatar SVGs (simple 2D heads in public/images/avatars)
   const avatars = [
@@ -108,9 +117,8 @@ export default function Home() {
   ];
 
   const homePageSchema = getWebPageSchema({
-    title: "CUBE CAKE STUDIIOS | 2D Animation & Explainer Videos",
-    description:
-      "Professional 2D animation and explainer video production. Bring your ideas to life with stunning visuals. UI/UX Design, Branding and Web Design services.",
+    title: homeTitle,
+    description: homeDescription,
     url: "/",
     type: "WebPage",
   });
@@ -120,15 +128,15 @@ export default function Home() {
   return (
     <>
       <SEOHead
-        title="CUBE CAKE STUDIIOS | 2D Animation & Explainer Videos"
-        description="Professional 2D animation and explainer video production. Bring your ideas to life with stunning visuals. UI/UX Design, Branding and Web Design services."
+        title={homeTitle}
+        description={homeDescription}
         canonicalUrl="/"
         keywords={[
-          "2d animation agency",
-          "explainer videos",
-          "ui ux design",
-          "branding studio",
-          "web design services",
+          "2d animation studio for startups",
+          "explainer video studio",
+          "startup explainer video agency",
+          "saas explainer videos",
+          "global animation studio",
         ]}
         ogType="website"
         structuredData={[homePageSchema, homeBreadcrumbSchema]}
@@ -196,11 +204,10 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  Unlock Your Brand's Creative{" "}
+                  2D Animation & Explainer Video Studio for{" "}
                   <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-                    Potential Now
-                  </span>{" "}
-                  – Just One Click Away!
+                    Startups
+                  </span>
                 </motion.h1>
 
                 {/* Subtitle */}
@@ -210,8 +217,8 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
                 >
-                  Transform your ideas into stunning visual experiences with our team of creative experts.
-                  From animations to explainer videos, we bring your vision to life.
+                  We help startups and brands turn complex ideas into clear, engaging visual stories
+                  through high-converting explainer videos and 2D animation.
                 </motion.p>
 
                 {/* CTA Button */}
@@ -266,6 +273,28 @@ export default function Home() {
                       </p>
                     </div>
                   ))}
+                </motion.div>
+
+                <motion.div
+                  className="max-w-2xl"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                >
+                  <p className="text-xs uppercase tracking-[0.14em] font-semibold text-dark/70 mb-2">
+                    Startup Service Pages
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {seoIntentLinks.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="rounded-full border border-white/45 bg-white/65 px-3 py-1.5 text-xs font-semibold text-dark hover:border-primary hover:text-primary transition"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
                 </motion.div>
               </motion.div>
               {/* ✅ FIX: LEFT CONTENT motion.div was missing this closing tag */}
@@ -658,4 +687,5 @@ export default function Home() {
     </>
   );
 }
+
 

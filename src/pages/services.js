@@ -8,6 +8,7 @@ import {
   getServiceListSchema,
   getWebPageSchema,
 } from "@/lib/seo";
+import { seoLandingPageList } from "@/data/seoLandingPages";
 
 const MotionLink = motion.create(Link);
 
@@ -244,6 +245,43 @@ const Services = () => {
                 </motion.article>
               ))}
             </div>
+
+            <motion.section
+              className="mt-12 rounded-3xl border border-dark/15 bg-white p-7"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              viewport={{ once: true }}
+            >
+              <p className="text-xs tracking-[0.3em] uppercase text-primary font-semibold mb-3">
+                Startup SEO Landing Pages
+              </p>
+              <h3 className="text-3xl md:text-2xl font-black text-dark mb-6">
+                Explore Specialized Service Intent Pages
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+                {seoLandingPageList.map((page, index) => (
+                  <motion.article
+                    key={page.slug}
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: index * 0.05 }}
+                    viewport={{ once: true }}
+                    className="rounded-2xl border border-dark/15 bg-dark/[0.02] p-5"
+                  >
+                    <h4 className="text-xl font-black text-dark mb-2">{page.h1}</h4>
+                    <p className="text-sm text-dark/75 leading-relaxed mb-4">{page.description}</p>
+                    <Link
+                      href={`/services/${page.slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                    >
+                      Open landing page
+                      <span aria-hidden>&rarr;</span>
+                    </Link>
+                  </motion.article>
+                ))}
+              </div>
+            </motion.section>
           </div>
         </section>
 
