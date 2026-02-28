@@ -210,10 +210,10 @@ const LeadTunnelPopup = ({ routeKey }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.96 }}
             transition={{ duration: 0.24, ease: "easeOut" }}
-            className="fixed inset-0 z-[121] flex items-center justify-center p-4 md:items-start md:p-3 overflow-y-auto overscroll-contain"
+            className="fixed inset-0 z-[121] flex items-start justify-center overflow-y-auto overscroll-contain p-4 md:p-3"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
-            <div className="relative my-6 md:my-2 w-full max-w-[1040px] overflow-hidden md:overflow-y-auto md:max-h-[calc(100svh-1rem)] rounded-[2rem] border border-white/25 bg-[#0b1020]/95 text-white shadow-[0_35px_120px_-40px_rgba(0,0,0,0.75)]">
+            <div className="relative mt-4 mb-4 w-full max-w-[1040px] max-h-[calc(100svh-2rem)] overflow-y-auto rounded-[2rem] border border-white/25 bg-[#0b1020]/95 text-white shadow-[0_35px_120px_-40px_rgba(0,0,0,0.75)] md:mt-2 md:mb-2 md:max-h-[calc(100svh-1rem)]">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(56,189,248,0.27),transparent_34%),radial-gradient(circle_at_86%_84%,rgba(182,62,150,0.24),transparent_36%),linear-gradient(165deg,rgba(9,14,29,0.92),rgba(31,12,47,0.9),rgba(9,25,44,0.92))]" />
 
               <div className="relative z-10 px-8 py-7 lg:px-6 md:px-5">
