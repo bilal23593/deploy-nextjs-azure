@@ -10,30 +10,50 @@ const GOOGLE_PROFILE_URL =
 const WHATSAPP_URL =
   process.env.NEXT_PUBLIC_WHATSAPP_URL || 'https://wa.me/971543462742';
 
+export const leadChannelOrder = ['WhatsApp', 'Fiverr', 'LinkedIn', 'Google Profile'];
+export const leadConversionChannels = ['WhatsApp', 'Fiverr'];
+export const leadTrustChannels = ['LinkedIn', 'Google Profile'];
+
 export const socialLinks = [
   {
     name: 'Fiverr',
     url: 'https://www.fiverr.com/sohab1122',
     icon: 'FiFiverr',
     color: 'text-primary',
+    badge: 'Marketplace',
+    cta: 'Hire on Fiverr',
+    shortDescription: 'Best for buyers who want marketplace checkout and fixed packages.',
+    bestFor: 'Fixed-scope orders and marketplace-first buyers',
   },
   {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/company/cube-cake-studiios/',
     icon: 'FiLinkedin',
     color: 'text-blue-600',
+    badge: 'Professional',
+    cta: 'Connect on LinkedIn',
+    shortDescription: 'Best for agency partnerships, B2B validation, and professional credibility.',
+    bestFor: 'Partnerships, team buyers, and B2B trust checks',
   },
   {
     name: 'Google Profile',
     url: GOOGLE_PROFILE_URL,
     icon: 'FiGoogle',
     color: 'text-amber-500',
+    badge: 'Reviews',
+    cta: 'View Google Profile',
+    shortDescription: 'Best for review validation, business visibility, and local trust signals.',
+    bestFor: 'Review checks and trust validation before inquiry',
   },
   {
     name: 'WhatsApp',
     url: WHATSAPP_URL,
     icon: 'FiMessageCircle',
     color: 'text-green-500',
+    badge: 'Fastest',
+    cta: 'Chat on WhatsApp',
+    shortDescription: 'Best for fast scope, budget, and timeline conversations.',
+    bestFor: 'High-intent buyers who want a quick response',
   },
 ];
 
@@ -69,8 +89,11 @@ export const contactMethods = [
  */
 export const quickLinks = [
   { label: 'Home', href: '/' },
+  { label: 'Start Here', href: '/start-here' },
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -89,9 +112,9 @@ export const legalLinks = [
  */
 export const companyInfo = {
   name: 'CUBE CAKE STUDIIOS',
-  tagline: 'Crafting Ideas into Visually Striking Design & Animation',
+  tagline: '2D animation studio for explainer videos, product stories, and launch-ready creative',
   description:
-    'Professional design and animation agency specializing in 2D animation, explainer videos, UI/UX design, branding, and web design for brands and businesses.',
+    'Professional 2D animation studio and explainer video agency helping brands, startups, and product teams turn complex ideas into clear visual stories.',
   established: 2020,
   team: 'Professional designers, animators, and developers',
   location: 'Karachi, Pakistan',

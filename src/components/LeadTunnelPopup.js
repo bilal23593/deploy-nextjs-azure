@@ -1,132 +1,191 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { getSocialLink } from "@/data/social";
+import SocialChannelMark from "@/components/SocialChannelMark";
+import TrackedExternalLink from "@/components/TrackedExternalLink";
+import TrackedInternalLink from "@/components/TrackedInternalLink";
+import {
+  getLeadChannels,
+  getLeadRouteContext,
+  popupExcludedRoutes,
+  trackLeadPopupEvent,
+} from "@/lib/leadRouting";
 
 const channelStyle = {
   Fiverr: {
-    badge: "Freelance",
     accent: "from-[#00b22d] to-[#1c8e3f]",
-    description: "Quick project kickoff with clear service packages.",
     character: "/images/lead-channels/fiverr-character.svg",
   },
   LinkedIn: {
-    badge: "Network",
     accent: "from-[#0A66C2] to-[#004182]",
-    description: "Professional collaboration and long-term partnerships.",
     character: "/images/lead-channels/linkedin-character.svg",
   },
   "Google Profile": {
-    badge: "Trust",
     accent: "from-[#ea4335] via-[#fbbc05] to-[#34a853]",
-    description: "Check reviews, authority signals, and direct business details.",
     character: "/images/lead-channels/google-character.svg",
   },
   WhatsApp: {
-    badge: "Instant",
     accent: "from-[#25D366] to-[#128C7E]",
-    description: "Fastest response for scope, budget, and timeline discussion.",
     character: "/images/lead-channels/whatsapp-character.svg",
   },
 };
 
-const leadChannelOrder = ["Fiverr", "LinkedIn", "Google Profile", "WhatsApp"];
+const POPUP_DISMISS_KEY = "ccs-lead-popup-dismissed-until";
+const POPUP_SESSION_KEY = "ccs-lead-popup-opened";
+const POPUP_PAGEVIEW_KEY = "ccs-lead-popup-pageviews";
+const POPUP_COOLDOWN_MS = 1000 * 60 * 60 * 72;
 
-const trackLeadChannelClick = (channelName, targetUrl) => {
-  if (typeof window !== "undefined" && typeof window.gtag === "function") {
-    window.gtag("event", "lead_channel_click", {
-      channel: channelName,
-      target_url: targetUrl,
-      event_category: "lead_tunnel_popup",
-      event_label: channelName,
-    });
-  }
-};
+const BrandLogo = ({ channel }) => <SocialChannelMark channel={channel} />;
 
-const BrandLogo = ({ channel }) => {
-  if (channel === "LinkedIn") {
-    return (
-      <div className="w-10 h-10 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center font-black text-base">
-        in
-      </div>
-    );
-  }
-
-  if (channel === "Fiverr") {
-    return (
-      <div className="w-10 h-10 rounded-xl bg-[#1dbf73] text-white flex items-center justify-center font-black text-sm tracking-wide">
-        fi
-      </div>
-    );
-  }
-
-  if (channel === "Google Profile") {
-    return (
-      <div className="w-10 h-10 rounded-xl bg-white border border-white/35 flex items-center justify-center">
-        <span className="text-lg font-black bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] bg-clip-text text-transparent">
-          G
-        </span>
-      </div>
-    );
-  }
-
-  return (
-    <div className="w-10 h-10 rounded-xl bg-[#25D366] text-white flex items-center justify-center">
-      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden>
-        <path d="M20.52 3.48A11.93 11.93 0 0 0 12.05 0C5.5 0 .17 5.3.17 11.82c0 2.08.54 4.11 1.57 5.9L0 24l6.46-1.68a11.93 11.93 0 0 0 5.59 1.42h.01c6.55 0 11.88-5.3 11.89-11.82A11.75 11.75 0 0 0 20.52 3.48Zm-8.47 18.2h-.01a9.96 9.96 0 0 1-5.08-1.39l-.36-.21-3.83.99 1.02-3.72-.24-.38a9.8 9.8 0 0 1-1.53-5.15c0-5.43 4.44-9.85 9.9-9.85a9.82 9.82 0 0 1 7.02 2.9 9.74 9.74 0 0 1 2.89 6.95c-.01 5.43-4.45 9.86-9.78 9.86Zm5.43-7.41c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.66.15-.2.3-.76.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.27-.47-2.41-1.5-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.45.13-.6.13-.12.3-.32.44-.47.15-.15.2-.25.3-.42.1-.17.05-.32-.02-.47-.08-.15-.66-1.57-.91-2.16-.24-.58-.48-.5-.66-.51h-.56c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.88 1.22 3.08c.15.2 2.09 3.18 5.06 4.45.7.3 1.25.48 1.68.62.71.22 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.42.24-.7.24-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z" />
-      </svg>
-    </div>
-  );
-};
+const normalizeRoute = (value = "/") => String(value || "/").split("?")[0].split("#")[0] || "/";
 
 const LeadTunnelPopup = ({ routeKey }) => {
   const showPopup = process.env.NEXT_PUBLIC_SHOW_LEAD_POPUP !== "false";
   const [isOpen, setIsOpen] = useState(false);
+  const normalizedRoute = normalizeRoute(routeKey);
+  const routeContext = useMemo(() => getLeadRouteContext(routeKey), [routeKey]);
+  const shouldSkipPopup =
+    !showPopup ||
+    popupExcludedRoutes.includes(normalizedRoute) ||
+    normalizedRoute.startsWith("/search");
 
   const channels = useMemo(() => {
-    return leadChannelOrder
-      .map((name) => {
-        const link = getSocialLink(name);
-        if (!link?.url) return null;
-        return {
-          name,
-          url: link.url,
-          ...channelStyle[name],
-        };
-      })
-      .filter(Boolean);
-  }, []);
+    return getLeadChannels([
+      routeContext.primaryChannel,
+      routeContext.secondaryChannel,
+      "LinkedIn",
+      "Google Profile",
+    ]).map((channel) => ({
+      ...channel,
+      ...channelStyle[channel.name],
+    }));
+  }, [routeContext.primaryChannel, routeContext.secondaryChannel]);
+
+  const closePopup = useCallback(
+    (reason = "dismiss", persistCooldown = true) => {
+      if (typeof window !== "undefined") {
+        window.sessionStorage.setItem(POPUP_SESSION_KEY, "true");
+        if (persistCooldown) {
+          window.localStorage.setItem(
+            POPUP_DISMISS_KEY,
+            String(Date.now() + POPUP_COOLDOWN_MS)
+          );
+        }
+      }
+
+      trackLeadPopupEvent({
+        action: "close",
+        route: normalizedRoute,
+        trigger: reason,
+        contextKey: routeContext.key,
+      });
+      setIsOpen(false);
+    },
+    [normalizedRoute, routeContext.key]
+  );
 
   useEffect(() => {
-    if (!showPopup) {
+    if (shouldSkipPopup) {
       setIsOpen(false);
       return undefined;
     }
 
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
     setIsOpen(false);
-    const timer = window.setTimeout(() => setIsOpen(true), 550);
-    return () => window.clearTimeout(timer);
-  }, [routeKey, showPopup]);
+
+    const dismissedUntil = Number(window.localStorage.getItem(POPUP_DISMISS_KEY) || "0");
+    const alreadyOpened = window.sessionStorage.getItem(POPUP_SESSION_KEY) === "true";
+
+    if (dismissedUntil > Date.now() || alreadyOpened) {
+      return undefined;
+    }
+
+    const pageviews = Number(window.sessionStorage.getItem(POPUP_PAGEVIEW_KEY) || "0") + 1;
+    window.sessionStorage.setItem(POPUP_PAGEVIEW_KEY, String(pageviews));
+
+    let opened = false;
+    let timerId;
+
+    const openPopup = (trigger) => {
+      if (opened) return;
+      opened = true;
+      window.sessionStorage.setItem(POPUP_SESSION_KEY, "true");
+      setIsOpen(true);
+      trackLeadPopupEvent({
+        action: "open",
+        route: normalizedRoute,
+        trigger,
+        contextKey: routeContext.key,
+      });
+      cleanupListeners();
+    };
+
+    const handleScroll = () => {
+      const totalScrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      if (totalScrollable <= 0) return;
+
+      const progress =
+        (window.scrollY || document.documentElement.scrollTop) / totalScrollable;
+
+      if (progress >= 0.55) {
+        openPopup("engaged_scroll");
+      }
+    };
+
+    const handleExitIntent = (event) => {
+      if (event.clientY <= 0) {
+        openPopup("exit_intent");
+      }
+    };
+
+    const cleanupListeners = () => {
+      if (timerId) {
+        window.clearTimeout(timerId);
+      }
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mouseout", handleExitIntent);
+    };
+
+    if (pageviews > 1) {
+      timerId = window.setTimeout(() => openPopup("second_pageview"), 9000);
+    } else {
+      timerId = window.setTimeout(() => openPopup("engaged_time"), 30000);
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      if (window.innerWidth >= 1024) {
+        document.addEventListener("mouseout", handleExitIntent);
+      }
+    }
+
+    return cleanupListeners;
+  }, [normalizedRoute, routeContext.key, shouldSkipPopup]);
 
   useEffect(() => {
     if (!isOpen) return undefined;
+
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const handleEscape = (event) => {
       if (event.key === "Escape") {
-        setIsOpen(false);
+        closePopup("escape_key");
       }
     };
 
     window.addEventListener("keydown", handleEscape);
+
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleEscape);
     };
-  }, [isOpen]);
+  }, [closePopup, isOpen]);
 
-  if (!showPopup) return null;
+  if (shouldSkipPopup) return null;
 
   return (
     <AnimatePresence>
@@ -135,7 +194,7 @@ const LeadTunnelPopup = ({ routeKey }) => {
           <motion.button
             type="button"
             aria-label="Close lead popup overlay"
-            onClick={() => setIsOpen(false)}
+            onClick={() => closePopup("overlay_dismiss")}
             className="fixed inset-0 z-[120] bg-black/65 backdrop-blur-[2px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -146,7 +205,7 @@ const LeadTunnelPopup = ({ routeKey }) => {
           <motion.section
             role="dialog"
             aria-modal="true"
-            aria-label="Choose lead channel"
+            aria-label="Choose lead route"
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.96 }}
@@ -154,100 +213,170 @@ const LeadTunnelPopup = ({ routeKey }) => {
             className="fixed inset-0 z-[121] flex items-center justify-center p-4 md:items-start md:p-3 overflow-y-auto overscroll-contain"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
-            <div className="relative my-6 md:my-2 w-full max-w-[980px] overflow-hidden md:overflow-y-auto md:max-h-[calc(100svh-1rem)] rounded-[2rem] border border-white/25 bg-[#0b1020]/95 text-white shadow-[0_35px_120px_-40px_rgba(0,0,0,0.75)]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(56,189,248,0.27),transparent_34%),radial-gradient(circle_at_86%_84%,rgba(182,62,150,0.24),transparent_36%),linear-gradient(165deg,rgba(9,14,29,0.92),rgba(31,12,47,0.9),rgba(9,25,44,0.92))]" />
-              <motion.div
-                className="absolute -top-20 -right-10 w-64 h-64 rounded-full bg-violet-400/30 blur-3xl"
-                animate={{ scale: [1, 1.22, 1], opacity: [0.24, 0.45, 0.24] }}
-                transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute -bottom-20 -left-10 w-56 h-56 rounded-full bg-cyan-400/30 blur-3xl"
-                animate={{ scale: [1, 1.16, 1], opacity: [0.22, 0.4, 0.22] }}
-                transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut", delay: 0.35 }}
-              />
+            <div className="relative my-6 md:my-2 w-full max-w-[1040px] overflow-hidden md:overflow-y-auto md:max-h-[calc(100svh-1rem)] rounded-[2rem] border border-white/25 bg-[#0b1020]/95 text-white shadow-[0_35px_120px_-40px_rgba(0,0,0,0.75)]">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(56,189,248,0.27),transparent_34%),radial-gradient(circle_at_86%_84%,rgba(182,62,150,0.24),transparent_36%),linear-gradient(165deg,rgba(9,14,29,0.92),rgba(31,12,47,0.9),rgba(9,25,44,0.92))]" />
 
-              <div className="relative px-8 py-7 lg:px-6 md:px-5">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="inline-flex rounded-full border border-cyan-300/40 bg-cyan-300/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-cyan-200">
-                      Lead Routing Popup
-                    </p>
-                    <h2 className="mt-4 text-4xl lg:text-3xl md:text-2xl font-black leading-tight">
-                      Pick Your Channel and Let’s Connect
-                    </h2>
-                    <p className="mt-2 text-sm text-slate-200/90 max-w-2xl">
-                      Select your preferred platform. We are active there and can respond faster.
-                    </p>
+              <div className="relative z-10 px-8 py-7 lg:px-6 md:px-5">
+                <div className="rounded-[1.75rem] border border-white/15 bg-black/20 px-5 py-5 shadow-[0_20px_60px_-34px_rgba(0,0,0,0.72)] backdrop-blur-sm">
+                  <div className="flex items-start justify-between gap-4 md:flex-col md:items-start">
+                    <div className="max-w-2xl">
+                      <p className="inline-flex rounded-full border border-cyan-300/40 bg-cyan-300/14 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-cyan-100">
+                      Smart Lead Routing
+                      </p>
+                      <h2 className="mt-4 text-4xl lg:text-3xl md:text-2xl font-black leading-tight text-white">
+                      {routeContext.popupTitle}
+                      </h2>
+                      <p className="mt-3 text-sm text-slate-100/90 max-w-2xl leading-relaxed">
+                      {routeContext.popupDescription}
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => closePopup("close_button")}
+                      className="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/12 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-white/20 transition"
+                    >
+                      Close
+                    </button>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => setIsOpen(false)}
-                    className="rounded-lg border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-semibold hover:bg-white/20 transition"
-                  >
-                    Close
-                  </button>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <TrackedInternalLink
+                      href="/contact"
+                      label="Send Project Brief"
+                      location="lead_popup_header"
+                      route={normalizedRoute}
+                      ctaType="lead_brief"
+                      onClick={() => closePopup("brief_cta_header", false)}
+                      className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-bold text-dark shadow-md hover:scale-[1.01] transition"
+                    >
+                      Send Project Brief
+                    </TrackedInternalLink>
+
+                    <TrackedInternalLink
+                      href="/start-here"
+                      label="Compare All Options"
+                      location="lead_popup_header"
+                      route={normalizedRoute}
+                      ctaType="routing_hub"
+                      onClick={() => closePopup("routing_cta_header", false)}
+                      className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/8 px-5 py-3 text-sm font-semibold text-white hover:bg-white/14 transition"
+                    >
+                      Compare All Options
+                    </TrackedInternalLink>
+                  </div>
                 </div>
 
-                <div className="mt-6 grid grid-cols-2 md:grid-cols-1 gap-4">
-                  {channels.map((channel, index) => (
-                    <motion.a
-                      key={channel.name}
-                      href={channel.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackLeadChannelClick(channel.name, channel.url)}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: 0.05 + index * 0.05 }}
-                      whileHover={{ y: -5, scale: 1.01 }}
-                      className="group relative overflow-hidden rounded-2xl border border-white/20 bg-white/8 p-5"
-                    >
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${channel.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-22`}
-                      />
-                      <div className="relative">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex items-center gap-3">
-                            <BrandLogo channel={channel.name} />
-                            <div>
-                              <p className="text-lg font-black leading-tight">{channel.name}</p>
-                              <span className="text-[11px] uppercase tracking-[0.12em] font-semibold text-white/80">
-                                {channel.badge}
-                              </span>
+                <div className="mt-6 grid grid-cols-12 gap-4 md:grid-cols-1">
+                  <motion.article
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="col-span-5 rounded-[1.75rem] border border-white/20 bg-white/9 p-5 shadow-[0_20px_50px_-34px_rgba(0,0,0,0.7)] backdrop-blur-sm"
+                  >
+                    <p className="text-xs uppercase tracking-[0.14em] font-semibold text-cyan-100">
+                      Recommended First Step
+                    </p>
+                    <h3 className="mt-2 text-2xl font-black text-white">Stay on-site for the brief</h3>
+                    <p className="mt-3 text-sm text-slate-100/90 leading-relaxed">
+                      Use the website for a detailed project brief, then choose WhatsApp or Fiverr
+                      if you want to continue in those environments.
+                    </p>
+
+                    <div className="mt-5 flex flex-col gap-3">
+                      <TrackedInternalLink
+                        href="/contact"
+                        label="Send Project Brief"
+                        location="lead_popup"
+                        route={normalizedRoute}
+                        ctaType="lead_brief"
+                        onClick={() => closePopup("brief_cta", false)}
+                        className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-bold text-dark shadow-md hover:scale-[1.01] transition"
+                      >
+                        Send Project Brief
+                      </TrackedInternalLink>
+
+                      <TrackedInternalLink
+                        href="/start-here"
+                        label="Compare All Options"
+                        location="lead_popup"
+                        route={normalizedRoute}
+                        ctaType="routing_hub"
+                        onClick={() => closePopup("routing_cta", false)}
+                        className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/8 px-5 py-3 text-sm font-semibold text-white hover:bg-white/14 transition"
+                      >
+                        Compare All Options
+                      </TrackedInternalLink>
+                    </div>
+                  </motion.article>
+
+                  <div className="col-span-7 grid grid-cols-2 md:grid-cols-1 gap-4">
+                    {channels.map((channel, index) => (
+                      <motion.div
+                        key={channel.name}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: 0.05 + index * 0.05 }}
+                      >
+                        <TrackedExternalLink
+                          channel={channel.name}
+                          location="lead_popup"
+                          route={normalizedRoute}
+                          surface="lead_popup"
+                          onClick={() => closePopup(`${channel.name}_cta`, false)}
+                          className="group relative block h-full overflow-hidden rounded-2xl border border-white/20 bg-white/9 p-5 shadow-[0_20px_50px_-34px_rgba(0,0,0,0.68)] backdrop-blur-sm"
+                        >
+                          <div
+                            className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${channel.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-20`}
+                          />
+                          <div className="relative z-10">
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex items-center gap-3">
+                                <BrandLogo channel={channel.name} />
+                                <div>
+                                  <p className="text-lg font-black leading-tight text-white">{channel.name}</p>
+                                  <span className="mt-1 inline-flex rounded-full border border-white/15 bg-white/10 px-2 py-1 text-[10px] uppercase tracking-[0.12em] font-semibold text-slate-100/90">
+                                    {channel.badge}
+                                  </span>
+                                </div>
+                              </div>
+
+                              {channel.character ? (
+                                <div className="relative w-24 h-20 rounded-xl overflow-hidden border border-white/20 bg-white/10 shrink-0">
+                                  <Image
+                                    src={channel.character}
+                                    alt={`${channel.name} character`}
+                                    fill
+                                    sizes="96px"
+                                    className="object-cover"
+                                  />
+                                </div>
+                              ) : null}
+                            </div>
+
+                            <p className="mt-3 text-sm text-slate-100/90 leading-relaxed">
+                              {channel.shortDescription}
+                            </p>
+                            <p className="mt-2 text-xs text-slate-300/85">{channel.bestFor}</p>
+                            <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-dark shadow-sm">
+                              {channel.cta}
+                              <span aria-hidden>&rarr;</span>
                             </div>
                           </div>
-
-                          <div className="relative w-24 h-20 rounded-xl overflow-hidden border border-white/20 bg-white/10 shrink-0">
-                            <Image
-                              src={channel.character}
-                              alt={`${channel.name} 2D character`}
-                              fill
-                              sizes="96px"
-                              className="object-cover"
-                            />
-                          </div>
-                        </div>
-
-                        <p className="mt-3 text-sm text-slate-200/90">{channel.description}</p>
-                        <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white text-dark px-4 py-2 text-xs font-bold">
-                          Continue
-                          <span aria-hidden>&rarr;</span>
-                        </div>
-                      </div>
-                    </motion.a>
-                  ))}
+                        </TrackedExternalLink>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="mt-4 flex items-center justify-between gap-4 text-xs text-slate-300/85 md:flex-col md:items-start">
-                  <p>Use the channel where you usually respond fastest.</p>
+                  <p>Use WhatsApp for the fastest reply, Fiverr for marketplace ordering, and LinkedIn or Google for validation.</p>
                   <button
                     type="button"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => closePopup("continue_website", false)}
                     className="underline underline-offset-4 hover:text-white transition"
                   >
-                    Continue to website
+                    Continue browsing
                   </button>
                 </div>
               </div>

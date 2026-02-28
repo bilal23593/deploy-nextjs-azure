@@ -1,13 +1,16 @@
+import "@/styles/globals.css";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import CookieConsent from "@/components/CookieConsent";
-import LeadTunnelPopup from "@/components/LeadTunnelPopup";
-import "@/styles/globals.css";
+import dynamic from "next/dynamic";
+import { MotionConfig } from "framer-motion";
 import { Montserrat } from "next/font/google";
 import Head from "next/head";
 import Script from "next/script";
 import { useRouter } from "next/router";
 import { getOrganizationSchema, getWebsiteSchema } from "@/lib/seo";
+
+const CookieConsent = dynamic(() => import("@/components/CookieConsent"), { ssr: false });
+const LeadTunnelPopup = dynamic(() => import("@/components/LeadTunnelPopup"), { ssr: false });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -37,38 +40,40 @@ export default function App({ Component, pageProps }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </Head>
-      <main
-        className={`${montserrat.variable} font-mont bg-light w-full min-h-screen`}
-      >
-        {/* Google Analytics */}
-        {gaId ? (
-          <>
-            <Script
-              strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-            />
-            <Script
-              id="google-analytics"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  window.gtag = gtag;
-                  gtag('js', new Date());
-                  gtag('config', '${gaId}', { anonymize_ip: true });
-                `,
-              }}
-            />
-          </>
-        ) : null}
+      <MotionConfig reducedMotion="user">
+        <main
+          className={`${montserrat.variable} font-mont bg-light w-full min-h-screen`}
+        >
+          {/* Google Analytics */}
+          {gaId ? (
+            <>
+              <Script
+                strategy="lazyOnload"
+                src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              />
+              <Script
+                id="google-analytics"
+                strategy="lazyOnload"
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    window.gtag = gtag;
+                    gtag('js', new Date());
+                    gtag('config', '${gaId}', { anonymize_ip: true });
+                  `,
+                }}
+              />
+            </>
+          ) : null}
 
-        <LeadTunnelPopup routeKey={router.asPath} />
-        <NavBar />
-        <Component {...pageProps} />
-        <Footer />
-        <CookieConsent />
-      </main>
+          <LeadTunnelPopup routeKey={router.asPath} />
+          <NavBar />
+          <Component {...pageProps} />
+          <Footer />
+          <CookieConsent />
+        </main>
+      </MotionConfig>
     </>
   );
 }

@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export const TransitionEffect = () => {
-  const [mounted, setMounted] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    setMounted(true);
+    const storageKey = "ccs-route-transition-ready";
+
+    try {
+      const hasVisited = window.sessionStorage.getItem(storageKey);
+      if (hasVisited) {
+        setShouldAnimate(true);
+      } else {
+        window.sessionStorage.setItem(storageKey, "1");
+      }
+    } catch {
+      setShouldAnimate(false);
+    }
   }, []);
 
-  if (!mounted) return null;
+  if (!shouldAnimate || prefersReducedMotion) return null;
 
   return (
     <>
@@ -17,21 +29,21 @@ export const TransitionEffect = () => {
         initial={{ x: "100%", width: "100%" }}
         animate={{ x: "0%", width: "0%" }}
         exit={{ x: ["0%", "100%"], width: ["0%", "100%"] }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
+        transition={{ duration: 0.55, ease: "easeInOut" }}
       />
 
       <motion.div
         className="fixed top-0 bottom-0 right-full w-screen h-screen z-[60] bg-light"
         initial={{ x: "100%", width: "100%" }}
         animate={{ x: "0%", width: "0%" }}
-        transition={{ delay: 0.2, duration: 0.8, ease: "easeInOut" }}
+        transition={{ delay: 0.14, duration: 0.55, ease: "easeInOut" }}
       />
 
       <motion.div
         className="fixed top-0 bottom-0 right-full w-screen h-screen z-[50] bg-dark"
         initial={{ x: "100%", width: "100%" }}
         animate={{ x: "0%", width: "0%" }}
-        transition={{ delay: 0.35, duration: 0.95, ease: "easeInOut" }}
+        transition={{ delay: 0.24, duration: 0.65, ease: "easeInOut" }}
       />
     </>
   );

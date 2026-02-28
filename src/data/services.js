@@ -7,6 +7,7 @@ export const services = [
   {
     id: 'animation',
     title: '2D Animation',
+    href: '/services/2d-animation-studio',
     shortDescription: 'Engage your audience with captivating 2D animations.',
     fullDescription:
       'We create stunning 2D animations that bring your ideas to life. From character animation to motion graphics, our team crafts visually striking animations that capture attention and communicate your message effectively.',
@@ -32,6 +33,7 @@ export const services = [
   {
     id: 'explainer',
     title: 'Explainer Videos',
+    href: '/services/explainer-video-production-for-startups',
     shortDescription: 'Simplify complex ideas with engaging explainer videos.',
     fullDescription:
       'Transform complex concepts into simple, engaging video content. Our explainer videos combine animation, voiceover, and sound design to deliver your message clearly and memorably.',
@@ -82,6 +84,7 @@ export const services = [
   {
     id: 'branding',
     title: 'Branding & Identity',
+    href: '/services/brand-story-animation-for-startups',
     shortDescription: 'Build a distinctive brand that stands out.',
     fullDescription:
       'Create a strong, memorable brand identity that resonates with your audience. We develop comprehensive brand guidelines including logos, color schemes, typography, and brand voice.',

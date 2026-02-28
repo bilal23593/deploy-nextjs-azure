@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import TrackedExternalLink from "@/components/TrackedExternalLink";
+import { trackLeadCtaClick } from "@/lib/leadRouting";
 
 const MotionLink = motion.create(Link);
 
@@ -20,7 +22,7 @@ const pulseItems = [
   { label: "Campaign uplift", value: "3.4x" },
 ];
 
-export default function GenZPulseSection({ fiverr }) {
+export default function GenZPulseSection() {
   const [pointer, setPointer] = useState({ x: 50, y: 50 });
 
   const handlePointerMove = (event) => {
@@ -161,18 +163,43 @@ export default function GenZPulseSection({ fiverr }) {
                 Start with one campaign sprint and get a full concept, storyboard, and launch-ready assets.
               </p>
               <div className="flex sm:flex-col items-center sm:items-start gap-4">
-                <motion.a
-                  href={fiverr}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <MotionLink
+                  href="/contact"
+                  onClick={() =>
+                    trackLeadCtaClick({
+                      label: "Book a Creative Sprint",
+                      destination: "/contact",
+                      location: "genz_pulse",
+                      route: "/",
+                      ctaType: "lead_brief",
+                    })
+                  }
                   className="px-7 py-3 rounded-full bg-white text-dark font-bold hover:shadow-xl transition-all"
                   whileHover={{ y: -2, scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 >
                   Book a Creative Sprint
-                </motion.a>
+                </MotionLink>
+                <TrackedExternalLink
+                  channel="Fiverr"
+                  location="genz_pulse"
+                  route="/"
+                  surface="genz_pulse"
+                  className="px-7 py-3 rounded-full border border-white/35 text-white font-semibold hover:bg-white/10 transition-all"
+                >
+                  Hire on Fiverr
+                </TrackedExternalLink>
                 <MotionLink
                   href="/portfolio"
+                  onClick={() =>
+                    trackLeadCtaClick({
+                      label: "See Recent Work",
+                      destination: "/portfolio",
+                      location: "genz_pulse",
+                      route: "/",
+                      ctaType: "portfolio_navigation",
+                    })
+                  }
                   className="px-7 py-3 rounded-full border border-white/35 text-white font-semibold hover:bg-white/10 transition-all"
                   whileHover={{ y: -2, scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}

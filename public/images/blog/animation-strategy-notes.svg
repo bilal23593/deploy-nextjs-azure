@@ -1,0 +1,35 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" rx="48" fill="#F7F4EF"/>
+  <rect x="60" y="60" width="1480" height="880" rx="40" fill="url(#bg)"/>
+  <rect x="132" y="164" width="742" height="672" rx="34" fill="#FFFDF9" stroke="#D6D3D1"/>
+  <rect x="926" y="164" width="542" height="300" rx="34" fill="#FFFFFF" stroke="#D6D3D1"/>
+  <rect x="926" y="506" width="542" height="330" rx="34" fill="#FFFFFF" stroke="#D6D3D1"/>
+  <rect x="188" y="236" width="300" height="24" rx="12" fill="#111827"/>
+  <rect x="188" y="292" width="474" height="16" rx="8" fill="#94A3B8"/>
+  <rect x="188" y="330" width="430" height="16" rx="8" fill="#94A3B8"/>
+  <rect x="188" y="400" width="626" height="160" rx="28" fill="#0F172A"/>
+  <rect x="236" y="456" width="178" height="16" rx="8" fill="#F8FAFC"/>
+  <rect x="236" y="494" width="248" height="12" rx="6" fill="#94A3B8"/>
+  <path d="M236 540H730" stroke="#1F2937" stroke-width="18" stroke-linecap="round"/>
+  <path d="M236 540C328 540 368 468 450 468C536 468 566 594 730 594" stroke="url(#line)" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="730" cy="594" r="16" fill="#F97316"/>
+  <rect x="972" y="226" width="184" height="156" rx="28" fill="#F97316" fill-opacity="0.12"/>
+  <rect x="1198" y="226" width="224" height="156" rx="28" fill="#7C3AED" fill-opacity="0.12"/>
+  <rect x="972" y="556" width="404" height="198" rx="28" fill="#0F172A"/>
+  <rect x="1022" y="614" width="242" height="18" rx="9" fill="#F8FAFC"/>
+  <rect x="1022" y="654" width="190" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="1022" y="688" width="304" height="12" rx="6" fill="#94A3B8"/>
+  <circle cx="1376" cy="718" r="58" fill="#22D3EE" fill-opacity="0.25"/>
+  <text x="132" y="118" fill="#111827" font-family="Arial, sans-serif" font-size="42" font-weight="700">Animation Strategy Notes</text>
+  <text x="132" y="910" fill="#475569" font-family="Arial, sans-serif" font-size="28">Editorial guide covers for strategy, system design, and growth planning</text>
+  <defs>
+    <linearGradient id="bg" x1="80" y1="80" x2="1520" y2="920" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7ED"/>
+      <stop offset="1" stop-color="#EFF6FF"/>
+    </linearGradient>
+    <linearGradient id="line" x1="236" y1="468" x2="730" y2="594" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+</svg>

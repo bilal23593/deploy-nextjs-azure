@@ -1,0 +1,40 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" rx="48" fill="#08131D"/>
+  <rect x="56" y="56" width="1488" height="888" rx="40" fill="url(#bg)"/>
+  <circle cx="1318" cy="194" r="184" fill="#34D399" fill-opacity="0.16"/>
+  <circle cx="324" cy="794" r="240" fill="#A855F7" fill-opacity="0.14"/>
+  <rect x="128" y="170" width="566" height="644" rx="36" fill="#0F2432"/>
+  <rect x="186" y="244" width="222" height="18" rx="9" fill="#F8FAFC" fill-opacity="0.92"/>
+  <rect x="186" y="288" width="326" height="14" rx="7" fill="#94A3B8"/>
+  <rect x="186" y="346" width="450" height="112" rx="28" fill="#143042"/>
+  <rect x="186" y="490" width="450" height="112" rx="28" fill="#143042"/>
+  <rect x="186" y="634" width="450" height="112" rx="28" fill="#143042"/>
+  <rect x="230" y="386" width="160" height="16" rx="8" fill="#E2E8F0" fill-opacity="0.9"/>
+  <rect x="230" y="528" width="160" height="16" rx="8" fill="#E2E8F0" fill-opacity="0.9"/>
+  <rect x="230" y="672" width="160" height="16" rx="8" fill="#E2E8F0" fill-opacity="0.9"/>
+  <rect x="230" y="416" width="254" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="230" y="558" width="214" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="230" y="702" width="228" height="12" rx="6" fill="#94A3B8"/>
+  <path d="M770 290H1368" stroke="#173244" stroke-width="20" stroke-linecap="round"/>
+  <path d="M770 418H1368" stroke="#173244" stroke-width="20" stroke-linecap="round"/>
+  <path d="M770 546H1368" stroke="#173244" stroke-width="20" stroke-linecap="round"/>
+  <rect x="774" y="218" width="210" height="144" rx="28" fill="#0F2432" stroke="#34D399" stroke-opacity="0.45"/>
+  <rect x="1016" y="218" width="210" height="144" rx="28" fill="#0F2432" stroke="#22D3EE" stroke-opacity="0.45"/>
+  <rect x="1258" y="218" width="210" height="144" rx="28" fill="#0F2432" stroke="#F97316" stroke-opacity="0.45"/>
+  <rect x="774" y="474" width="694" height="300" rx="36" fill="#0F2432"/>
+  <path d="M850 688C916 636 974 650 1040 608C1104 568 1174 570 1228 512C1276 462 1350 462 1396 462" stroke="url(#growth)" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="1396" cy="462" r="18" fill="#34D399"/>
+  <text x="128" y="112" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="42" font-weight="700">Service Clarity Motion System</text>
+  <text x="128" y="914" fill="#94A3B8" font-family="Arial, sans-serif" font-size="28">Explain services faster, improve trust, and lift conversion intent</text>
+  <defs>
+    <linearGradient id="bg" x1="96" y1="96" x2="1504" y2="904" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#081923"/>
+      <stop offset="1" stop-color="#143342"/>
+    </linearGradient>
+    <linearGradient id="growth" x1="850" y1="688" x2="1396" y2="462" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="0.5" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+</svg>

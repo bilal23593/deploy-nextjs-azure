@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
+import LeadRoutingPanel from "@/components/LeadRoutingPanel";
 import { TransitionEffect } from "@/components/TransitionEffect";
 import { services, processSteps } from "@/data/services";
 import SEOHead from "@/components/SEOHead";
@@ -45,7 +46,7 @@ const serviceStyle = {
   },
 };
 
-const highlightBadges = ["2D Animation", "Explainer Video", "UI/UX", "Branding", "Web Design"];
+const highlightBadges = ["2D Animation Studio", "Explainer Video", "UI/UX", "Branding", "Web Design"];
 
 const serviceStats = [
   { label: "Creative sprints this year", value: "120+" },
@@ -56,7 +57,7 @@ const serviceStats = [
 const Services = () => {
   const servicesTitle = "Services | CUBE CAKE STUDIIOS";
   const servicesDescription =
-    "Our comprehensive design and animation services: 2D Animation, Explainer Videos, UI/UX Design, Branding, and Web Design.";
+    "Our comprehensive creative services including 2D animation studio work, explainer videos, UI/UX design, branding, and web design.";
 
   const servicesPageSchema = getWebPageSchema({
     title: servicesTitle,
@@ -104,7 +105,7 @@ const Services = () => {
                 Services
               </p>
               <h1 className="text-7xl xl:text-6xl lg:text-5xl md:text-4xl sm:text-3xl font-black leading-tight mb-6">
-                Creative Services Built to Win Attention and Drive Results
+                2D Animation Studio Services Built to Win Attention and Drive Results
               </h1>
               <p className="text-lg text-gray-200 max-w-3xl leading-relaxed mb-8">
                 From story to execution, we design and animate brand experiences that feel premium,
@@ -216,12 +217,12 @@ const Services = () => {
                       </div>
 
                       <MotionLink
-                        href="/contact"
+                        href={service.href || "/contact"}
                         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-dark text-white font-semibold"
                         whileHover={{ x: 2 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        Start This Service
+                        {service.href ? "View Service" : "Start This Service"}
                         <span>→</span>
                       </MotionLink>
                     </div>
@@ -254,7 +255,7 @@ const Services = () => {
               viewport={{ once: true }}
             >
               <p className="text-xs tracking-[0.3em] uppercase text-primary font-semibold mb-3">
-                Startup SEO Landing Pages
+                Specialized Service Pages
               </p>
               <h3 className="text-3xl md:text-2xl font-black text-dark mb-6">
                 Explore Specialized Service Intent Pages
@@ -282,6 +283,18 @@ const Services = () => {
                 ))}
               </div>
             </motion.section>
+
+            <div className="mt-12">
+              <LeadRoutingPanel
+                eyebrow="Service Routing"
+                title="Pick the route that matches how you buy creative services."
+                description="The service library should clarify scope and fit first. Then route serious buyers into a brief, WhatsApp, Fiverr, or trust checks depending on intent."
+                location="services_index_panel"
+                route="/services"
+                primaryChannel="WhatsApp"
+                secondaryChannel="Fiverr"
+              />
+            </div>
           </div>
         </section>
 

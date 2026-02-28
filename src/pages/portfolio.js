@@ -1,7 +1,11 @@
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import LeadRoutingPanel from "@/components/LeadRoutingPanel";
+import TrackedInternalLink from "@/components/TrackedInternalLink";
 import { TransitionEffect } from "@/components/TransitionEffect";
 import ProjectCard from "@/components/ProjectCard";
+import { caseStudyList } from "@/data/caseStudies";
 import { portfolioProjects, projectCategories } from "@/data/portfolio";
 import SEOHead from "@/components/SEOHead";
 import { getBreadcrumbSchema, getPortfolioSchema, getWebPageSchema } from "@/lib/seo";
@@ -27,7 +31,7 @@ const Portfolio = () => {
 
   const portfolioTitle = "Portfolio | CUBE CAKE STUDIIOS";
   const portfolioDescription =
-    "View our latest animation, design, and branding projects. Showcase of successful client work and case studies.";
+    "View our latest animation, design, and branding projects, plus selected case studies with measurable outcomes.";
   const portfolioPageSchema = getWebPageSchema({
     title: portfolioTitle,
     description: portfolioDescription,
@@ -139,6 +143,58 @@ const Portfolio = () => {
                 );
               })}
             </div>
+
+            <motion.section
+              className="mt-12 rounded-3xl border border-dark/15 bg-white p-7"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              viewport={{ once: true }}
+            >
+              <p className="text-xs tracking-[0.3em] uppercase text-primary font-semibold mb-3">
+                Deep Dives
+              </p>
+              <h3 className="text-3xl md:text-2xl font-black text-dark mb-6">
+                Read the Case Studies Behind the Work
+              </h3>
+              <div className="grid grid-cols-3 md:grid-cols-1 gap-4">
+                {caseStudyList.map((caseStudy, index) => (
+                  <motion.article
+                    key={caseStudy.slug}
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: index * 0.05 }}
+                    viewport={{ once: true }}
+                    className="rounded-2xl border border-dark/15 bg-dark/[0.02] p-5"
+                  >
+                    <p className="text-xs uppercase tracking-[0.14em] font-semibold text-primary">
+                      {caseStudy.serviceLine}
+                    </p>
+                    <h4 className="mt-2 text-xl font-black text-dark">{caseStudy.title}</h4>
+                    <p className="mt-2 text-sm text-dark/75 leading-relaxed">{caseStudy.description}</p>
+                    <Link
+                      href={`/case-studies/${caseStudy.slug}`}
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                    >
+                      Read case study
+                      <span aria-hidden>&rarr;</span>
+                    </Link>
+                  </motion.article>
+                ))}
+              </div>
+            </motion.section>
+
+            <div className="mt-12">
+              <LeadRoutingPanel
+                eyebrow="Portfolio Routing"
+                title="Seen enough proof to talk about your own project?"
+                description="Use the portfolio to qualify the work, then send a detailed brief, move to WhatsApp for a fast discussion, or use Fiverr if you already want a marketplace-style order."
+                location="portfolio_lead_panel"
+                route="/portfolio"
+                primaryChannel="WhatsApp"
+                secondaryChannel="Fiverr"
+              />
+            </div>
           </div>
         </section>
 
@@ -191,12 +247,16 @@ const Portfolio = () => {
                 Share your goal and timeline. We will map the right visual style, character approach,
                 and output format for your launch.
               </p>
-              <a
+              <TrackedInternalLink
                 href="/contact"
+                label="Start Your Project"
+                location="portfolio_final_cta"
+                route="/portfolio"
+                ctaType="lead_brief"
                 className="inline-block px-8 py-3 rounded-full bg-white text-dark font-bold hover:shadow-xl transition-all"
               >
                 Start Your Project
-              </a>
+              </TrackedInternalLink>
             </motion.div>
           </div>
         </section>

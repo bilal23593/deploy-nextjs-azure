@@ -55,12 +55,22 @@ const SEOHead = ({
       <title>{seoMeta.title}</title>
       <meta name="description" content={seoMeta.description} />
       <meta name="robots" content={seoMeta.robots} />
+      <meta name="googlebot" content={seoMeta.robots} />
       <meta name="author" content={SITE_NAME} />
       <meta name="application-name" content={SITE_NAME} />
+      <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
+      <meta name="referrer" content="strict-origin-when-cross-origin" />
 
       {normalizedKeywords ? <meta name="keywords" content={normalizedKeywords} /> : null}
 
       <link rel="canonical" href={seoMeta.canonical} />
+      {seoMeta.mobileAlternate ? (
+        <link
+          rel="alternate"
+          media={seoMeta.mobileAlternate.media}
+          href={seoMeta.mobileAlternate.href}
+        />
+      ) : null}
       {seoMeta.languageAlternates?.map((alt) => (
         <link key={`${alt.hrefLang}-${alt.href}`} rel="alternate" hrefLang={alt.hrefLang} href={alt.href} />
       ))}
@@ -72,6 +82,7 @@ const SEOHead = ({
       <meta property="og:site_name" content={openGraphMeta.siteName} />
       <meta property="og:locale" content={openGraphMeta.locale} />
       <meta property="og:image" content={openGraphMeta.images[0].url} />
+      <meta property="og:image:secure_url" content={openGraphMeta.images[0].url} />
       <meta property="og:image:width" content={String(openGraphMeta.images[0].width)} />
       <meta property="og:image:height" content={String(openGraphMeta.images[0].height)} />
       <meta property="og:image:alt" content={openGraphMeta.images[0].alt} />
@@ -83,10 +94,13 @@ const SEOHead = ({
       {articleModifiedTime ? (
         <meta property="article:modified_time" content={articleModifiedTime} />
       ) : null}
+      {articlePublishedTime ? <meta property="article:author" content={SITE_NAME} /> : null}
+      {articleModifiedTime ? <meta property="og:updated_time" content={articleModifiedTime} /> : null}
 
       <meta name="twitter:card" content={twitterMeta.cardType} />
       <meta name="twitter:site" content={twitterMeta.site} />
       <meta name="twitter:creator" content={twitterMeta.handle} />
+      <meta name="twitter:url" content={openGraphMeta.url} />
       <meta name="twitter:title" content={twitterMeta.title} />
       <meta name="twitter:description" content={twitterMeta.description} />
       <meta name="twitter:image" content={twitterMeta.image} />

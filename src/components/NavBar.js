@@ -2,19 +2,25 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
-import { getSocialLink } from "@/data/social";
+import TrackedInternalLink from "@/components/TrackedInternalLink";
 
 const navLinks = [
   { href: "/", title: "Home" },
   { href: "/about", title: "About" },
   { href: "/services", title: "Services" },
+  { href: "/blog", title: "Blog" },
+  { href: "/case-studies", title: "Case Studies" },
   { href: "/portfolio", title: "Portfolio" },
+  { href: "/search", title: "Search" },
   { href: "/contact", title: "Contact" },
 ];
 
 const CustomLink = ({ href, title, className = "" }) => {
   const router = useRouter();
-  const isActive = router.pathname === href;
+  const isActive =
+    href === "/"
+      ? router.pathname === href
+      : router.pathname === href || router.asPath === href || router.asPath.startsWith(`${href}/`);
 
   return (
     <Link
@@ -33,7 +39,10 @@ const CustomLink = ({ href, title, className = "" }) => {
 
 const CustomMobileLink = ({ href, title, closeMenu }) => {
   const router = useRouter();
-  const isActive = router.pathname === href;
+  const isActive =
+    href === "/"
+      ? router.pathname === href
+      : router.pathname === href || router.asPath === href || router.asPath.startsWith(`${href}/`);
 
   const handleClick = () => {
     closeMenu();
@@ -60,8 +69,6 @@ const CustomMobileLink = ({ href, title, closeMenu }) => {
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-
-  const fiverr = getSocialLink("Fiverr")?.url || "https://www.fiverr.com/sohab1122";
 
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
@@ -103,14 +110,16 @@ const NavBar = () => {
             ))}
           </nav>
 
-          <a
-            href={fiverr}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center rounded-full bg-purple-600 px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.03] hover:shadow-lg"
+          <TrackedInternalLink
+            href="/start-here"
+            label="Start Here"
+            location="navbar_desktop"
+            route={router.asPath}
+            ctaType="routing_hub"
+            className="inline-flex items-center rounded-full bg-dark px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.03] hover:shadow-lg"
           >
-            Hire on Fiverr
-          </a>
+            Start Here
+          </TrackedInternalLink>
         </div>
 
         <button
@@ -175,15 +184,17 @@ const NavBar = () => {
                   ))}
                 </nav>
 
-                <a
-                  href={fiverr}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <TrackedInternalLink
+                  href="/start-here"
+                  label="Start Here"
+                  location="navbar_mobile"
+                  route={router.asPath}
+                  ctaType="routing_hub"
                   onClick={closeMenu}
-                  className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-purple-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-purple-500"
+                  className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-semibold text-dark transition hover:bg-white/90"
                 >
-                  Hire on Fiverr
-                </a>
+                  Start Here
+                </TrackedInternalLink>
               </div>
             </motion.div>
           </>

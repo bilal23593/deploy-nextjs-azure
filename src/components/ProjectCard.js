@@ -2,6 +2,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import TrackedExternalLink from "@/components/TrackedExternalLink";
+import TrackedInternalLink from "@/components/TrackedInternalLink";
 
 const MotionLink = motion.create(Link);
 
@@ -23,6 +25,7 @@ const ProjectCard = ({ project, index, featured = false }) => {
             className="absolute inset-0 w-full h-full"
             src={project.video}
             title={project.title}
+            loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
@@ -93,23 +96,34 @@ const ProjectCard = ({ project, index, featured = false }) => {
         ) : null}
 
         <div className="flex gap-3">
-          <MotionLink
+          <TrackedInternalLink
             href="/contact"
+            label="Project Inquiry"
+            location={`portfolio_card_${project.id}`}
+            ctaType="lead_brief"
             className="flex-1 text-center py-2.5 rounded-xl bg-dark text-white font-semibold"
-            whileHover={{ y: -1 }}
-            whileTap={{ scale: 0.98 }}
           >
-            Inquire
-          </MotionLink>
-          {project.link ? (
-            <a
+            Send Brief
+          </TrackedInternalLink>
+          {project.caseStudySlug ? (
+            <MotionLink
+              href={`/case-studies/${project.caseStudySlug}`}
+              className="flex-1 text-center py-2.5 rounded-xl border-2 border-dark text-dark font-semibold hover:bg-dark hover:text-white transition-colors"
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Case Study
+            </MotionLink>
+          ) : project.link ? (
+            <TrackedExternalLink
               href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
+              channel={project.link.includes("fiverr.com") ? "Fiverr" : undefined}
+              location={`portfolio_card_${project.id}`}
+              surface="portfolio_card"
               className="flex-1 text-center py-2.5 rounded-xl border-2 border-dark text-dark font-semibold hover:bg-dark hover:text-white transition-colors"
             >
-              View Live
-            </a>
+              {project.link.includes("fiverr.com") ? "Order on Fiverr" : "View Live"}
+            </TrackedExternalLink>
           ) : null}
         </div>
       </div>

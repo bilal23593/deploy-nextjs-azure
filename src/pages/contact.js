@@ -1,28 +1,16 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import LeadRoutingPanel from '@/components/LeadRoutingPanel';
 import Layout from '@/components/Layout';
+import SocialChannelMark from '@/components/SocialChannelMark';
 import { TransitionEffect } from '@/components/TransitionEffect';
 import ContactForm from '@/components/ContactForm';
+import TrackedExternalLink from '@/components/TrackedExternalLink';
+import TrackedInternalLink from '@/components/TrackedInternalLink';
 import { contactMethods, socialLinks } from '@/data/social';
-import {
-  GithubIcon,
-  TwitterIcon,
-  LinkedInIcon,
-  DribbbleIcon,
-  SkypeIcon,
-  TelegramIcon,
-} from '@/components/Icons';
 import SEOHead from '@/components/SEOHead';
 import { getBreadcrumbSchema, getContactSchema, getWebPageSchema } from '@/lib/seo';
-
-const socialIconMap = {
-  GitHub: GithubIcon,
-  Twitter: TwitterIcon,
-  LinkedIn: LinkedInIcon,
-  Dribbble: DribbbleIcon,
-  Skype: SkypeIcon,
-  Telegram: TelegramIcon,
-};
+import { trackLeadCtaClick } from '@/lib/leadRouting';
 
 const contactHighlights = [
   { value: '24h', label: 'Average Reply Time' },
@@ -70,6 +58,15 @@ const Contact = () => {
     { title: 'Contact', url: '/contact' },
   ]);
   const visibleContactMethods = contactMethods.filter((method) => method.type !== 'address');
+  const handleContactClick = (label, destination, ctaType) => () => {
+    trackLeadCtaClick({
+      label,
+      destination,
+      location: 'contact_page',
+      route: '/contact',
+      ctaType,
+    });
+  };
 
   return (
     <>
@@ -178,6 +175,7 @@ const Contact = () => {
                         {method.link ? (
                           <a
                             href={method.link}
+                            onClick={handleContactClick(method.label, method.link, 'contact_method')}
                             className="mt-1 inline-block text-sm font-semibold text-light hover:text-primaryDark transition-colors"
                           >
                             {method.value}
@@ -203,6 +201,18 @@ const Contact = () => {
         </section>
 
         <section className="w-full pb-8 lg:pb-7 md:pb-6">
+          <Layout className="pt-0 pb-8">
+            <LeadRoutingPanel
+              eyebrow="Choose Your Route"
+              title="This page works best as a lead hub, not just a form."
+              description="Send a detailed brief here for custom work, use WhatsApp for the fastest reply, use Fiverr for marketplace ordering, and use LinkedIn or Google Profile as trust layers before you decide."
+              location="contact_lead_panel"
+              route="/contact"
+              primaryChannel="WhatsApp"
+              secondaryChannel="Fiverr"
+            />
+          </Layout>
+
           <Layout className="pt-0">
             <div className="grid grid-cols-12 gap-7 lg:grid-cols-1 lg:gap-6">
               <div className="col-span-4 space-y-5">
@@ -221,6 +231,7 @@ const Contact = () => {
                         {method.link ? (
                           <a
                             href={method.link}
+                            onClick={handleContactClick(method.label, method.link, 'contact_method')}
                             className="mt-1 inline-block text-sm font-semibold text-dark dark:text-light hover:text-primary transition-colors"
                           >
                             {method.value}
@@ -236,26 +247,25 @@ const Contact = () => {
                 <div className="rounded-[1.75rem] border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark/70 p-6">
                   <p className="text-xs uppercase tracking-[0.14em] font-semibold text-primary">Stay Connected</p>
                   <h3 className="mt-2 text-2xl font-black text-dark dark:text-light">Social Presence</h3>
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    {socialLinks.slice(0, 8).map((link) => {
-                      const Icon = socialIconMap[link.name];
-                      return (
-                        <a
-                          key={link.name}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title={link.name}
-                          className="h-10 w-10 rounded-full border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-dark dark:text-light hover:border-primary hover:text-primary hover:scale-110 transition"
-                        >
-                          {Icon ? (
-                            <Icon className="w-4 h-4" />
-                          ) : (
-                            <span className="text-xs font-bold">{link.name.charAt(0)}</span>
-                          )}
-                        </a>
-                      );
-                    })}
+                  <div className="mt-5 grid grid-cols-2 sm:grid-cols-1 gap-3">
+                    {socialLinks.map((link) => (
+                      <TrackedExternalLink
+                        key={link.name}
+                        channel={link.name}
+                        location="contact_social"
+                        surface="contact_social"
+                        title={link.name}
+                        className="flex items-center gap-3 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/40 px-4 py-3 text-dark dark:text-light hover:border-primary hover:shadow-sm transition"
+                      >
+                        <SocialChannelMark channel={link.name} size="sm" />
+                        <div>
+                          <p className="text-sm font-semibold leading-tight">{link.name}</p>
+                          <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-gray-500 dark:text-gray-400">
+                            {link.badge}
+                          </p>
+                        </div>
+                      </TrackedExternalLink>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -278,18 +288,26 @@ const Contact = () => {
                   </h2>
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
-                  <Link
+                  <TrackedInternalLink
                     href="/services"
+                    label="Explore Services"
+                    location="contact_next_steps"
+                    route="/contact"
+                    ctaType="services_navigation"
                     className="rounded-full border border-gray-300 dark:border-gray-700 px-5 py-2.5 text-sm font-semibold text-dark dark:text-light hover:border-primary hover:text-primary transition"
                   >
                     Explore Services
-                  </Link>
-                  <Link
+                  </TrackedInternalLink>
+                  <TrackedInternalLink
                     href="/portfolio"
+                    label="View Portfolio"
+                    location="contact_next_steps"
+                    route="/contact"
+                    ctaType="portfolio_navigation"
                     className="rounded-full bg-dark text-light dark:bg-light dark:text-dark px-5 py-2.5 text-sm font-bold hover:scale-[1.03] transition"
                   >
                     View Portfolio
-                  </Link>
+                  </TrackedInternalLink>
                 </div>
               </div>
 

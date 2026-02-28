@@ -1,0 +1,42 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" rx="48" fill="#08111F"/>
+  <rect x="56" y="56" width="1488" height="888" rx="40" fill="url(#bg)"/>
+  <circle cx="1280" cy="210" r="180" fill="#22D3EE" fill-opacity="0.14"/>
+  <circle cx="290" cy="770" r="220" fill="#F97316" fill-opacity="0.12"/>
+  <rect x="128" y="160" width="460" height="680" rx="36" fill="#0E1E35" stroke="#F8FAFC" stroke-opacity="0.08"/>
+  <rect x="178" y="228" width="360" height="128" rx="24" fill="#12253F"/>
+  <rect x="214" y="268" width="160" height="18" rx="9" fill="#F8FAFC" fill-opacity="0.9"/>
+  <rect x="214" y="306" width="220" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="178" y="392" width="360" height="128" rx="24" fill="#12253F"/>
+  <rect x="214" y="432" width="196" height="18" rx="9" fill="#F8FAFC" fill-opacity="0.9"/>
+  <rect x="214" y="470" width="174" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="178" y="556" width="360" height="128" rx="24" fill="#12253F"/>
+  <rect x="214" y="596" width="142" height="18" rx="9" fill="#F8FAFC" fill-opacity="0.9"/>
+  <rect x="214" y="634" width="200" height="12" rx="6" fill="#94A3B8"/>
+  <rect x="742" y="168" width="676" height="292" rx="34" fill="#0F1F36"/>
+  <rect x="798" y="228" width="274" height="22" rx="11" fill="#F8FAFC" fill-opacity="0.92"/>
+  <rect x="798" y="278" width="320" height="14" rx="7" fill="#94A3B8"/>
+  <rect x="798" y="316" width="296" height="14" rx="7" fill="#94A3B8"/>
+  <rect x="798" y="374" width="218" height="58" rx="18" fill="url(#accent)"/>
+  <rect x="742" y="510" width="676" height="300" rx="34" fill="#0F1F36" stroke="#F8FAFC" stroke-opacity="0.08"/>
+  <rect x="804" y="582" width="552" height="42" rx="21" fill="#162C46"/>
+  <rect x="804" y="652" width="552" height="42" rx="21" fill="#162C46"/>
+  <rect x="804" y="722" width="552" height="42" rx="21" fill="#162C46"/>
+  <rect x="804" y="582" width="366" height="42" rx="21" fill="#22D3EE"/>
+  <rect x="804" y="652" width="428" height="42" rx="21" fill="#C084FC"/>
+  <rect x="804" y="722" width="290" height="42" rx="21" fill="#F97316"/>
+  <circle cx="1188" cy="603" r="26" fill="#F8FAFC"/>
+  <path d="M1180 590L1200 603L1180 616V590Z" fill="#0F172A"/>
+  <text x="128" y="112" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="42" font-weight="700">Tutorial Video Activation System</text>
+  <text x="128" y="914" fill="#94A3B8" font-family="Arial, sans-serif" font-size="28">Chapter-based education, clearer setup, lower support load</text>
+  <defs>
+    <linearGradient id="bg" x1="96" y1="96" x2="1504" y2="904" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#081725"/>
+      <stop offset="1" stop-color="#16324B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="798" y1="374" x2="1016" y2="432" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#C084FC"/>
+    </linearGradient>
+  </defs>
+</svg>

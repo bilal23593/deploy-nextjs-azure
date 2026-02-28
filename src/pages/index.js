@@ -1,21 +1,25 @@
 import Layout from "@/components/Layout";
+import LeadRoutingPanel from "@/components/LeadRoutingPanel";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { TransitionEffect } from "@/components/TransitionEffect";
-import GenZPulseSection from "@/components/GenZPulseSection";
-import GlobalRemoteShowcase from "@/components/GlobalRemoteShowcase";
 import SEOHead from "@/components/SEOHead";
+import TrackedExternalLink from "@/components/TrackedExternalLink";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/seo";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { getSocialLink } from "@/data/social";
+import { trackLeadCtaClick } from "@/lib/leadRouting";
+import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { seoLandingPageList } from "@/data/seoLandingPages";
 
 const MotionLink = motion.create(Link);
+const GenZPulseSection = dynamic(() => import("@/components/GenZPulseSection"));
+const GlobalRemoteShowcase = dynamic(() => import("@/components/GlobalRemoteShowcase"));
 
 export default function Home() {
   const homeTitle = "2D Animation & Explainer Video Studio for Startups | Cube Cake Studiios";
   const homeDescription =
     "Cube Cake Studiios is a global 2D animation and explainer video studio helping startups and brands turn complex ideas into clear, engaging visual stories that drive results.";
+  const prefersReducedMotion = useReducedMotion();
 
   const ctaMagnetX = useMotionValue(0);
   const ctaMagnetY = useMotionValue(0);
@@ -26,8 +30,6 @@ export default function Home() {
   const heroTiltY = useMotionValue(0);
   const heroX = useSpring(heroTiltX, { stiffness: 170, damping: 16, mass: 0.5 });
   const heroY = useSpring(heroTiltY, { stiffness: 170, damping: 16, mass: 0.5 });
-
-  const fiverr = getSocialLink('Fiverr')?.url || 'https://www.fiverr.com/sohab1122';
 
   const handleMagnetMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -55,6 +57,16 @@ export default function Home() {
   const resetHeroTilt = () => {
     heroTiltX.set(0);
     heroTiltY.set(0);
+  };
+
+  const handleTrackedNavigation = (label, destination, ctaType) => () => {
+    trackLeadCtaClick({
+      label,
+      destination,
+      location: "homepage",
+      route: "/",
+      ctaType,
+    });
   };
 
   // Services data
@@ -157,20 +169,20 @@ export default function Home() {
                 "linear-gradient(0deg, rgba(255,255,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px)",
               backgroundSize: "70px 70px",
             }}
-            animate={{ backgroundPosition: ["0px 0px", "70px 70px"] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+            animate={prefersReducedMotion ? undefined : { backgroundPosition: ["0px 0px", "70px 70px"] }}
+            transition={prefersReducedMotion ? undefined : { duration: 12, repeat: Infinity, ease: "linear" }}
           />
 
           {/* Animated Floating Orbs */}
           <motion.div
             className="absolute top-20 right-1/4 w-96 h-96 bg-purple-400/20 rounded-full filter blur-3xl"
-            animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 8, repeat: Infinity }}
+            animate={prefersReducedMotion ? undefined : { scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
+            transition={prefersReducedMotion ? undefined : { duration: 8, repeat: Infinity }}
           />
           <motion.div
             className="absolute bottom-20 left-1/4 w-72 h-72 bg-orange-300/20 rounded-full filter blur-3xl"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 10, repeat: Infinity, delay: 1 }}
+            animate={prefersReducedMotion ? undefined : { scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+            transition={prefersReducedMotion ? undefined : { duration: 10, repeat: Infinity, delay: 1 }}
           />
 
           <Layout className="relative z-10 pt-0 md:pt-16 sm:pt-8">
@@ -221,39 +233,85 @@ export default function Home() {
                   through high-converting explainer videos and 2D animation.
                 </motion.p>
 
-                {/* CTA Button */}
+                {/* CTA Buttons */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  <motion.a
-                    href={fiverr}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative inline-flex items-center gap-2 px-8 py-3 bg-black text-white font-semibold rounded-full hover:shadow-lg transition-all group overflow-hidden"
-                    style={{ x: ctaX, y: ctaY }}
-                    onMouseMove={handleMagnetMove}
-                    onMouseLeave={resetMagnet}
-                    whileHover={{ scale: 1.08, rotate: -1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                      style={{
-                        background:
-                          "radial-gradient(160px circle at 50% 50%, rgba(255,255,255,0.28), transparent 55%)",
-                      }}
-                    />
-                    <span className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-transparent to-violet-400/20" />
-                    Start Project
-                    <motion.span
-                      animate={{ x: [0, 4, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                  <div className="flex flex-wrap gap-3">
+                    <MotionLink
+                      href="/start-here"
+                      onClick={handleTrackedNavigation("Start Here", "/start-here", "routing_hub")}
+                      className="relative inline-flex items-center gap-2 px-8 py-3 bg-black text-white font-semibold rounded-full hover:shadow-lg transition-all group overflow-hidden"
+                      style={{ x: ctaX, y: ctaY }}
+                      onMouseMove={handleMagnetMove}
+                      onMouseLeave={resetMagnet}
+                      whileHover={{ scale: 1.08, rotate: -1 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      →
-                    </motion.span>
-                  </motion.a>
+                      <span
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                        style={{
+                          background:
+                            "radial-gradient(160px circle at 50% 50%, rgba(255,255,255,0.28), transparent 55%)",
+                        }}
+                      />
+                      <span className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-transparent to-violet-400/20" />
+                      Start Here
+                      <motion.span
+                        animate={prefersReducedMotion ? undefined : { x: [0, 4, 0] }}
+                        transition={prefersReducedMotion ? undefined : { duration: 2, repeat: Infinity }}
+                      >
+                        →
+                      </motion.span>
+                    </MotionLink>
+
+                    <MotionLink
+                      href="/contact"
+                      onClick={handleTrackedNavigation("Send Project Brief", "/contact", "lead_brief")}
+                      className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-black/20 bg-white/75 text-dark font-semibold hover:bg-white hover:shadow-lg transition-all"
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      Send Project Brief
+                    </MotionLink>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <TrackedExternalLink
+                      channel="WhatsApp"
+                      location="homepage_hero"
+                      surface="homepage_trust"
+                      className="rounded-full border border-white/45 bg-white/65 px-3 py-1.5 text-xs font-semibold text-dark hover:border-green-500 hover:text-green-700 transition"
+                    >
+                      WhatsApp
+                    </TrackedExternalLink>
+                    <TrackedExternalLink
+                      channel="Fiverr"
+                      location="homepage_hero"
+                      surface="homepage_trust"
+                      className="rounded-full border border-white/45 bg-white/65 px-3 py-1.5 text-xs font-semibold text-dark hover:border-primary hover:text-primary transition"
+                    >
+                      Fiverr
+                    </TrackedExternalLink>
+                    <TrackedExternalLink
+                      channel="LinkedIn"
+                      location="homepage_hero"
+                      surface="homepage_trust"
+                      className="rounded-full border border-white/45 bg-white/65 px-3 py-1.5 text-xs font-semibold text-dark hover:border-blue-600 hover:text-blue-700 transition"
+                    >
+                      LinkedIn
+                    </TrackedExternalLink>
+                    <TrackedExternalLink
+                      channel="Google Profile"
+                      location="homepage_hero"
+                      surface="homepage_trust"
+                      className="rounded-full border border-white/45 bg-white/65 px-3 py-1.5 text-xs font-semibold text-dark hover:border-amber-500 hover:text-amber-700 transition"
+                    >
+                      Google Profile
+                    </TrackedExternalLink>
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -341,13 +399,13 @@ export default function Home() {
 
                   <motion.div
                     className="absolute inset-[12%] rounded-full border border-white/35"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    animate={prefersReducedMotion ? undefined : { rotate: 360 }}
+                    transition={prefersReducedMotion ? undefined : { duration: 20, repeat: Infinity, ease: "linear" }}
                   />
                   <motion.div
                     className="absolute inset-[24%] rounded-full border border-white/20"
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+                    animate={prefersReducedMotion ? undefined : { rotate: -360 }}
+                    transition={prefersReducedMotion ? undefined : { duration: 14, repeat: Infinity, ease: "linear" }}
                   />
 
                   {/* Center Content */}
@@ -364,6 +422,7 @@ export default function Home() {
                           src="/images/profile/cube-cake-studiios.png"
                           alt="CUBE CAKE STUDIIOS logo"
                           fill
+                          priority
                           sizes="(max-width: 768px) 128px, 160px"
                           className="object-cover"
                         />
@@ -384,20 +443,25 @@ export default function Home() {
                     const angle = (i / avatars.length) * Math.PI * 2;
                     const radii = [150, 120, 160, 140, 130, 155];
                     const radius = radii[i % radii.length];
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
                     return (
                       <motion.div
                         key={i}
                         className="absolute w-16 h-16 rounded-full bg-white border-4 border-white shadow-2xl flex items-center justify-center overflow-hidden"
-                        initial={{ scale: 0.9, opacity: 0.95 }}
-                        animate={{
-                          x: Math.cos(angle) * radius,
-                          y: Math.sin(angle) * radius,
-                        }}
-                        transition={{ duration: 4 + i * 0.35, repeat: Infinity, ease: 'linear' }}
+                        initial={{ scale: 0.85, opacity: 0, x, y }}
+                        animate={{ scale: 1, opacity: 0.95, x, y }}
+                        transition={{ duration: 0.45, delay: 0.55 + i * 0.04 }}
                         whileHover={{ scale: 1.08 }}
                         style={{ left: '50%', top: '50%', marginLeft: '-32px', marginTop: '-32px' }}
                       >
-                        <img src={src} alt={`avatar-${i}`} className="w-full h-full object-cover rounded-full" />
+                        <Image
+                          src={src}
+                          alt={`avatar-${i}`}
+                          fill
+                          sizes="64px"
+                          className="object-cover rounded-full"
+                        />
                       </motion.div>
                     );
                   })}
@@ -405,8 +469,8 @@ export default function Home() {
                   <motion.div
                     className="absolute top-[8%] -left-10 md:left-0 px-4 py-2 rounded-2xl border border-white/40 bg-white/70 backdrop-blur-md shadow-xl"
                     style={{ transform: "translateZ(40px)" }}
-                    animate={{ y: [0, -8, 0] }}
-                    transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+                    animate={prefersReducedMotion ? undefined : { y: [0, -8, 0] }}
+                    transition={prefersReducedMotion ? undefined : { duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <p className="text-xs font-semibold text-dark">Hot this week</p>
                     <p className="text-sm font-black text-purple-700">Explainer + Reels</p>
@@ -415,8 +479,8 @@ export default function Home() {
                   <motion.div
                     className="absolute bottom-[10%] -right-10 md:right-0 px-4 py-2 rounded-2xl border border-white/25 bg-dark/70 backdrop-blur-md shadow-xl"
                     style={{ transform: "translateZ(50px)" }}
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.25 }}
+                    animate={prefersReducedMotion ? undefined : { y: [0, 8, 0] }}
+                    transition={prefersReducedMotion ? undefined : { duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.25 }}
                   >
                     <p className="text-xs font-semibold text-gray-300">Avg Delivery</p>
                     <p className="text-sm font-black text-orange-300">72 hours</p>
@@ -435,8 +499,8 @@ export default function Home() {
             <span className="text-[10px] tracking-[0.2em] uppercase font-semibold">Scroll</span>
             <motion.span
               className="text-lg"
-              animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+              animate={prefersReducedMotion ? undefined : { y: [0, 5, 0] }}
+              transition={prefersReducedMotion ? undefined : { duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
             >
               ↓
             </motion.span>
@@ -570,7 +634,21 @@ export default function Home() {
           </Layout>
         </section>
 
-        <GenZPulseSection fiverr={fiverr} />
+        <GenZPulseSection />
+
+        <section className="w-full bg-light dark:bg-dark/50">
+          <Layout className="pt-0 pb-12">
+            <LeadRoutingPanel
+              eyebrow="High-Intent Routing"
+              title="Use the website to build trust, then choose the buying route that fits you."
+              description="This site should attract search traffic, qualify buyers with proof and case studies, and then route each visitor into the best conversion path for custom briefs, fast WhatsApp conversations, marketplace orders, or trust checks."
+              location="homepage_lead_panel"
+              route="/"
+              primaryChannel="WhatsApp"
+              secondaryChannel="Fiverr"
+            />
+          </Layout>
+        </section>
 
 
         {/* CTA SECTION */}
@@ -581,13 +659,13 @@ export default function Home() {
           {/* Floating Orbs */}
           <motion.div
             className="absolute top-1/4 right-1/4 w-72 h-72 bg-purple-300/20 rounded-full filter blur-3xl"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 8, repeat: Infinity }}
+            animate={prefersReducedMotion ? undefined : { scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+            transition={prefersReducedMotion ? undefined : { duration: 8, repeat: Infinity }}
           />
           <motion.div
             className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-pink-300/20 rounded-full filter blur-3xl"
-            animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 10, repeat: Infinity, delay: 1 }}
+            animate={prefersReducedMotion ? undefined : { scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
+            transition={prefersReducedMotion ? undefined : { duration: 10, repeat: Infinity, delay: 1 }}
           />
 
           <Layout className="relative z-10">
@@ -629,41 +707,54 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.25 }}
                 viewport={{ once: true }}
               >
-                <motion.a
-                  href={fiverr}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <MotionLink
+                  href="/start-here"
+                  onClick={handleTrackedNavigation("Start Here", "/start-here", "routing_hub")}
                   className="group relative px-12 py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold rounded-full shadow-xl overflow-hidden hover:shadow-2xl transition-all"
                   whileHover={{ scale: 1.08 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <div className="absolute inset-0 bg-white/0 group-hover:bg-white/20 transition-all" />
                   <div className="relative flex items-center gap-2">
-                    Start Your Project
+                    Start Here
                     <motion.span
-                      animate={{ x: [0, 6, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                      animate={prefersReducedMotion ? undefined : { x: [0, 6, 0] }}
+                      transition={prefersReducedMotion ? undefined : { duration: 2, repeat: Infinity }}
                     >
-                      ✨
+                      →
                     </motion.span>
                   </div>
-                </motion.a>
+                </MotionLink>
 
                 <MotionLink
-                  href="/portfolio"
+                  href="/contact"
+                  onClick={handleTrackedNavigation("Send Project Brief", "/contact", "lead_brief")}
                   className="group relative px-12 py-4 border-2 border-purple-600 text-purple-600 dark:text-purple-300 font-semibold rounded-full hover:bg-purple-50 dark:hover:bg-purple-500/10 transition-all"
                   whileHover={{ scale: 1.08 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <div className="absolute inset-0 bg-purple-50/0 dark:bg-purple-500/0 group-hover:bg-purple-50 dark:group-hover:bg-purple-500/10 transition-all" />
                   <div className="relative flex items-center gap-2">
-                    Explore Portfolio
+                    Send Project Brief
                     <motion.span
-                      animate={{ x: [0, 6, 0] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+                      animate={prefersReducedMotion ? undefined : { x: [0, 6, 0] }}
+                      transition={prefersReducedMotion ? undefined : { duration: 2, repeat: Infinity, delay: 0.2 }}
                     >
                       →
                     </motion.span>
+                  </div>
+                </MotionLink>
+
+                <MotionLink
+                  href="/portfolio"
+                  onClick={handleTrackedNavigation("Explore Portfolio", "/portfolio", "portfolio_navigation")}
+                  className="group relative px-12 py-4 border-2 border-dark/20 text-dark dark:text-light font-semibold rounded-full hover:bg-white/50 dark:hover:bg-white/5 transition-all"
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="relative flex items-center gap-2">
+                    Explore Portfolio
+                    <span aria-hidden>→</span>
                   </div>
                 </MotionLink>
               </motion.div>

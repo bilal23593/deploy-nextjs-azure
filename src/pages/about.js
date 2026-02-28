@@ -202,6 +202,7 @@ const About = () => {
                       className="absolute inset-0 w-full h-full"
                       src="https://www.youtube.com/embed/EOlp1K1KKKU?mute=1&controls=1&rel=0"
                       title="CUBE CAKE STUDIIOS showreel"
+                      loading="lazy"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     />

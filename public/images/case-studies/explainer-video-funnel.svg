@@ -1,0 +1,43 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" rx="48" fill="#07151D"/>
+  <rect x="56" y="56" width="1488" height="888" rx="40" fill="url(#bg)"/>
+  <circle cx="1340" cy="184" r="180" fill="#22D3EE" fill-opacity="0.18"/>
+  <circle cx="286" cy="804" r="230" fill="#C084FC" fill-opacity="0.16"/>
+  <rect x="136" y="170" width="560" height="268" rx="34" fill="#0F2432" stroke="#E2E8F0" stroke-opacity="0.08"/>
+  <rect x="188" y="234" width="258" height="22" rx="11" fill="#F8FAFC" fill-opacity="0.92"/>
+  <rect x="188" y="284" width="320" height="14" rx="7" fill="#94A3B8"/>
+  <rect x="188" y="318" width="278" height="14" rx="7" fill="#94A3B8"/>
+  <circle cx="574" cy="304" r="72" fill="#152F42"/>
+  <path d="M554 270L620 304L554 338V270Z" fill="#F97316"/>
+  <rect x="136" y="494" width="560" height="316" rx="34" fill="#0F2432"/>
+  <path d="M232 640H600" stroke="#1E293B" stroke-width="16" stroke-linecap="round"/>
+  <path d="M232 640C312 640 356 590 420 590C486 590 514 704 600 704" stroke="url(#line)" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="600" cy="704" r="18" fill="#F97316"/>
+  <rect x="742" y="168" width="662" height="642" rx="36" fill="#0F2432" stroke="#F8FAFC" stroke-opacity="0.08"/>
+  <path d="M820 260H1328" stroke="#1C3448" stroke-width="28" stroke-linecap="round"/>
+  <path d="M914 260L1116 410L1258 410L1034 564L1114 564L948 720" stroke="url(#funnel)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="844" y="230" width="136" height="54" rx="18" fill="#112334" stroke="#22D3EE" stroke-opacity="0.45"/>
+  <rect x="1102" y="384" width="156" height="54" rx="18" fill="#112334" stroke="#C084FC" stroke-opacity="0.45"/>
+  <rect x="930" y="538" width="170" height="54" rx="18" fill="#112334" stroke="#F97316" stroke-opacity="0.45"/>
+  <rect x="846" y="684" width="198" height="58" rx="20" fill="#F8FAFC"/>
+  <rect x="1082" y="646" width="252" height="96" rx="24" fill="#153044"/>
+  <rect x="1120" y="678" width="176" height="16" rx="8" fill="#E2E8F0" fill-opacity="0.9"/>
+  <rect x="1120" y="710" width="132" height="12" rx="6" fill="#94A3B8"/>
+  <text x="136" y="112" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="42" font-weight="700">Explainer Video Funnel</text>
+  <text x="136" y="914" fill="#94A3B8" font-family="Arial, sans-serif" font-size="28">Positioning, trust, lead quality, and product understanding</text>
+  <defs>
+    <linearGradient id="bg" x1="96" y1="96" x2="1504" y2="904" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#081821"/>
+      <stop offset="1" stop-color="#163041"/>
+    </linearGradient>
+    <linearGradient id="line" x1="232" y1="590" x2="600" y2="704" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+    <linearGradient id="funnel" x1="914" y1="260" x2="1114" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="0.5" stop-color="#C084FC"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+</svg>

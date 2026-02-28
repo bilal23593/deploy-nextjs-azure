@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { getSocialLink } from "@/data/social";
+import TrackedExternalLink from "@/components/TrackedExternalLink";
+import { getLeadChannels } from "@/lib/leadRouting";
 
 const channelDesign = {
   Fiverr: {
@@ -26,25 +27,11 @@ const channelDesign = {
 
 const channelOrder = ["Fiverr", "LinkedIn", "Google Profile", "WhatsApp"];
 
-const trackLeadChannelClick = (channelName, targetUrl) => {
-  if (typeof window !== "undefined" && typeof window.gtag === "function") {
-    window.gtag("event", "lead_channel_click", {
-      channel: channelName,
-      target_url: targetUrl,
-      event_category: "lead_tunnel",
-      event_label: channelName,
-    });
-  }
-};
-
 const LeadTunnelSection = () => {
-  const channels = channelOrder
-    .map((name) => {
-      const link = getSocialLink(name);
-      if (!link?.url) return null;
-      return { ...link, ...channelDesign[name] };
-    })
-    .filter(Boolean);
+  const channels = getLeadChannels(channelOrder).map((link) => ({
+    ...link,
+    ...channelDesign[link.name],
+  }));
 
   return (
     <section className="relative min-h-[92vh] w-full overflow-hidden flex items-center">
@@ -71,42 +58,45 @@ const LeadTunnelSection = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-1 gap-5">
           {channels.map((channel, index) => (
-            <motion.a
+            <motion.div
               key={channel.name}
-              href={channel.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackLeadChannelClick(channel.name, channel.url)}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.1 + index * 0.06 }}
               whileHover={{ y: -6, scale: 1.01 }}
-              className="group relative overflow-hidden rounded-[1.7rem] border border-white/20 bg-white/8 backdrop-blur-md p-6 md:p-5 shadow-2xl"
+              className="group relative overflow-hidden rounded-[1.7rem] border border-white/20 bg-white/8 backdrop-blur-md shadow-2xl"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${channel.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-20`} />
-              <div className="relative z-10">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xl sm:text-lg font-black text-white">{channel.name}</p>
-                  <span className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.12em] font-semibold text-white/90">
-                    {channel.badge}
-                  </span>
-                </div>
-                <p className="mt-3 text-sm text-slate-200/90">
-                  {channel.name === "WhatsApp"
-                    ? "Fastest direct response for project scope, budget, and timeline."
-                    : channel.name === "Google Profile"
-                    ? "Open reviews, trust signals, and direct contact from Google."
-                    : channel.name === "LinkedIn"
-                    ? "Best for professional networking and long-term partnerships."
-                    : "Best for quick project kickoff with clear service packages."}
-                </p>
+              <TrackedExternalLink
+                channel={channel.name}
+                location="lead_tunnel_section"
+                surface="lead_tunnel_section"
+                className="block h-full p-6 md:p-5"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${channel.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-20`} />
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-xl sm:text-lg font-black text-white">{channel.name}</p>
+                    <span className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.12em] font-semibold text-white/90">
+                      {channel.badge}
+                    </span>
+                  </div>
+                  <p className="mt-3 text-sm text-slate-200/90">
+                    {channel.name === "WhatsApp"
+                      ? "Fastest direct response for project scope, budget, and timeline."
+                      : channel.name === "Google Profile"
+                      ? "Open reviews, trust signals, and direct contact from Google."
+                      : channel.name === "LinkedIn"
+                      ? "Best for professional networking and long-term partnerships."
+                      : "Best for quick project kickoff with clear service packages."}
+                  </p>
 
-                <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white text-dark px-4 py-2 text-sm font-bold">
-                  {channel.cta}
-                  <span aria-hidden>&rarr;</span>
+                  <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white text-dark px-4 py-2 text-sm font-bold">
+                    {channel.cta}
+                    <span aria-hidden>&rarr;</span>
+                  </div>
                 </div>
-              </div>
-            </motion.a>
+              </TrackedExternalLink>
+            </motion.div>
           ))}
         </div>
 
