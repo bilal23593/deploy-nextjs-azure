@@ -467,6 +467,7 @@ export const getLegalWebPageSchema = ({ name, url, lastReviewed } = {}) => {
 const baseSitemapEntries = [
   { url: "/", title: "Home", priority: 1.0, changefreq: "weekly" },
   { url: "/start-here", title: "Start Here", priority: 0.86, changefreq: "weekly" },
+  { url: "/saas-explainer-video-agency", title: "SaaS Explainer Video Agency", priority: 0.88, changefreq: "weekly" },
   { url: "/about", title: "About", priority: 0.8, changefreq: "monthly" },
   { url: "/services", title: "Services", priority: 0.9, changefreq: "weekly" },
   { url: "/portfolio", title: "Portfolio", priority: 0.8, changefreq: "weekly" },

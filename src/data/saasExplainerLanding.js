@@ -1,0 +1,101 @@
+export const saasExplainerLanding = {
+  route: "/saas-explainer-video-agency",
+  title: "SaaS Explainer Video Agency | Cube Cake Studiios",
+  description:
+    "Cube Cake Studiios creates premium explainer videos for US SaaS startups and B2B teams that need clearer messaging, stronger trust, and better conversion support.",
+  keywords: [
+    "saas explainer video agency",
+    "explainer video company for startups",
+    "explainer videos for saas",
+    "startup animation studio",
+    "product demo animation services",
+    "b2b explainer video studio",
+  ],
+  hero: {
+    eyebrow: "Explainer Videos For SaaS And B2B Products",
+    titleLead: "Make Complex Products Feel",
+    titleAccent: "Obvious In Seconds",
+    summary:
+      "Premium explainer videos that help buyers understand the value faster, trust the offer sooner, and enquire with more confidence.",
+    trustLine: "Less explaining. More clarity. Better first impressions.",
+    visual: {
+      badge: "Clarity Changes Everything",
+      beforeTitle: "Before",
+      beforePoints: [
+        "Too much explaining",
+        "Harder to trust fast",
+        "Cold traffic drops off",
+      ],
+      afterTitle: "After",
+      afterPoints: [
+        "Clear value in seconds",
+        "Sharper product credibility",
+        "Higher-intent conversations",
+      ],
+      closing: "When the message lands fast, the product feels easier to trust and easier to buy.",
+    },
+  },
+  problemSolution: {
+    problemTitle: "A strong product can still lose the room.",
+    problemText:
+      "If visitors have to work to understand the offer, attention drops, trust weakens, and conversion slows down.",
+    solutionTitle: "A clear explainer changes the first impression.",
+    solutionText:
+      "A clear video delivers the story in seconds, so buyers understand the value faster and the product feels easier to trust.",
+  },
+  proof: {
+    eyebrow: "Proof",
+    title: "Enough trust to take the next step.",
+    items: [
+      {
+        title: "Since 2020",
+        description: "Premium creative work for modern brands and product teams since 2020.",
+      },
+      {
+        title: "Direct process",
+        description: "Clear scope, direct communication, and defined revisions.",
+      },
+      {
+        title: "Proof available",
+        description: "Portfolio and case studies for buyers who want to verify fit first.",
+      },
+    ],
+    links: [
+      {
+        href: "/case-studies",
+        label: "View Case Studies",
+        ctaType: "case_study_navigation",
+      },
+      {
+        href: "/portfolio",
+        label: "View Portfolio",
+        ctaType: "portfolio_navigation",
+      },
+    ],
+  },
+  process: {
+    eyebrow: "Process",
+    title: "Three steps. No messy handoff.",
+    steps: [
+      {
+        number: "01",
+        title: "Share brief",
+        description: "Tell us the product, audience, and goal.",
+      },
+      {
+        number: "02",
+        title: "We build the story",
+        description: "We shape the concept, visuals, and animation.",
+      },
+      {
+        number: "03",
+        title: "Launch with confidence",
+        description: "Receive polished assets ready for launch.",
+      },
+    ],
+  },
+  finalCta: {
+    title: "Make the first impression do more work.",
+    description: "Send the brief for a tailored proposal, or start on WhatsApp for the fastest way in.",
+  },
+};
