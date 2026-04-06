@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import profileImage from "../../public/images/profile/developer-pic-3.png";
 import { TransitionEffect } from "@/components/TransitionEffect";
+import { studioShowreel } from "@/data/videos";
 import SEOHead from "@/components/SEOHead";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/seo";
 
@@ -197,16 +198,34 @@ const About = () => {
                   transition={{ duration: 0.6, delay: 0.06 }}
                   viewport={{ once: true }}
                 >
-                  <div className="relative w-full h-full min-h-[230px] rounded-[1.5rem] overflow-hidden border border-white/20">
-                    <iframe
-                      className="absolute inset-0 w-full h-full"
-                      src="https://www.youtube.com/embed/EOlp1K1KKKU?mute=1&controls=1&rel=0"
-                      title="CUBE CAKE STUDIIOS showreel"
-                      loading="lazy"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
+                  <MotionLink
+                    href={studioShowreel.watchPagePath}
+                    className="group relative block w-full h-full min-h-[230px] overflow-hidden rounded-[1.5rem] border border-white/20"
+                    whileHover={{ y: -3 }}
+                    whileTap={{ scale: 0.99 }}
+                  >
+                    <Image
+                      src="/og-image.jpg"
+                      alt="Cube Cake Studiios showreel preview"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                  </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-[11px] font-black tracking-[0.18em] text-dark shadow-xl">
+                        PLAY
+                      </span>
+                    </div>
+                    <div className="absolute left-5 right-5 bottom-5">
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-300 mb-2">
+                        Watch Our Showreel
+                      </p>
+                      <p className="text-xl font-extrabold text-white">
+                        Open the dedicated video page
+                      </p>
+                    </div>
+                  </MotionLink>
                 </motion.div>
 
                 <motion.div

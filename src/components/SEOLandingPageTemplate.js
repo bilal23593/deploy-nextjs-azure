@@ -5,11 +5,11 @@ import LeadRoutingPanel from "@/components/LeadRoutingPanel";
 import SEOHead from "@/components/SEOHead";
 import TrackedInternalLink from "@/components/TrackedInternalLink";
 import { TransitionEffect } from "@/components/TransitionEffect";
+import VideoPreviewCard from "@/components/VideoPreviewCard";
 import { getBlogArticlesByServiceSlug } from "@/data/blogArticles";
 import { getCaseStudiesByServiceSlug } from "@/data/caseStudies";
 import {
   getBreadcrumbSchema,
-  getVideoObjectSchema,
   getWebPageSchema,
   SITE_URL,
   toAbsoluteUrl,
@@ -82,18 +82,6 @@ const SEOLandingPageTemplate = ({ config }) => {
 
   const serviceSchema = getServiceSchema(config, canonicalPath);
   const faqSchema = getFaqSchema(config.faqs || []);
-  const videoSchema = config.videoEmbedUrl
-    ? getVideoObjectSchema({
-        name: config.videoTitle || config.h1,
-        description: config.description,
-        uploadDate: config.updatedAt,
-        thumbnailUrl: relatedCaseStudies[0]?.image || "/og-image.jpg",
-        embedUrl: config.videoEmbedUrl,
-        contentUrl: canonicalPath,
-        duration: config.videoDuration,
-      })
-    : null;
-
   return (
     <>
       <SEOHead
@@ -102,7 +90,7 @@ const SEOLandingPageTemplate = ({ config }) => {
         canonicalUrl={canonicalPath}
         keywords={config.keywords}
         ogType="website"
-        structuredData={[pageSchema, breadcrumbSchema, serviceSchema, faqSchema, videoSchema]}
+        structuredData={[pageSchema, breadcrumbSchema, serviceSchema, faqSchema]}
       />
 
       <TransitionEffect />
@@ -291,17 +279,13 @@ const SEOLandingPageTemplate = ({ config }) => {
                 {...fadeIn}
                 className="rounded-3xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark/80 p-7"
               >
-                <h2 className="text-4xl md:text-3xl font-black text-dark dark:text-light">
-                  Featured Animation
-                </h2>
-                <div className="mt-5 overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 aspect-video">
-                  <iframe
-                    className="h-full w-full"
-                    src={config.videoEmbedUrl}
-                    title={config.videoTitle || config.h1}
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                <h2 className="text-4xl md:text-3xl font-black text-dark dark:text-light">Featured Reel</h2>
+                <div className="mt-5">
+                  <VideoPreviewCard
+                    image={relatedCaseStudies[0]?.image || "/og-image.jpg"}
+                    imageAlt={`${config.h1} showreel preview`}
+                    title="Watch the Cube Cake Studiios Showreel"
+                    description="Open the dedicated watch page to see our animation pacing, transitions, and storytelling approach in one uninterrupted reel."
                   />
                 </div>
               </motion.div>

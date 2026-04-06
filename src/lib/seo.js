@@ -8,6 +8,7 @@ import { caseStudyList, caseStudyTrackList } from "@/data/caseStudies";
 import { DEFAULT_MARKET, DEFAULT_MARKET_KEY, getMarketByKey, publishedMarkets } from "@/data/markets";
 import { companyInfo, socialLinks } from "@/data/social";
 import { seoLandingPageList } from "@/data/seoLandingPages";
+import { watchPageList } from "@/data/videos";
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_APP_URL || "https://cubecakestudiios.com").replace(
   /\/$/,
@@ -342,16 +343,24 @@ export const getVideoObjectSchema = ({
   embedUrl,
   contentUrl,
   duration,
+  url,
+  mainEntityOfPage,
 } = {}) => ({
   "@context": "https://schema.org",
   "@type": "VideoObject",
   name,
   description,
   uploadDate,
+  url: url ? toAbsoluteUrl(url) : undefined,
   thumbnailUrl: [toAbsoluteUrl(thumbnailUrl || DEFAULT_OG_IMAGE_PATH)],
   embedUrl: embedUrl ? toAbsoluteUrl(embedUrl) : undefined,
   contentUrl: contentUrl ? toAbsoluteUrl(contentUrl) : undefined,
   duration,
+  mainEntityOfPage: mainEntityOfPage
+    ? {
+        "@id": `${toAbsoluteUrl(mainEntityOfPage)}#webpage`,
+      }
+    : undefined,
   publisher: {
     "@id": `${SITE_URL}/#organization`,
   },
@@ -506,8 +515,17 @@ const caseStudyTrackSitemapEntries = caseStudyTrackList.map((track) => ({
   changefreq: "weekly",
 }));
 
+const watchPageSitemapEntries = watchPageList.map((video) => ({
+  url: video.watchPagePath,
+  title: video.pageTitle,
+  priority: 0.82,
+  changefreq: "monthly",
+  lastModified: video.updatedAt,
+}));
+
 export const sitemap = [
   ...baseSitemapEntries,
+  ...watchPageSitemapEntries,
   ...serviceSitemapEntries,
   ...blogCollectionSitemapEntries,
   ...caseStudyTrackSitemapEntries,

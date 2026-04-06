@@ -5,12 +5,12 @@ import LeadRoutingPanel from "@/components/LeadRoutingPanel";
 import Layout from "@/components/Layout";
 import SEOHead from "@/components/SEOHead";
 import { TransitionEffect } from "@/components/TransitionEffect";
+import VideoPreviewCard from "@/components/VideoPreviewCard";
 import { seoLandingPages } from "@/data/seoLandingPages";
 import { taxonomyLabelToSlug } from "@/lib/contentTaxonomy";
 import {
   getBreadcrumbSchema,
   getCaseStudySchema,
-  getVideoObjectSchema,
   getWebPageSchema,
 } from "@/lib/seo";
 
@@ -63,18 +63,6 @@ const CaseStudyTemplate = ({ caseStudy, relatedCaseStudies = [], relatedArticles
     { title: caseStudy.title, url: canonicalPath },
   ]);
 
-  const videoSchema = caseStudy.videoEmbedUrl
-    ? getVideoObjectSchema({
-        name: caseStudy.title,
-        description: caseStudy.description,
-        uploadDate: caseStudy.publishedAt,
-        thumbnailUrl: caseStudy.image,
-        embedUrl: caseStudy.videoEmbedUrl,
-        contentUrl: canonicalPath,
-        duration: caseStudy.videoDuration,
-      })
-    : null;
-
   return (
     <>
       <SEOHead
@@ -85,7 +73,7 @@ const CaseStudyTemplate = ({ caseStudy, relatedCaseStudies = [], relatedArticles
         ogImage={caseStudy.image}
         articlePublishedTime={caseStudy.publishedAt}
         articleModifiedTime={caseStudy.updatedAt}
-        structuredData={[pageSchema, articleSchema, breadcrumbSchema, videoSchema]}
+        structuredData={[pageSchema, articleSchema, breadcrumbSchema]}
       />
 
       <TransitionEffect />
@@ -260,15 +248,13 @@ const CaseStudyTemplate = ({ caseStudy, relatedCaseStudies = [], relatedArticles
                 {...fadeIn}
                 className="rounded-3xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark/80 p-7"
               >
-                <h2 className="text-3xl md:text-2xl font-black text-dark dark:text-light">Project Video</h2>
-                <div className="mt-5 overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 aspect-video">
-                  <iframe
-                    className="h-full w-full"
-                    src={caseStudy.videoEmbedUrl}
-                    title={`${caseStudy.title} video`}
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                <h2 className="text-3xl md:text-2xl font-black text-dark dark:text-light">Featured Reel</h2>
+                <div className="mt-5">
+                  <VideoPreviewCard
+                    image={caseStudy.image}
+                    imageAlt={`${caseStudy.title} showreel preview`}
+                    title="Watch the Cube Cake Studiios Showreel"
+                    description="Open the dedicated watch page for a quick look at the motion style, pacing, and visual polish behind our project work."
                   />
                 </div>
               </motion.div>
