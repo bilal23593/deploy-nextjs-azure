@@ -7,15 +7,15 @@ import { TransitionEffect } from '@/components/TransitionEffect';
 import ContactForm from '@/components/ContactForm';
 import TrackedExternalLink from '@/components/TrackedExternalLink';
 import TrackedInternalLink from '@/components/TrackedInternalLink';
-import { contactMethods, socialLinks } from '@/data/social';
+import { companyInfo, contactMethods, socialLinks } from '@/data/social';
 import SEOHead from '@/components/SEOHead';
 import { getBreadcrumbSchema, getContactSchema, getWebPageSchema } from '@/lib/seo';
 import { trackLeadCtaClick } from '@/lib/leadRouting';
 
 const contactHighlights = [
-  { value: '24h', label: 'Average Reply Time' },
-  { value: '48h', label: 'Project Kickoff' },
-  { value: '95%', label: 'Client Retention' },
+  { value: String(companyInfo.established), label: 'Established' },
+  { value: '2', label: 'Direct Contact Methods' },
+  { value: '4', label: 'Lead Routes on Site' },
 ];
 
 const engagementModes = [
@@ -30,15 +30,15 @@ const engagementModes = [
 const processSteps = [
   {
     title: 'Share Your Vision',
-    description: 'Tell us what you are building, your goals, and the style you want.',
+    description: 'Tell us what you are building, your goals, timeline, and any references you already have.',
   },
   {
     title: 'Get a Creative Blueprint',
-    description: 'Receive a clear strategy, timeline, and deliverables tailored to your project.',
+    description: 'We reply with the clearest route, expected deliverables, and the next step for your project.',
   },
   {
-    title: 'Launch With Confidence',
-    description: 'We execute, refine, and ship polished work ready for your audience.',
+    title: 'Move Into Production',
+    description: 'Once scope is aligned, we move into design, motion, and delivery with fewer surprises.',
   },
 ];
 
@@ -113,12 +113,12 @@ const Contact = () => {
                 </div>
 
                 <h1 className="mt-5 text-6xl xl:text-5xl lg:text-4xl md:text-3xl font-black leading-[1.05] text-dark dark:text-light">
-                  Lets craft something that people cannot ignore.
+                  Tell us what you are building and we will map the clearest next step.
                 </h1>
 
                 <p className="mt-5 max-w-2xl text-base lg:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                  From high-energy animation to polished brand experiences, we convert ideas into visuals
-                  that perform. Send your brief and we will map the smartest route from concept to launch.
+                  Share your brief, goals, and timeline. We handle animation, design, branding, and
+                  website work with a process that stays clear from enquiry to delivery.
                 </p>
 
                 <div className="mt-6 grid grid-cols-3 md:grid-cols-1 gap-3">
@@ -147,6 +147,10 @@ const Contact = () => {
                     </span>
                   ))}
                 </div>
+
+                <p className="mt-5 text-sm text-gray-600 dark:text-gray-400">
+                  Based in {companyInfo.location} and working remotely with founders, marketers, and small teams.
+                </p>
               </motion.div>
 
               <motion.div
@@ -157,12 +161,12 @@ const Contact = () => {
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,rgba(182,62,150,0.45),transparent_38%),radial-gradient(circle_at_15%_90%,rgba(88,230,217,0.3),transparent_42%)]" />
                 <div className="relative">
-                  <p className="text-xs uppercase tracking-[0.14em] font-semibold text-primaryDark">Fast Lane</p>
+                  <p className="text-xs uppercase tracking-[0.14em] font-semibold text-primaryDark">Direct Contact</p>
                   <h2 className="mt-2 text-3xl md:text-2xl font-black leading-tight">
-                    Need momentum now? We can start within 48 hours.
+                    Prefer to speak with us before sending the full brief?
                   </h2>
                   <p className="mt-3 text-sm text-gray-200/90">
-                    Priority support for founders, marketers, and creators preparing for launch.
+                    Use email, phone, or WhatsApp if you want to confirm fit, scope, or timing first.
                   </p>
 
                   <div className="mt-6 space-y-3">
@@ -205,7 +209,7 @@ const Contact = () => {
             <LeadRoutingPanel
               eyebrow="Choose Your Route"
               title="This page works best as a lead hub, not just a form."
-              description="Send a detailed brief here for custom work, use WhatsApp for the fastest reply, use Fiverr for marketplace ordering, and use LinkedIn or Google Profile as trust layers before you decide."
+              description="Use the form for a full project brief, WhatsApp for a quick fit check, Fiverr for marketplace checkout, and LinkedIn or Google Profile if you want to verify the business first."
               location="contact_lead_panel"
               route="/contact"
               primaryChannel="WhatsApp"
@@ -284,7 +288,7 @@ const Contact = () => {
                 <div>
                   <p className="text-xs uppercase tracking-[0.14em] font-semibold text-primary">What Happens Next</p>
                   <h2 className="mt-2 text-4xl lg:text-3xl md:text-2xl font-black text-dark dark:text-light">
-                    Your message becomes momentum.
+                    Here is what happens after you get in touch.
                   </h2>
                 </div>
                 <div className="flex flex-wrap items-center gap-3">

@@ -17,9 +17,9 @@ const trendChips = [
 ];
 
 const pulseItems = [
-  { label: "Avg watch retention", value: "87%" },
-  { label: "Concept-to-cut", value: "72h" },
-  { label: "Campaign uplift", value: "3.4x" },
+  { label: "Creative fit", value: "Explainers + reels" },
+  { label: "Workflow", value: "Brief to delivery" },
+  { label: "Best for", value: "Launch campaigns" },
 ];
 
 export default function GenZPulseSection() {
@@ -47,13 +47,14 @@ export default function GenZPulseSection() {
             Next-Gen Creative Stack
           </p>
           <h2 className="text-6xl md:text-5xl sm:text-4xl font-black text-white leading-tight">
-            Built for Scroll-Stopping{" "}
+            Built for internet-native{" "}
             <span className="bg-gradient-to-r from-orange-300 to-violet-400 bg-clip-text text-transparent">
-              Gen Z Attention
+              creative direction
             </span>
           </h2>
           <p className="text-gray-300 max-w-3xl mx-auto mt-5 text-lg">
-            A live creative playground combining velocity, trend relevance, and high-impact visuals.
+            A visual section that shows the styles, formats, and references we use when brands want
+            creative that feels current without looking disposable.
           </p>
         </motion.div>
 
@@ -129,7 +130,7 @@ export default function GenZPulseSection() {
                 </motion.div>
               </div>
               <p className="text-gray-300 mt-6 leading-relaxed">
-                We translate fast-moving internet culture into premium creative that still looks intentional.
+                We translate fast-moving internet culture into creative that still looks intentional.
               </p>
             </motion.article>
 
@@ -140,7 +141,7 @@ export default function GenZPulseSection() {
               transition={{ duration: 0.55, delay: 0.12 }}
               viewport={{ once: true }}
             >
-              <p className="text-xs uppercase tracking-[0.24em] text-violet-300 mb-4">Proof points</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-violet-300 mb-4">Creative fit</p>
               <div className="space-y-4">
                 {pulseItems.map((item) => (
                   <div key={item.label} className="rounded-2xl border border-white/20 bg-[#1a1d2d] px-4 py-3">
@@ -160,7 +161,7 @@ export default function GenZPulseSection() {
             >
               <h3 className="text-3xl sm:text-2xl font-black text-white mb-3">Want this vibe for your brand?</h3>
               <p className="text-gray-200 mb-6 max-w-2xl">
-                Start with one campaign sprint and get a full concept, storyboard, and launch-ready assets.
+                Start with one campaign sprint and get a concept, storyboard, and assets ready for review.
               </p>
               <div className="flex sm:flex-col items-center sm:items-start gap-4">
                 <MotionLink

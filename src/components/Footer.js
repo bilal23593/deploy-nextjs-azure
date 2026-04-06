@@ -18,6 +18,9 @@ const Footer = () => {
             <p className="text-sm text-gray-600 dark:text-gray-400 max-w-sm">
               {companyInfo.tagline}
             </p>
+            <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 max-w-sm">
+              Independent studio since {companyInfo.established} based in {companyInfo.location}.
+            </p>
 
             <div className="mt-4 flex flex-wrap items-center gap-2.5">
               {socialLinks.map((link) => (

@@ -8,6 +8,7 @@ import SEOHead from "@/components/SEOHead";
 import TrackedExternalLink from "@/components/TrackedExternalLink";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/seo";
 import { trackLeadCtaClick } from "@/lib/leadRouting";
+import { companyInfo } from "@/data/social";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { seoLandingPageList } from "@/data/seoLandingPages";
 
@@ -18,7 +19,7 @@ const GlobalRemoteShowcase = dynamic(() => import("@/components/GlobalRemoteShow
 export default function Home() {
   const homeTitle = "2D Animation Studio for Startups | Cube Cake Studiios";
   const homeDescription =
-    "Cube Cake Studiios helps startups and brands turn complex ideas into clear 2D animation, explainer videos, and launch-ready visual stories.";
+    "Cube Cake Studiios helps startups and brands turn complex ideas into clear 2D animation, explainer videos, and visual stories.";
   const prefersReducedMotion = useReducedMotion();
 
   const ctaMagnetX = useMotionValue(0);
@@ -81,7 +82,7 @@ export default function Home() {
     {
       icon: "📹",
       title: "Explainer Videos",
-      description: "Complex ideas simplified through engaging visual narratives that convert and inspire",
+      description: "Complex ideas simplified through clear visual narratives for demos, onboarding, and launches",
       gradient: "from-purple-500/20 to-pink-500/20",
       borderGlow: "border-purple-500/30",
     },
@@ -95,7 +96,7 @@ export default function Home() {
     {
       icon: "✨",
       title: "Branding",
-      description: "Distinctive brand identities that resonate, stand out, and create lasting impressions",
+      description: "Distinctive brand identities built to stay consistent across web, video, and social",
       gradient: "from-red-500/20 to-orange-500/20",
       borderGlow: "border-red-500/30",
     },
@@ -103,15 +104,15 @@ export default function Home() {
 
   // Stats data
   const stats = [
-    { number: "50+", label: "Projects Completed" },
-    { number: "40+", label: "Happy Clients" },
-    { number: "4+", label: "Years Experience" },
+    { number: String(companyInfo.established), label: "Established" },
+    { number: "4", label: "Core Services" },
+    { number: "2", label: "Direct Contact Methods" },
   ];
 
   const heroSignals = [
-    { value: "48h", label: "Avg Kickoff" },
-    { value: "95%", label: "Client Satisfaction" },
-    { value: "4.9", label: "Creative Rating" },
+    { value: String(companyInfo.established), label: "Since" },
+    { value: "Direct", label: "Email + Phone" },
+    { value: "Public", label: "Profiles + Portfolio" },
   ];
   const seoIntentLinks = seoLandingPageList.map((page) => ({
     href: `/services/${page.slug}`,
@@ -202,10 +203,10 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.1 }}
                 >
                   <span className="px-3 py-1 rounded-full bg-black/10 backdrop-blur-md text-black/60 font-medium border border-white/20">
-                    Top Rated
+                    Since {companyInfo.established}
                   </span>
                   <span className="px-3 py-1 rounded-full bg-black/10 backdrop-blur-md text-black/60 font-medium border border-white/20">
-                    2D Animation
+                    Remote Studio
                   </span>
                 </motion.div>
 
@@ -230,7 +231,7 @@ export default function Home() {
                   transition={{ duration: 0.8, delay: 0.3 }}
                 >
                   We help startups and brands turn complex ideas into clear, engaging visual stories
-                  through high-converting explainer videos and 2D animation.
+                  through explainer videos, 2D animation, and creative systems that stay easy to understand.
                 </motion.p>
 
                 {/* CTA Buttons */}
@@ -472,8 +473,8 @@ export default function Home() {
                     animate={prefersReducedMotion ? undefined : { y: [0, -8, 0] }}
                     transition={prefersReducedMotion ? undefined : { duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <p className="text-xs font-semibold text-dark">Hot this week</p>
-                    <p className="text-sm font-black text-purple-700">Explainer + Reels</p>
+                    <p className="text-xs font-semibold text-dark">Core focus</p>
+                    <p className="text-sm font-black text-purple-700">Explainers + reels</p>
                   </motion.div>
 
                   <motion.div
@@ -482,8 +483,8 @@ export default function Home() {
                     animate={prefersReducedMotion ? undefined : { y: [0, 8, 0] }}
                     transition={prefersReducedMotion ? undefined : { duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.25 }}
                   >
-                    <p className="text-xs font-semibold text-gray-300">Avg Delivery</p>
-                    <p className="text-sm font-black text-orange-300">72 hours</p>
+                    <p className="text-xs font-semibold text-gray-300">Working style</p>
+                    <p className="text-sm font-black text-orange-300">Clear scope</p>
                   </motion.div>
                 </div>
               </motion.div>
@@ -581,10 +582,10 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-5xl md:text-4xl font-black text-dark dark:text-light mb-4">
-                Our Creative Impact
+                Business Basics
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Transforming visions into reality for incredible clients worldwide
+                Clear identity, direct communication, and defined services help people trust the site faster.
               </p>
             </motion.div>
 
@@ -641,7 +642,7 @@ export default function Home() {
             <LeadRoutingPanel
               eyebrow="High-Intent Routing"
               title="Use the website to build trust, then choose the buying route that fits you."
-              description="This site should attract search traffic, qualify buyers with proof and case studies, and then route each visitor into the best conversion path for custom briefs, fast WhatsApp conversations, marketplace orders, or trust checks."
+              description="Use the portfolio, service pages, and public profiles to evaluate fit first, then choose the route that works best for a full brief, a quick WhatsApp check, or marketplace checkout."
               location="homepage_lead_panel"
               route="/"
               primaryChannel="WhatsApp"
@@ -686,7 +687,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                Ready to Unlock Your Creative Potential?
+                Ready to scope your next creative project?
               </motion.h2>
 
               <motion.p
@@ -696,7 +697,8 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 viewport={{ once: true }}
               >
-                Join thousands of satisfied clients who've transformed their vision into stunning visual experiences. Let's create something extraordinary together.
+                Review the work, compare the contact routes, and send a brief when you are ready.
+                We keep the process clear from scope to delivery.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -768,7 +770,8 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  ✨ Trusted by leading brands and startups • 24/7 Creative Support • 100% Satisfaction Guaranteed
+                  Portfolio, LinkedIn, Google Profile, and direct contact details are all here if you
+                  want to verify the studio before you enquire.
                 </p>
               </motion.div>
             </motion.div>

@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import profileImage from "../../public/images/profile/developer-pic-3.png";
 import { TransitionEffect } from "@/components/TransitionEffect";
+import { companyInfo } from "@/data/social";
 import { studioShowreel } from "@/data/videos";
 import SEOHead from "@/components/SEOHead";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/seo";
@@ -11,9 +12,9 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/seo";
 const MotionLink = motion.create(Link);
 
 const impactStats = [
-  { value: 50, suffix: "+", label: "Satisfied Clients" },
-  { value: 40, suffix: "+", label: "Projects Completed" },
-  { value: 4, suffix: "+", label: "Years of Experience" },
+  { value: companyInfo.established, suffix: "", label: "Established" },
+  { value: 4, suffix: "", label: "Core Services" },
+  { value: 2, suffix: "", label: "Direct Contact Methods" },
 ];
 
 const coreValues = [
@@ -23,9 +24,9 @@ const coreValues = [
       "Every visual decision starts with the emotion and action you want from your audience.",
   },
   {
-    title: "Fast Creative Velocity",
+    title: "Clear Communication",
     description:
-      "We move quickly from idea to storyboard to final delivery without sacrificing polish.",
+      "We aim to keep briefs, feedback, and delivery expectations easy to understand from the start.",
   },
   {
     title: "Design + Motion Craft",
@@ -33,9 +34,9 @@ const coreValues = [
       "From UI/UX to animation, we keep every touchpoint visually consistent and memorable.",
   },
   {
-    title: "Business Outcomes",
+    title: "Structured Delivery",
     description:
-      "Our work is built to improve clarity, retention, conversion, and overall brand presence.",
+      "We prefer defined scope, thoughtful revisions, and handoff that feels organized instead of rushed.",
   },
 ];
 
@@ -56,13 +57,13 @@ const processSteps = [
     step: "03",
     title: "Design + Animation",
     description:
-      "From styleframes to motion, we produce high-impact assets built for modern attention spans.",
+      "From styleframes to motion, we build assets tailored for web, social, and product storytelling.",
   },
   {
     step: "04",
-    title: "Launch + Iterate",
+    title: "Delivery + Handover",
     description:
-      "We optimize edits and formats for performance across web, social, ads, and presentations.",
+      "We package the final assets for the right channels and close with a cleaner handoff.",
   },
 ];
 
@@ -135,12 +136,12 @@ const About = () => {
                 About CUBE CAKE STUDIIOS
               </p>
               <h1 className="text-7xl xl:text-6xl lg:text-5xl md:text-4xl sm:text-3xl font-black leading-tight mb-6">
-                We craft ideas into visual stories people actually remember.
+                We turn ideas into clear visual stories for startups and growing brands.
               </h1>
               <p className="text-lg text-gray-200 max-w-3xl leading-relaxed mb-8">
-                We are a creative team focused on 2D animation, explainer videos, UI/UX design,
-                and branding. Our process blends strategy, design systems, and motion craft to
-                build content that feels premium and performs in the real world.
+                Since {companyInfo.established}, we have focused on 2D animation, explainer videos,
+                UI/UX design, and branding. We work remotely, keep communication direct, and build
+                visual systems that help teams explain what they do more clearly.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <MotionLink
@@ -184,7 +185,7 @@ const About = () => {
                       Studio Philosophy
                     </p>
                     <p className="text-2xl md:text-xl font-extrabold">
-                      Design it bold. Animate it smart. Deliver it fast.
+                      Design with intent. Animate with clarity.
                     </p>
                   </div>
                 </div>
@@ -236,12 +237,27 @@ const About = () => {
                   viewport={{ once: true }}
                 >
                   <p className="text-xs uppercase tracking-[0.2em] text-violet-300 mb-4">
-                    Mission Pulse
+                    Business Basics
                   </p>
-                  <p className="text-gray-200 leading-relaxed">
-                    We simplify complexity with clear visual storytelling and performance-driven
-                    creative systems tailored for modern digital brands.
-                  </p>
+                  <div className="space-y-4 text-gray-200">
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-violet-200/80">Established</p>
+                      <p className="mt-1 font-semibold">{companyInfo.established}</p>
+                    </div>
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-violet-200/80">Location</p>
+                      <p className="mt-1 font-semibold">{companyInfo.location}</p>
+                    </div>
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-violet-200/80">Contact</p>
+                      <a href={`mailto:${companyInfo.email}`} className="mt-1 block font-semibold hover:text-orange-300 transition-colors">
+                        {companyInfo.email}
+                      </a>
+                      <a href={`tel:${companyInfo.phone}`} className="mt-1 block font-semibold hover:text-orange-300 transition-colors">
+                        {companyInfo.phone}
+                      </a>
+                    </div>
+                  </div>
                 </motion.div>
               </div>
             </div>
@@ -289,7 +305,7 @@ const About = () => {
                 Creative DNA
               </p>
               <h2 className="text-5xl md:text-4xl sm:text-3xl font-black text-dark">
-                What Makes Our Team Different
+                How We Work
               </h2>
             </motion.div>
 
