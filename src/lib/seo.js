@@ -167,7 +167,12 @@ export const getTwitterMeta = (meta = {}) => {
 const getSameAsLinks = () =>
   socialLinks
     .map((item) => item.url)
-    .filter((url) => typeof url === "string" && /^https?:\/\//i.test(url));
+    .filter(
+      (url) =>
+        typeof url === "string" &&
+        /^https?:\/\//i.test(url) &&
+        !/^https?:\/\/(www\.)?google\.com\/search\?/i.test(url)
+    );
 
 export const getOrganizationSchema = () => {
   return {
@@ -208,11 +213,6 @@ export const getWebsiteSchema = () => {
     name: SITE_NAME,
     url: SITE_URL,
     inLanguage: DEFAULT_LANG,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${SITE_URL}/search?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },

@@ -57,7 +57,7 @@ export default function BlogCollectionPage({
   return (
     <>
       <SEOHead
-        title={`${collection.title} | Cube Cake Studiios`}
+        title={collection.metaTitle || `${collection.title} | Cube Cake Studiios`}
         description={collection.description}
         canonicalUrl={canonicalPath}
         keywords={collection.keywords}

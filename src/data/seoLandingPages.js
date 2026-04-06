@@ -4,7 +4,7 @@ export const seoLandingPages = {
     updatedAt: "2026-02-28",
     title: "2D Animation Studio | Cube Cake Studiios",
     description:
-      "Cube Cake Studiios is a 2D animation studio creating explainer videos, product animations, launch campaigns, and brand storytelling assets for startups and growth teams worldwide.",
+      "Cube Cake Studiios is a 2D animation studio creating explainer videos, product animations, and launch-ready brand storytelling assets for startups and growth teams.",
     h1: "2D Animation Studio for Explainers, Product Stories, and Launch Campaigns",
     eyebrow: "2D Animation Studio",
     heroSummary:
@@ -246,7 +246,7 @@ export const seoLandingPages = {
   "saas-explainer-videos": {
     slug: "saas-explainer-videos",
     updatedAt: "2026-02-28",
-    title: "SaaS Explainer Videos That Drive Trial Signups | Cube Cake Studiios",
+    title: "SaaS Explainer Videos | Cube Cake Studiios",
     description:
       "SaaS explainer videos built to improve trial signups, product understanding, and activation rates with clear positioning and product-led storytelling.",
     h1: "SaaS Explainer Videos That Drive Trial Signups",

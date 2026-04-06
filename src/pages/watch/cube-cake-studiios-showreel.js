@@ -124,6 +124,20 @@ const WatchShowreelPage = () => {
                   </div>
                 ))}
               </div>
+              <div className="mt-6 space-y-4 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+                <p>
+                  This page is built as a dedicated video destination for visitors who want to
+                  evaluate Cube Cake Studiios through motion work first. The video is the main
+                  content of the page, with the surrounding copy there to explain what the reel
+                  covers and where to go next.
+                </p>
+                <p>
+                  The reel highlights how we handle pacing, transitions, product framing, and brand
+                  storytelling across explainers, launch assets, and design-led communication. If
+                  the visual style fits what you need, continue into the portfolio and case studies
+                  for more detailed proof and project context.
+                </p>
+              </div>
             </motion.article>
 
             <motion.aside

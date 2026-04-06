@@ -70,19 +70,6 @@ const faqItems = [
   },
 ];
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
-};
-
 const fadeIn = {
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
@@ -91,9 +78,9 @@ const fadeIn = {
 };
 
 export default function StartHerePage() {
-  const title = "Start Here | Choose the Best Route to Work With Cube Cake Studiios";
+  const title = "Start Here | Work With Cube Cake Studiios";
   const description =
-    "Compare the best way to work with Cube Cake Studiios. Send a direct brief, chat on WhatsApp, hire on Fiverr, or verify via LinkedIn and Google Profile.";
+    "Choose the best way to start with Cube Cake Studiios: send a brief, chat on WhatsApp, hire on Fiverr, or verify the business on LinkedIn.";
 
   const leadChannels = getLeadChannels(["WhatsApp", "Fiverr", "LinkedIn", "Google Profile"]);
 
@@ -144,7 +131,7 @@ export default function StartHerePage() {
           "whatsapp animation agency",
         ]}
         ogType="website"
-        structuredData={[pageSchema, collectionSchema, breadcrumbSchema, itemListSchema, faqSchema]}
+        structuredData={[pageSchema, collectionSchema, breadcrumbSchema, itemListSchema]}
       />
 
       <TransitionEffect />

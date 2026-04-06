@@ -4,7 +4,7 @@ export const blogArticles = [
   {
     slug: "why-design-clarity-helps-businesses-explain-services",
     title: "Why Design Clarity Helps Businesses Explain Services and Win Better Leads",
-    metaTitle: "Why Design Clarity Helps Businesses Explain Services | Cube Cake Studiios Blog",
+    metaTitle: "Design Clarity and Service Messaging | Cube Cake Studiios",
     description:
       "A strategic guide to how design clarity, visual hierarchy, and motion help businesses explain products and services more clearly and improve conversion quality.",
     excerpt:
@@ -69,7 +69,7 @@ export const blogArticles = [
   {
     slug: "tutorial-video-design-for-product-adoption",
     title: "Tutorial Video Design for Product Adoption: A Framework for Teams That Need Faster Activation",
-    metaTitle: "Tutorial Video Design for Product Adoption | Cube Cake Studiios Blog",
+    metaTitle: "Tutorial Video Design for Product Adoption | Cube Cake Studiios",
     description:
       "A tutorial video design framework explaining how structured education content reduces support load, improves activation, and makes complex products easier to use.",
     excerpt:
@@ -131,7 +131,7 @@ export const blogArticles = [
   {
     slug: "explainer-video-framework-for-service-businesses",
     title: "Explainer Video Framework for Service Businesses That Need Clearer Positioning",
-    metaTitle: "Explainer Video Framework for Service Businesses | Cube Cake Studiios Blog",
+    metaTitle: "Service Business Explainer Video Framework | Cube Cake Studiios",
     description:
       "A framework for service businesses using explainer videos to clarify positioning, show process, build trust, and improve conversion quality.",
     excerpt:
@@ -188,7 +188,7 @@ export const blogArticles = [
   {
     slug: "2d-animation-design-systems-for-multi-channel-growth",
     title: "2D Animation Design Systems for Multi-Channel Growth Teams",
-    metaTitle: "2D Animation Design Systems for Multi-Channel Growth | Cube Cake Studiios Blog",
+    metaTitle: "2D Animation Systems for Growth Teams | Cube Cake Studiios",
     description:
       "How 2D animation design systems create reusable assets for web, ads, onboarding, and sales, making creative production more scalable for growth teams.",
     excerpt:
@@ -454,6 +454,7 @@ export const blogArticleList = blogArticles;
 
 const blogCollectionDefinitions = {
   "Strategy & Positioning": {
+    metaTitle: "Strategy and Positioning Articles | Cube Cake Studiios",
     title: "Strategy & Positioning Articles for 2D Animation, Explainer Video, and Brand Clarity",
     description:
       "A topic hub covering explainer strategy, animation studio selection, service positioning, and design-led communication for growth-focused brands.",
@@ -472,6 +473,7 @@ const blogCollectionDefinitions = {
     image: "/images/blog/design-business-growth.svg",
   },
   "Product Education & SaaS": {
+    metaTitle: "Product Education and SaaS Articles | Cube Cake Studiios",
     title: "Product Education and SaaS Explainer Articles",
     description:
       "A topic hub for SaaS explainer videos, onboarding tutorial design, activation content systems, and product education strategy.",
@@ -490,6 +492,7 @@ const blogCollectionDefinitions = {
     image: "/images/blog/tutorial-playbook.svg",
   },
   "Systems, Production & Pricing": {
+    metaTitle: "Animation Systems and Pricing Articles | Cube Cake Studiios",
     title: "Animation Systems, Production Planning, and Pricing Articles",
     description:
       "A topic hub covering reusable animation systems, production structure, scoping decisions, and pricing guidance for teams buying 2D animation work.",

@@ -57,7 +57,7 @@ export default function CaseStudyTrackPage({
   return (
     <>
       <SEOHead
-        title={`${track.title} | Cube Cake Studiios`}
+        title={track.metaTitle || `${track.title} | Cube Cake Studiios`}
         description={track.description}
         canonicalUrl={canonicalPath}
         keywords={track.keywords}

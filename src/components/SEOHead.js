@@ -1,12 +1,6 @@
 import Head from "next/head";
 import { getOpenGraphMeta, getSEOMeta, getTwitterMeta, SITE_NAME } from "@/lib/seo";
 
-const toKeywordString = (keywords) => {
-  if (!keywords) return "";
-  if (Array.isArray(keywords)) return keywords.filter(Boolean).join(", ");
-  return String(keywords);
-};
-
 const SEOHead = ({
   title,
   description,
@@ -47,7 +41,6 @@ const SEOHead = ({
     ogImage,
   });
 
-  const normalizedKeywords = toKeywordString(seoMeta.keywords);
   const schemas = (Array.isArray(structuredData) ? structuredData : [structuredData]).filter(Boolean);
 
   return (
@@ -60,8 +53,6 @@ const SEOHead = ({
       <meta name="application-name" content={SITE_NAME} />
       <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
       <meta name="referrer" content="strict-origin-when-cross-origin" />
-
-      {normalizedKeywords ? <meta name="keywords" content={normalizedKeywords} /> : null}
 
       <link rel="canonical" href={seoMeta.canonical} />
       {seoMeta.mobileAlternate ? (

@@ -16,9 +16,9 @@ const GenZPulseSection = dynamic(() => import("@/components/GenZPulseSection"));
 const GlobalRemoteShowcase = dynamic(() => import("@/components/GlobalRemoteShowcase"));
 
 export default function Home() {
-  const homeTitle = "2D Animation & Explainer Video Studio for Startups | Cube Cake Studiios";
+  const homeTitle = "2D Animation Studio for Startups | Cube Cake Studiios";
   const homeDescription =
-    "Cube Cake Studiios is a global 2D animation and explainer video studio helping startups and brands turn complex ideas into clear, engaging visual stories that drive results.";
+    "Cube Cake Studiios helps startups and brands turn complex ideas into clear 2D animation, explainer videos, and launch-ready visual stories.";
   const prefersReducedMotion = useReducedMotion();
 
   const ctaMagnetX = useMotionValue(0);

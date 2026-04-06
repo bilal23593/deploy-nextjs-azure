@@ -38,19 +38,6 @@ const getServiceSchema = (config, canonicalPath) => ({
   },
 });
 
-const getFaqSchema = (faqs = []) => ({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
-});
-
 const fadeIn = {
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
@@ -81,7 +68,6 @@ const SEOLandingPageTemplate = ({ config }) => {
   ]);
 
   const serviceSchema = getServiceSchema(config, canonicalPath);
-  const faqSchema = getFaqSchema(config.faqs || []);
   return (
     <>
       <SEOHead
@@ -90,7 +76,7 @@ const SEOLandingPageTemplate = ({ config }) => {
         canonicalUrl={canonicalPath}
         keywords={config.keywords}
         ogType="website"
-        structuredData={[pageSchema, breadcrumbSchema, serviceSchema, faqSchema]}
+        structuredData={[pageSchema, breadcrumbSchema, serviceSchema]}
       />
 
       <TransitionEffect />

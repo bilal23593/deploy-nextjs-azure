@@ -6,7 +6,7 @@ export const caseStudies = [
     title: "Lumio Fintech Tutorial Video System",
     metaTitle: "Lumio Tutorial Video System Case Study | Cube Cake Studiios",
     description:
-      "How Cube Cake Studiios designed a tutorial video system for Lumio that improved product activation, reduced onboarding tickets, and helped users understand a complex fintech workflow faster.",
+      "How Cube Cake Studiios designed Lumio's tutorial video system to improve activation, reduce onboarding tickets, and clarify a complex fintech workflow.",
     excerpt:
       "A tutorial video case study showing how structured motion design, UI callouts, and chapter-based education can turn product confusion into faster activation.",
     client: "Lumio Finance",
@@ -65,7 +65,7 @@ export const caseStudies = [
   {
     slug: "northstar-service-explainer-funnel",
     title: "Northstar Service Explainer Funnel",
-    metaTitle: "Northstar Service Explainer Funnel Case Study | Cube Cake Studiios",
+    metaTitle: "Northstar Explainer Funnel Case Study | Cube Cake Studiios",
     description:
       "A service explainer case study showing how design and motion helped Northstar clarify complex offers, improve lead quality, and explain its services faster to buyers.",
     excerpt:
@@ -126,7 +126,7 @@ export const caseStudies = [
   {
     slug: "atlas-health-2d-animation-design-system",
     title: "Atlas Health 2D Animation Design System",
-    metaTitle: "Atlas Health 2D Animation Design System Case Study | Cube Cake Studiios",
+    metaTitle: "Atlas Health Animation System Case Study | Cube Cake Studiios",
     description:
       "How a 2D animation design system helped Atlas Health explain a complex healthcare workflow more clearly across demos, marketing, and onboarding content.",
     excerpt:
@@ -434,6 +434,7 @@ export const caseStudyList = caseStudies;
 
 const caseStudyTrackDefinitions = {
   "2D Animation Design": {
+    metaTitle: "2D Animation Design Case Studies | Cube Cake Studiios",
     title: "2D Animation Design Case Studies for Product, Campaign, and Launch Clarity",
     description:
       "A case-study hub covering reusable 2D animation systems, product launch assets, and motion design work built to improve understanding and engagement.",
@@ -452,6 +453,7 @@ const caseStudyTrackDefinitions = {
     image: "/images/case-studies/2d-animation-design-system.svg",
   },
   "Explainer Video": {
+    metaTitle: "Explainer Video Case Studies | Cube Cake Studiios",
     title: "Explainer Video Case Studies for Product and Service Clarity",
     description:
       "A case-study hub focused on explainer videos that improved lead quality, product understanding, and buyer confidence.",
@@ -470,6 +472,7 @@ const caseStudyTrackDefinitions = {
     image: "/images/case-studies/explainer-video-funnel.svg",
   },
   "Tutorial Video": {
+    metaTitle: "Tutorial Video Case Studies | Cube Cake Studiios",
     title: "Tutorial Video Case Studies for Onboarding and Product Adoption",
     description:
       "A case-study hub showing how tutorial video systems improved onboarding clarity, activation, and support efficiency.",
@@ -488,6 +491,7 @@ const caseStudyTrackDefinitions = {
     image: "/images/case-studies/tutorial-video-activation.svg",
   },
   "Service Clarity": {
+    metaTitle: "Service Clarity Case Studies | Cube Cake Studiios",
     title: "Service Clarity Case Studies for Complex Offers and Campaign Systems",
     description:
       "A case-study hub for design and motion work that helped service businesses explain offers, packages, and campaign narratives more clearly.",
