@@ -3,6 +3,8 @@ import {
   leadChannelOrder,
   leadTrustChannels,
 } from "@/data/social";
+import { seoLandingPages } from "@/data/seoLandingPages";
+import { saasExplainerLanding } from "@/data/saasExplainerLanding";
 
 const normalizeRoute = (value = "/") => {
   const path = String(value || "/").split("?")[0].split("#")[0];
@@ -84,7 +86,20 @@ const defaultContext = {
     "Stay on-site for the brief, use WhatsApp for the fastest response, or choose Fiverr for marketplace checkout.",
 };
 
-export const popupExcludedRoutes = ["/contact", "/start-here", "/search", "/privacy", "/terms"];
+const manualPopupExcludedRoutes = [
+  "/contact",
+  "/start-here",
+  "/search",
+  "/privacy",
+  "/terms",
+];
+
+const seoLandingRoutes = Object.keys(seoLandingPages).map((slug) => `/services/${slug}`);
+const dedicatedLandingRoutes = [saasExplainerLanding.route];
+
+export const popupExcludedRoutes = Array.from(
+  new Set([...manualPopupExcludedRoutes, ...seoLandingRoutes, ...dedicatedLandingRoutes])
+);
 
 export const getLeadRouteContext = (route = "/") => {
   const normalizedRoute = normalizeRoute(route);
