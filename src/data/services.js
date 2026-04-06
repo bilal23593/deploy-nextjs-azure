@@ -159,7 +159,7 @@ export const processSteps = [
     number: '04',
     title: 'Review',
     description:
-      'We gather feedback and refine until you are completely satisfied.',
+      'We gather feedback, work through the included revision rounds, and refine against the approved brief.',
   },
   {
     number: '05',

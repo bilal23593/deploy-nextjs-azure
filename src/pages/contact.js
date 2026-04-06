@@ -118,7 +118,8 @@ const Contact = () => {
 
                 <p className="mt-5 max-w-2xl text-base lg:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                   Share your brief, goals, and timeline. We handle animation, design, branding, and
-                  website work with a process that stays clear from enquiry to delivery.
+                  website work with a process that stays clear from enquiry to delivery, including
+                  defined revision options and a scope-based satisfaction guarantee.
                 </p>
 
                 <div className="mt-6 grid grid-cols-3 md:grid-cols-1 gap-3">

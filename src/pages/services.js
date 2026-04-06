@@ -10,6 +10,7 @@ import {
   getWebPageSchema,
 } from "@/lib/seo";
 import { seoLandingPageList } from "@/data/seoLandingPages";
+import { clientPromiseCards } from "@/data/clientPromise";
 
 const MotionLink = motion.create(Link);
 
@@ -246,6 +247,56 @@ const Services = () => {
                 </motion.article>
               ))}
             </div>
+
+            <motion.section
+              className="mt-12 rounded-3xl border border-dark/15 bg-gradient-to-br from-orange-50 via-white to-violet-50 p-7"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-start justify-between gap-6 lg:flex-col">
+                <div className="max-w-2xl">
+                  <p className="text-xs tracking-[0.3em] uppercase text-primary font-semibold mb-3">
+                    Client Promise
+                  </p>
+                  <h3 className="text-3xl md:text-2xl font-black text-dark mb-3">
+                    Multiple change options, clear approvals, and a safer finish.
+                  </h3>
+                  <p className="text-dark/75 leading-relaxed">
+                    We do not rely on vague promises. Your quote explains how revisions work, what
+                    is included, and what happens if the final delivery still misses the agreed
+                    brief after the included review rounds.
+                  </p>
+                </div>
+                <Link
+                  href="/terms"
+                  className="inline-flex items-center gap-2 rounded-full border border-dark/15 bg-white px-5 py-2.5 text-sm font-semibold text-dark hover:border-primary hover:text-primary transition"
+                >
+                  Read policy details
+                  <span aria-hidden>&rarr;</span>
+                </Link>
+              </div>
+
+              <div className="mt-7 grid grid-cols-3 lg:grid-cols-1 gap-4">
+                {clientPromiseCards.map((item, index) => (
+                  <motion.article
+                    key={item.title}
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: index * 0.06 }}
+                    viewport={{ once: true }}
+                    className="rounded-2xl border border-dark/10 bg-white/90 p-5"
+                  >
+                    <p className="text-[11px] uppercase tracking-[0.16em] text-primary font-semibold mb-3">
+                      {item.eyebrow}
+                    </p>
+                    <h4 className="text-xl font-black text-dark mb-3">{item.title}</h4>
+                    <p className="text-sm text-dark/75 leading-relaxed">{item.description}</p>
+                  </motion.article>
+                ))}
+              </div>
+            </motion.section>
 
             <motion.section
               className="mt-12 rounded-3xl border border-dark/15 bg-white p-7"

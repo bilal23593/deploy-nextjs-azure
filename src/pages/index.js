@@ -11,6 +11,8 @@ import { trackLeadCtaClick } from "@/lib/leadRouting";
 import { companyInfo } from "@/data/social";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { seoLandingPageList } from "@/data/seoLandingPages";
+import { clientPromiseCards } from "@/data/clientPromise";
+import { leadProtectionHighlights } from "@/data/offerGuidance";
 
 const MotionLink = motion.create(Link);
 const GenZPulseSection = dynamic(() => import("@/components/GenZPulseSection"));
@@ -312,6 +314,17 @@ export default function Home() {
                     >
                       Google Profile
                     </TrackedExternalLink>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {leadProtectionHighlights.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-white/45 bg-white/65 px-3 py-1.5 text-[11px] font-semibold text-dark"
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </motion.div>
 
@@ -632,6 +645,64 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
+          </Layout>
+        </section>
+
+        <section className="w-full bg-light dark:bg-dark/50">
+          <Layout className="pt-0 pb-12">
+            <motion.div
+              className="rounded-[2rem] border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-orange-50 via-white to-violet-50 dark:from-dark dark:via-purple-900/10 dark:to-cyan-900/10 p-8 lg:p-6"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-start justify-between gap-6 lg:flex-col">
+                <div className="max-w-3xl">
+                  <p className="text-xs uppercase tracking-[0.14em] font-semibold text-primary">
+                    Client Assurance
+                  </p>
+                  <h2 className="mt-2 text-4xl md:text-3xl font-black text-dark dark:text-light">
+                    Clients get revision options and a defined protection policy.
+                  </h2>
+                  <p className="mt-3 text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                    We set revision rounds up front, keep feedback tied to the approved brief, and
+                    offer refund support if the final work still does not match the agreed scope
+                    after reasonable revisions.
+                  </p>
+                </div>
+                <MotionLink
+                  href="/contact"
+                  onClick={handleTrackedNavigation("Send Project Brief", "/contact", "lead_brief")}
+                  className="rounded-full bg-dark text-white dark:bg-light dark:text-dark px-6 py-3 text-sm font-bold hover:scale-[1.02] transition"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  Request a Quote
+                </MotionLink>
+              </div>
+
+              <div className="mt-7 grid grid-cols-3 lg:grid-cols-1 gap-4">
+                {clientPromiseCards.map((item, index) => (
+                  <motion.article
+                    key={item.title}
+                    className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-black/20 p-5"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.06 }}
+                    viewport={{ once: true }}
+                  >
+                    <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary">
+                      {item.eyebrow}
+                    </p>
+                    <h3 className="mt-3 text-xl font-black text-dark dark:text-light">{item.title}</h3>
+                    <p className="mt-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </motion.article>
+                ))}
+              </div>
+            </motion.div>
           </Layout>
         </section>
 

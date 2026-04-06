@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getCountries, getCountryCallingCode } from 'libphonenumber-js';
+import { clientPromiseBullets } from '@/data/clientPromise';
 
 const fieldClassName =
   'w-full rounded-xl border border-gray-300/90 dark:border-gray-700/80 bg-white/90 dark:bg-gray-900/80 px-4 py-3 text-dark dark:text-light placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/70 focus:border-primary/70 transition';
@@ -168,6 +169,25 @@ const ContactForm = () => {
         <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           Drop your idea and goals. We will send a clear plan, timeline, and pricing options.
         </p>
+        <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/5 px-4 py-4">
+          <p className="text-[11px] uppercase tracking-[0.14em] font-semibold text-primary">
+            Revision And Refund Policy
+          </p>
+          <div className="mt-3 space-y-2">
+            {clientPromiseBullets.map((item) => (
+              <p key={item} className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                {item}
+              </p>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
+            See the full details in our{' '}
+            <Link href="/terms" className="font-semibold text-primary hover:underline">
+              terms of service
+            </Link>
+            .
+          </p>
+        </div>
 
         <div className="mt-5 flex flex-wrap gap-2">
           {quickServiceChips.map((chip) => {

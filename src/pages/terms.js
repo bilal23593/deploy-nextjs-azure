@@ -9,11 +9,11 @@ const Terms = () => {
   const termsDescription =
     'Terms of Service and use conditions for CUBE CAKE STUDIIOS website and services.';
 
-  const lastUpdated = 'February 6, 2026';
+  const lastUpdated = 'April 6, 2026';
   const termsSchema = getLegalWebPageSchema({
     name: termsTitle,
     url: '/terms',
-    lastReviewed: '2026-02-06',
+    lastReviewed: '2026-04-06',
   });
   const termsBreadcrumbSchema = getBreadcrumbSchema([
     { title: 'Home', url: '/' },
@@ -161,9 +161,10 @@ const Terms = () => {
                   Our design and animation services are provided on a project basis. Upon request:
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-4">
-                  <li>We provide project quotes based on requirements</li>
-                  <li>Clients must provide content and direction for projects</li>
-                  <li>Revisions are included within the agreed scope</li>
+                  <li>We provide project quotes based on requirements, deliverables, and timelines</li>
+                  <li>Clients must provide content, direction, and feedback needed for the project</li>
+                  <li>Revision rounds are included as defined in the agreed scope or proposal</li>
+                  <li>Requests outside the approved scope may require a revised quote or timeline</li>
                   <li>Payment terms are discussed and agreed upon before project initiation</li>
                   <li>Deliverables are provided in agreed formats</li>
                 </ul>
@@ -171,7 +172,24 @@ const Terms = () => {
 
               <section className="mb-8">
                 <h2 className="text-3xl font-bold text-dark dark:text-light mb-4">
-                  10. Intellectual Property
+                  10. Revisions, Satisfaction, and Refunds
+                </h2>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  We aim to resolve delivery concerns through the included review and revision stages first.
+                  To keep expectations fair for both sides, the following principles apply:
+                </p>
+                <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-4">
+                  <li>Revision requests must relate to the agreed brief, scope, and approved direction</li>
+                  <li>Changes in preference outside the approved brief are not covered by the satisfaction guarantee</li>
+                  <li>If final deliverables still do not materially match the agreed written scope after reasonable revisions, we may offer a full or partial refund</li>
+                  <li>Any refund decision is assessed case by case based on project stage, approvals already given, and reusable assets already delivered</li>
+                  <li>Refund discussions and outcomes will be confirmed in writing</li>
+                </ul>
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-3xl font-bold text-dark dark:text-light mb-4">
+                  11. Intellectual Property
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
                   All content on this website, including original animations, designs, and written
@@ -183,7 +201,7 @@ const Terms = () => {
 
               <section className="mb-8">
                 <h2 className="text-3xl font-bold text-dark dark:text-light mb-4">
-                  11. Contact Information
+                  12. Contact Information
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
                   If you have any questions about these terms, please contact us at:
